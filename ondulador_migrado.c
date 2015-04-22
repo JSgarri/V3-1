@@ -17,8 +17,9 @@
  #pragma config[1] = 0b.0000.1000//pagina 301 datasheet
  #pragma config[2] = 0b.0000.0001
  #pragma config[3] = 0b.0001.0110
- #pragma config[5] = 0b.1000.1000//Mirar CCP2 MUX bit 0 -->1 = CCP2 input/output is multiplexed with RC1
-													//   -->0 = CCP2 input/output is multiplexed with RB3 
+ #pragma config[5] = 0b.1000.1000//Mirar CCP2 MUX bit 0 
+ 				//-->1 = CCP2 input/output is multiplexed with RC1
+				//   -->0 = CCP2 input/output is multiplexed with RB3 
  #pragma config[6] = 0b.1000.0101
  // resto configs son para la proteccion del programa 
 
@@ -32,7 +33,8 @@
 #define CALCULOS_VAC 1
 #define LECTURA_IAC  2
 #define CALCULOS_IAC 3
-#define ENVIO_LCD    4
+#define LECTURAS_VARIAS 4
+#define ENVIO_LCD    5
 
 
 #pragma rambank 0
@@ -52,7 +54,7 @@ static const char sen [26] =
 //=======================================================================
 #include "int18XXX.h"	 // Capçalera de interrupcions.
 
-#pragma origin 0x08	//#pragma origin 0x18	(PIC 16F88x)// Indica el origen del vector de interrupciones.
+#pragma origin 0x08	//#pragma origin 0x18	(PIC 16F88x)
 
 interrupt highPriorityTimer_0 (void)		// Interrupción por desbordamiento de Timer 0.			
 {
@@ -84,7 +86,8 @@ interrupt highPriorityTimer_0 (void)		// Interrupción por desbordamiento de Tim
 		if(!bUdw)   T--;                       
 		if(T==0) 
 		{  	while(!TMR2IF); TMR2IF =0; // ESPERO QUE ACABI  T=1
-			T2CON = 0b.0.0001.1.01;  	CCPR1L = 0;		CCP1CON.5 = 0;	CCP1CON.4 = 0;	 // Posrescaler a 2
+			T2CON = 0b.0.0001.1.01;  	CCPR1L = 0;		CCP1CON.5 = 0;	CCP1CON.4 = 0;	 
+			// Posrescaler a 2
 			//while(!TMR2IF); // espero que acabi el T=0
 			//	TMR2IF =0; // Postscaler a 2
 			while(!TMR2IF); // espeor que acabi la 1era meitat del T=0, postsclaer =2
@@ -115,7 +118,7 @@ interrupt highPriorityTimer_0 (void)		// Interrupción por desbordamiento de Tim
 #include "Temporiz_20Mhz.h"
 void configuraPic (void);
 void configura1_PWM (void); 				// Configura todos los prámetros excepto M.
-uns8 lectura_AD (void);
+uns8 lectura_VAC (void);
 
 #include "math24F.h"
 #include "math24LB.h"	
@@ -145,29 +148,46 @@ void main (void)
 	CCPR1L    = ancho_pwm.high8;	CCP1CON.5 = ancho_pwm.7;	CCP1CON.4 = ancho_pwm.6; // PWM carregat a 0
 	TMR2IF=0;	TMR2IE=1;	GIE=1; TMR2ON  = 1;
 	T++; SENO = sen[T];		ancho_pwm = (uns16)SENO*Vmax; // PREPARO SEGUENT VALOR
+ //**************************************************************************************//
+ //*******************  V A R I A B L E S   L O C A L E L E S ***************************//
+ //**************************************************************************************//
 	char estado;
+	uns8 x;
+	char vac[6];
 
 
 	OSCTUNE=0b.01.000000; //PLL enable 
 	
 	RCON = 0b.01111111; //C18 pag 80 i 167  Causes del RESET i IPEN (priority Enabled o no)
 	OSCCON    = 0b.0.111.0.0.00;
+ //**************************************************************************************//
+ //**************************  B U C L E   I N F I N I T O  *****************************//
+ //**************************************************************************************//
 	
-	while (1)       					    // Bucle infinito durante el cual las interrupciones irán saltando.
+	while (1)       					
 	{
 		PORTC.1^=1;
-	/*
+	
 		switch(estado){
 			case LECTURA_VAC:
 				while(T!=0);//espero a que sea paso por cero
-				while (estado== LECTURA_VAC){
-					if ((T == 6) || (T == 15 ) || (T == 20)) {	
-					
-					nop();
-					}				
+				if(LATD.0==1){
+					while(LATD.0==1){
+						if ((T == 6) || (T == 15 ) || (T == 20)) {	
+							vac[x]=lectura_VAC();
+							x++;
+						}				
+						x=0;
+					}
+					estado = ENVIO_LCD; // envio lecturas de referencia para luego hacer calculos
+					//estado = CALCULOS_VAC;
 				}
+				else estado = LECTURA_VAC; 
+				
+				
 				break;
 			case CALCULOS_VAC:
+				
 				nop();
 
 				break;
@@ -176,25 +196,36 @@ void main (void)
 				while (estado== LECTURA_IAC){
 					if ((T == 6) || (T == 15 ) || (T == 20)) {	
 					nop();
-			
 					}
 				}
 				break;
 			case CALCULOS_IAC:
 				nop();
 				break;
-			case ENVIO_LCD:
+			case LECTURAS_VARIAS:
 				nop();
+				break;
+			case ENVIO_LCD:
+
+				Enviar_uns16(1,1,var[0]);
+				Enviar_uns16(1,10,var[1]);
+				Enviar_uns16(2,1,var[2]);
+				Enviar_uns16(2,10,var[3]);
+				Enviar_uns16(3,1,var[4]);
+				Enviar_uns16(3,10,var[5]);
+
+				estado = LECTURA_VAC;
+				
 				break;
 
 		}
 													
-	*/
+	
 	}	
 }
 
 //=============================================================================================================
-uns8 lectura_AD (void)						// Lee el canal analógico AN0 con resolución de 8 bits:
+uns8 lectura_VAC (void)						// Lee el canal analógico AN0 con resolución de 8 bits:
 {
 	uns8 valor_AD;
 	TRISA.0 = 1;
