@@ -1,0 +1,35 @@
+CC8E Version 1.4, Copyright (c) B Knudsen Data, Norway 2001-2014
+ --> FREE edition, 8-16 bit int, 24 bit float, 128k code words, reduced optim.
+ondulador_migrado.c:
+ 21. Apr 2015  15:08
+ Chip = 18F44K20
+Warning[1] C:\PIC\Proyecto\v3.1\ondulador_migrado.c 255 : Shared call tree function '_const1' may contain local variables or parameters
+Warning[2] C:\PIC\Proyecto\v3.1\ondulador_migrado.c 255 : Local variables and parameters in uncalled functions are not allocated (89)
+ (The application contains non-library functions that are not called. Local
+ variables in these functions (option -wU) are not allocated to save space)
+ RAM : ******** ******** ******** ******** ******** ******** ******** ********
+  40h: ******** ******** ******** ******** ======== ======== =1...... ..******
+  80h: ******** ******** ******** ******** ******** ******** ******** ********
+  C0h: ******** ******** ******** ******** ******** ******** ******** ********
+ Bank  0:230  1:256  2:256  bytes free
+RAM usage: 26 bytes (17 local), 742 bytes free
+Warning[3] C:\PIC\Proyecto\v3.1\LCD_4bit.h 259 : Duplicate inline division (math library may save code, option -wi removes warning)
+Warning[4] C:\PIC\Proyecto\v3.1\LCD_4bit.h 260 : Duplicate inline division (math library may save code, option -wi removes warning)
+Warning[5] C:\PIC\Proyecto\v3.1\LCD_4bit.h 347 : Duplicate inline division (math library may save code, option -wi removes warning)
+Warning[6] C:\PIC\Proyecto\v3.1\LCD_4bit.h 348 : Duplicate inline division (math library may save code, option -wi removes warning)
+Warning[7] C:\PIC\Proyecto\v3.1\LCD_4bit.h 349 : Duplicate inline division (math library may save code, option -wi removes warning)
+Warning[8] C:\PIC\Proyecto\v3.1\LCD_4bit.h 350 : Duplicate inline division (math library may save code, option -wi removes warning)
+Warning[9] C:\PIC\Proyecto\v3.1\LCD_4bit.h 352 : Duplicate inline division (math library may save code, option -wi removes warning)
+Warning[10] C:\PIC\Proyecto\v3.1\LCD_4bit.h 353 : Duplicate inline division (math library may save code, option -wi removes warning)
+Warning[11] C:\PIC\Proyecto\v3.1\LCD_4bit.h 354 : Duplicate inline division (math library may save code, option -wi removes warning)
+Warning[12] C:\PIC\Proyecto\v3.1\LCD_4bit.h 355 : Duplicate inline division (math library may save code, option -wi removes warning)
+ File 'ondulador_migrado.fcs'
+ Optimizing - removed 256 code words (-17 %)
+ File 'ondulador_migrado.var'
+ File 'ondulador_migrado.asm'
+ File 'ondulador_migrado.lst'
+ File 'ondulador_migrado.cod'
+ File 'ondulador_migrado.occ'
+ File 'ondulador_migrado.hex'
+Total of 1461 code words (17 %)
+ * Estimated CODE SIZE of full optimization: 1414 code words (-3 %)
