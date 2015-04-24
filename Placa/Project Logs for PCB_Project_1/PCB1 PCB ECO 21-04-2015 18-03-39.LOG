@@ -1,0 +1,21 @@
+Removed Pin From Net: NetName=PWM Pin=ADN-1
+Removed Pin From Net: NetName=P Pin=ADN-2
+Removed Pin From Net: NetName=A Pin=ADN-3
+Removed Pin From Net: NetName=NetADN_4 Pin=ADN-4
+Removed Pin From Net: NetName=PWM Pin=ADN-5
+Removed Pin From Net: NetName=C Pin=ADN-6
+Removed Pin From Net: NetName=GND Pin=ADN-7
+Removed Pin From Net: NetName=+5V Pin=ADN-14
+Removed Member From Class: ClassName=Sheet1 Member=ADN
+Added Component: Designator=AND(DIP14)
+Added Pin To Net: NetName=PWM Pin=AND-1
+Added Pin To Net: NetName=P Pin=AND-2
+Added Pin To Net: NetName=A Pin=AND-3
+Added Pin To Net: NetName=NetADN_4 Pin=AND-4
+Added Pin To Net: NetName=PWM Pin=AND-5
+Added Pin To Net: NetName=C Pin=AND-6
+Added Pin To Net: NetName=GND Pin=AND-7
+Added Pin To Net: NetName=+5V Pin=AND-14
+Change Net Name : Old Net Name=NetADN_4 New Net Name=NetAND_4
+Added Member To Class: ClassName=Sheet1 Member=Component AND I-7408
+Added Room: Name=Sheet1

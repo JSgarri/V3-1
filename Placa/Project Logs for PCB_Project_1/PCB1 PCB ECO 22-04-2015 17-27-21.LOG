@@ -1,0 +1,13 @@
+Removed Pin From Net: NetName=PWM Pin=AND-1
+Removed Pin From Net: NetName=P Pin=AND-2
+Removed Pin From Net: NetName=A Pin=AND-3
+Removed Pin From Net: NetName=NetAND_4 Pin=AND-4
+Removed Pin From Net: NetName=PWM Pin=AND-5
+Removed Pin From Net: NetName=C Pin=AND-6
+Added Pin To Net: NetName=NetAND_4 Pin=AND-1
+Added Pin To Net: NetName=PWM Pin=AND-2
+Added Pin To Net: NetName=C Pin=AND-3
+Added Pin To Net: NetName=PWM Pin=AND-4
+Added Pin To Net: NetName=P Pin=AND-5
+Added Pin To Net: NetName=A Pin=AND-6
+Change Net Name : Old Net Name=NetAND_4 New Net Name=NetAND_1

@@ -1,0 +1,4 @@
+Added Component: Designator=CP4(CP1_D5i5)
+Added Pin To Net: NetName=+5V Pin=CP4-1
+Added Pin To Net: NetName=GND Pin=CP4-2
+Added Member To Class: ClassName=Sheet1 Member=Component CP4 CP

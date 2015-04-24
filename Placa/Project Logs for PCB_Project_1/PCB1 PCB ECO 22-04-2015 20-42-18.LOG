@@ -1,0 +1,5 @@
+Removed Pin From Net: NetName=NetR2_2 Pin=U1-2
+Removed Pin From Net: NetName=AN230 Pin=U1-3
+Added Pin To Net: NetName=AN230 Pin=U1-2
+Added Pin To Net: NetName=NetR2_2 Pin=U1-3
+Change Net Name : Old Net Name=NetR2_2 New Net Name=AN12V

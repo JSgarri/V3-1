@@ -1,0 +1,8 @@
+Added Component: Designator=HOLE1(HOLE3_D6)
+Added Component: Designator=HOLE2(HOLE3_D6)
+Added Component: Designator=HOLE3(HOLE3_D6)
+Added Component: Designator=HOLE4(HOLE3_D6)
+Added Member To Class: ClassName=Sheet1 Member=Component HOLE1 HOLE
+Added Member To Class: ClassName=Sheet1 Member=Component HOLE2 HOLE
+Added Member To Class: ClassName=Sheet1 Member=Component HOLE3 HOLE
+Added Member To Class: ClassName=Sheet1 Member=Component HOLE4 HOLE

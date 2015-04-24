@@ -1,0 +1,8 @@
+Removed Pin From Net: NetName=B Pin=OR-1
+Removed Pin From Net: NetName=NPWM Pin=OR-3
+Removed Pin From Net: NetName=D Pin=OR-4
+Removed Pin From Net: NetName=NPWM Pin=OR-6
+Added Pin To Net: NetName=NPWM Pin=OR-1
+Added Pin To Net: NetName=B Pin=OR-3
+Added Pin To Net: NetName=NPWM Pin=OR-4
+Added Pin To Net: NetName=D Pin=OR-6
