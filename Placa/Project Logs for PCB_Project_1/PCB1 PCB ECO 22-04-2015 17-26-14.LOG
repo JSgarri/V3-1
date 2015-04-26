@@ -1,8 +1,0 @@
-Removed Pin From Net: NetName=P Pin=OR-2
-Removed Pin From Net: NetName=B Pin=OR-3
-Removed Pin From Net: NetName=NetNOT_4 Pin=OR-5
-Removed Pin From Net: NetName=D Pin=OR-6
-Added Pin To Net: NetName=NetNOT_4 Pin=OR-2
-Added Pin To Net: NetName=D Pin=OR-3
-Added Pin To Net: NetName=P Pin=OR-5
-Added Pin To Net: NetName=B Pin=OR-6

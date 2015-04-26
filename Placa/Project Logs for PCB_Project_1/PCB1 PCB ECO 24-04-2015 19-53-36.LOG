@@ -1,8 +1,0 @@
-Removed Pin From Net: NetName=GND Pin=J7-1
-Removed Pin From Net: NetName=NPWM Pin=J7-2
-Removed Pin From Net: NetName=PWM Pin=J7-3
-Removed Pin From Net: NetName=P Pin=J7-4
-Added Pin To Net: NetName=PWM Pin=J7-1
-Added Pin To Net: NetName=P Pin=J7-2
-Added Pin To Net: NetName=NPWM Pin=J7-3
-Added Pin To Net: NetName=GND Pin=J7-4

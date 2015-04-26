@@ -1,8 +1,0 @@
-Removed Pin From Net: NetName=GND Pin=Z1-1
-Removed Pin From Net: NetName=+12V Pin=Z1-2
-Change Component DesignItemId : Designator=Z1 Old DesignItemId=Z-LM78MXX New DesignItemId=Z-78MXX
-Change Component Footprint: Designator=Z1 Old Footprint=TO252_LM78MXX New Footprint=TO220H_2COM
-Change Component Comment : Designator=Z1 Old Comment=Z-LM78MXX New Comment=Z-78MXX
-Added Pin To Net: NetName=+12V Pin=Z1-1
-Added Pin To Net: NetName=GND Pin=Z1-2
-Added Pin To Net: NetName=GND Pin=Z1-2
