@@ -1,4 +1,3 @@
-
 void envia_codigo_inicial (char codigo)
 {
 	PORTB.4=0;nop();
@@ -13,9 +12,7 @@ void envia_codigo_inicial (char codigo)
 	PORTB.5 = 1; 
 	retardo_20u();
 	PORTB.5 = 0; 
-	
-	
-	
+
 	return;
 }
  
@@ -397,4 +394,46 @@ void Enviar_uns16(char linea,char columna,uns16 dato){
 
 	return;
 
+}
+
+//***********************************************************************************************
+//***********************************************************************************************
+// Definicio caracter especial : PROCES  -> posar x, on volguem el pixel ,pes 16 8 4 2 1  Rtat Hexa
+//                         -  contar pesos ( veure exple, per Ah)             ¡ ¡x¡x¡ ¡ ¡ 0x0C
+//                             -  de dalt a baix, es el codi a posar          ¡x¡ ¡ ¡x¡ ¡ 0x12
+//                                                en el vector.               ¡x¡x¡x¡x¡ ¡ 0x1E
+//                   - Al inici cridar funcio per ecriure CGRAM               ¡x¡ ¡ ¡x¡ ¡ 0x12
+//                    - Hi caben 8 carac especials de 64 a 120                ¡ ¡ ¡x¡ ¡ ¡ 0x00
+//                       de 8 e 8,  64 , 72, 80, 88, 96,104.112,120           ¡ ¡ ¡x¡x¡x¡ 0x04
+//                   - Despres d'escriure la CGRAM, cal fer un                ¡ ¡ ¡x¡ ¡x¡ 0x07
+//                     comando, per no apuntar a la CGRAM                     ¡ ¡ ¡x¡ ¡x¡ 0x05
+// Per escriure simbol .... fer :   enviar_literal(3);enviar_literal(4);
+//************IMPORTANTE****************************************
+//******Poner despues de inicializar_lcd();*********************
+void RAM_LCD (void)
+{
+	static const char Carac_1[] = {0x0C,0x10,0x08,0x04,0x1B,0x04,0x04,0x03};//caracter micro 	//escribir_literal(0);
+	static const char Carac_2[] = {0xEE,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};	//escribir_literal(1); BAT_FULL
+	static const char Carac_3[] = {0xEE,0xFF,0xF1,0xFF,0xFF,0xFF,0xFF,0xFF};	// ""...               BAT_75
+	static const char Carac_4[] = {0xEE,0xFF,0xF1,0xF1,0xFF,0xFF,0xFF,0xFF};					    // BAT_50
+	static const char Carac_5[] = {0xEE,0xFF,0xF1,0xF1,0xF1,0xFF,0xFF,0xFF};					    // BAT_25
+	static const char Carac_6[] = {0xEE,0xFF,0xF1,0xF1,0xF1,0xF1,0xFF,0xFF};					    // BAT_10
+	static const char Carac_7[] = {0xEE,0xFF,0xF1,0xF1,0xF1,0xF1,0xF1,0xFF};					    // BAT_LW
+	static const char Carac_8[] = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+	// 1era posicio CGRAM es la 64 , 72, 80, 88, 96,104.112,120
+	char i;
+	
+	enviar_comando (64);// primera posicio del Carac_1, els altres seran consecutius
+	retardo_20u ();
+	for(i=0;i<=7;i++) { enviar_literal (Carac_1[i]); retardo_20u (); retardo_20u ();}
+	for(i=0;i<=7;i++) { enviar_literal (Carac_2[i]); retardo_20u (); retardo_20u ();}
+	for(i=0;i<=7;i++) { enviar_literal (Carac_3[i]); retardo_20u (); retardo_20u ();}
+	for(i=0;i<=7;i++) { enviar_literal (Carac_4[i]); retardo_20u (); retardo_20u ();}
+	for(i=0;i<=7;i++) { enviar_literal (Carac_5[i]); retardo_20u (); retardo_20u ();}
+	for(i=0;i<=7;i++) { enviar_literal (Carac_6[i]); retardo_20u (); retardo_20u ();}
+	for(i=0;i<=7;i++) { enviar_literal (Carac_7[i]); retardo_20u (); retardo_20u ();}
+	for(i=0;i<=7;i++) { enviar_literal (Carac_8[i]); retardo_20u (); retardo_20u ();}	
+	enviar_comando (0b.0000.0010);
+	
+	return;
 }

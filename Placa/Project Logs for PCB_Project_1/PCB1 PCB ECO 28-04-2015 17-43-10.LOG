@@ -1,0 +1,6 @@
+Added Component: Designator=Z1(TO220GDS_pla)
+Added Pin To Net: NetName=+12V Pin=Z1-1
+Added Pin To Net: NetName=GND Pin=Z1-2
+Added Pin To Net: NetName=+5V Pin=Z1-3
+Added Pin To Net: NetName=+5V Pin=Z1-3
+Added Member To Class: ClassName=Sheet1 Member=Component Z1 Z-78MXX

@@ -3,177 +3,207 @@ CC8E Version 1.4, Copyright (c) B Knudsen Data.
 * FUNCTION CALL STRUCTURE
 
 F: highPriorityTimer_0    :#0 
-    _const1               : #2 
+    _const1               : #15
 
-F: retardo_10u            :#0 
-
-F: retardo_20u            :#28
+F: retardo_20u            :#53
 
 F: retardo_1m             :#16
 
-F: retardo_100m           :#0 
+F: retardo_50m            :#0 
+
+F: retardo_100m           :#2 
 
 F: retardo_500m           :#0 
 
-F: _fmul24                :#51
-
-F: _fdiv24                :#1 
-
-F: _fadd24                :#46
-
-F: _fsub24                :#3 
-
-F: _int24ToFloat24        :#2 
-
-F: _int32ToFloat24        :#0 
-
-F: _float24ToInt24        :#3 
-
-F: _f24_LT_f24            :#0 
-
-F: _f24_GE_f24            :#0 
-
-F: _f24_GT_f24            :#0 
-
-F: _f24_LE_f24            :#0 
-
-F: log                    :#1 
-
-F: log10                  :#0 
-
-F: floorMaskTable24       :#2 
-
-F: floor24                :#2 
-
-F: exp10                  :#0 
-
-F: exp                    :#0 
-
-F: cosin24                :#2 
-
-F: cos                    :#0 
-
-F: sin                    :#0 
-
-F: sqrt                   :#0 
-
-F: lcdBegin               :#0 
-
 F: envia_codigo_inicial   :#4 
-    retardo_20u           : #28
+    retardo_20u           : #53
 
-F: enviar_comando         :#28
+F: enviar_comando         :#30
     retardo_1m            : #16
-    retardo_20u           : #28
-    retardo_20u           : #28
+    retardo_20u           : #53
+    retardo_20u           : #53
     retardo_1m            : #16
     retardo_1m            : #16
     retardo_1m            : #16
-    retardo_20u           : #28
-    retardo_20u           : #28
+    retardo_20u           : #53
+    retardo_20u           : #53
     retardo_1m            : #16
     retardo_1m            : #16
 
-F: enviar_literal         :#7 
-    retardo_20u           : #28
-    retardo_20u           : #28
-    retardo_20u           : #28
+F: enviar_literal         :#21
+    retardo_20u           : #53
+    retardo_20u           : #53
+    retardo_20u           : #53
     retardo_1m            : #16
     retardo_1m            : #16
-    retardo_20u           : #28
-    retardo_20u           : #28
-    enviar_comando        : #28
+    retardo_20u           : #53
+    retardo_20u           : #53
+    enviar_comando        : #30
 
-F: enviar_cifra           :#0 
-    retardo_20u           : #28
-    retardo_20u           : #28
-    retardo_20u           : #28
+F: enviar_cifra           :#3 
+    retardo_20u           : #53
+    retardo_20u           : #53
+    retardo_20u           : #53
     retardo_1m            : #16
     retardo_1m            : #16
-    retardo_20u           : #28
-    retardo_20u           : #28
-    enviar_comando        : #28
+    retardo_20u           : #53
+    retardo_20u           : #53
+    enviar_comando        : #30
 
 F: inicializar_lcd        :#1 
     retardo_1m            : #16
     envia_codigo_inicial  : #4 
     retardo_1m            : #16
     envia_codigo_inicial  : #4 
-    retardo_20u           : #28
+    retardo_20u           : #53
     envia_codigo_inicial  : #4 
-    retardo_20u           : #28
+    retardo_20u           : #53
     envia_codigo_inicial  : #4 
-    enviar_comando        : #28
-    enviar_comando        : #28
-    enviar_comando        : #28
+    enviar_comando        : #30
+    enviar_comando        : #30
+    enviar_comando        : #30
 
-F: escribir_posicion      :#0 
-    enviar_comando        : #28
-    enviar_comando        : #28
-    enviar_comando        : #28
-    enviar_comando        : #28
-    enviar_comando        : #28
+F: escribir_posicion      :#8 
+    enviar_comando        : #30
+    enviar_comando        : #30
+    enviar_comando        : #30
+    enviar_comando        : #30
+    enviar_comando        : #30
 
 F: borrar_linea           :#0 
-    enviar_comando        : #28
-    enviar_comando        : #28
-    enviar_comando        : #28
-    enviar_comando        : #28
-    enviar_literal        : #7 
-    enviar_comando        : #28
+    enviar_comando        : #30
+    enviar_comando        : #30
+    enviar_comando        : #30
+    enviar_comando        : #30
+    enviar_literal        : #21
+    enviar_comando        : #30
 
-F: borrar_lcd             :#0 
-    enviar_comando        : #28
+F: borrar_lcd             :#2 
+    enviar_comando        : #30
 
 F: Enviar_lcd             :#0 
-    enviar_comando        : #28
-    enviar_comando        : #28
-    enviar_comando        : #28
-    enviar_comando        : #28
-    enviar_comando        : #28
-    enviar_literal        : #7 
-    enviar_literal        : #7 
-    enviar_literal        : #7 
-    enviar_literal        : #7 
-    enviar_literal        : #7 
-    enviar_literal        : #7 
-    retardo_20u           : #28
-    retardo_20u           : #28
-    retardo_20u           : #28
+    enviar_comando        : #30
+    enviar_comando        : #30
+    enviar_comando        : #30
+    enviar_comando        : #30
+    enviar_comando        : #30
+    enviar_literal        : #21
+    enviar_literal        : #21
+    enviar_literal        : #21
+    enviar_literal        : #21
+    enviar_literal        : #21
+    enviar_literal        : #21
+    retardo_20u           : #53
+    retardo_20u           : #53
+    retardo_20u           : #53
     retardo_1m            : #16
     retardo_1m            : #16
-    retardo_20u           : #28
-    retardo_20u           : #28
-    enviar_comando        : #28
+    retardo_20u           : #53
+    retardo_20u           : #53
+    enviar_comando        : #30
 
-F: Enviar_uns16           :#0 
-    enviar_comando        : #28
-    enviar_comando        : #28
-    enviar_comando        : #28
-    enviar_comando        : #28
-    enviar_comando        : #28
-    retardo_20u           : #28
-    retardo_20u           : #28
-    retardo_20u           : #28
+F: Enviar_uns16           :#2 
+    enviar_comando        : #30
+    enviar_comando        : #30
+    enviar_comando        : #30
+    enviar_comando        : #30
+    enviar_comando        : #30
+    retardo_20u           : #53
+    retardo_20u           : #53
+    retardo_20u           : #53
     retardo_1m            : #16
     retardo_1m            : #16
-    retardo_20u           : #28
-    retardo_20u           : #28
-    enviar_comando        : #28
+    retardo_20u           : #53
+    retardo_20u           : #53
+    enviar_comando        : #30
+
+F: RAM_LCD                :#1 
+    enviar_comando        : #30
+    retardo_20u           : #53
+    _const1               : #15
+    enviar_literal        : #21
+    retardo_20u           : #53
+    retardo_20u           : #53
+    _const1               : #15
+    enviar_literal        : #21
+    retardo_20u           : #53
+    retardo_20u           : #53
+    _const1               : #15
+    enviar_literal        : #21
+    retardo_20u           : #53
+    retardo_20u           : #53
+    _const1               : #15
+    enviar_literal        : #21
+    retardo_20u           : #53
+    retardo_20u           : #53
+    _const1               : #15
+    enviar_literal        : #21
+    retardo_20u           : #53
+    retardo_20u           : #53
+    _const1               : #15
+    enviar_literal        : #21
+    retardo_20u           : #53
+    retardo_20u           : #53
+    _const1               : #15
+    enviar_literal        : #21
+    retardo_20u           : #53
+    retardo_20u           : #53
+    _const1               : #15
+    enviar_literal        : #21
+    retardo_20u           : #53
+    retardo_20u           : #53
+    enviar_comando        : #30
+
+F: medir                  :#2 
 
 F: main                   :#0 
     configuraPic          : #1 
+    _const1               : #15
     inicializar_lcd       : #1 
-    _const1               : #2 
-
-F: lectura_AD             :#0 
-    retardo_20u           : #28
+    borrar_lcd            : #2 
+    retardo_100m          : #2 
+    RAM_LCD               : #1 
+    retardo_100m          : #2 
+    borrar_lcd            : #2 
+    escribir_posicion     : #8 
+    _const1               : #15
+    enviar_literal        : #21
+    enviar_literal        : #21
+    escribir_posicion     : #8 
+    _const1               : #15
+    enviar_literal        : #21
+    escribir_posicion     : #8 
+    _const1               : #15
+    enviar_literal        : #21
+    escribir_posicion     : #8 
+    _const1               : #15
+    enviar_literal        : #21
+    medir                 : #2 
+    retardo_20u           : #53
+    retardo_20u           : #53
+    retardo_20u           : #53
+    retardo_20u           : #53
+    retardo_20u           : #53
+    retardo_20u           : #53
+    retardo_20u           : #53
+    retardo_20u           : #53
+    retardo_20u           : #53
+    _const1               : #15
+    medir                 : #2 
+    escribir_posicion     : #8 
+    enviar_cifra          : #3 
+    escribir_posicion     : #8 
+    enviar_cifra          : #3 
+    Enviar_uns16          : #2 
+    escribir_posicion     : #8 
+    enviar_cifra          : #3 
+    escribir_posicion     : #8 
+    enviar_literal        : #21
+    Enviar_uns16          : #2 
 
 F: configuraPic           :#1 
 
-F: configura2_PWM         :#0 
-
-F: _const1                :#2 
+F: _const1                :#15
 
 
  L1  highPriorityTimer_0
@@ -181,6 +211,7 @@ F: _const1                :#2
 
  L0  main
  L1    configuraPic
+ L1    _const1
  L1    inicializar_lcd
  L2      retardo_1m
  L2      envia_codigo_inicial
@@ -204,5 +235,124 @@ F: _const1                :#2
  L2        retardo_1m [T-GOTO]
  L2      enviar_comando ..
  L1      enviar_comando [T-GOTO] ..
+ L1    borrar_lcd
+ L1      enviar_comando [T-GOTO] ..
+ L1    retardo_100m
+ L1    RAM_LCD
+ L2      enviar_comando ..
+ L2      retardo_20u
+ L2      _const1
+ L2      enviar_literal
+ L3        retardo_20u
+ L3        retardo_20u
+ L3        retardo_20u
+ L3        retardo_1m
+ L3        retardo_1m
+ L3        retardo_20u
+ L3        retardo_20u
+ L2        enviar_comando [T-GOTO]
+ L3          retardo_1m
+ L3          retardo_20u
+ L3          retardo_20u
+ L3          retardo_1m
+ L3          retardo_1m
+ L3          retardo_1m
+ L3          retardo_20u
+ L3          retardo_20u
+ L3          retardo_1m
+ L2          retardo_1m [T-GOTO]
+ L2      retardo_20u
+ L2      retardo_20u
+ L2      _const1
+ L2      enviar_literal ..
+ L2      retardo_20u
+ L2      retardo_20u
+ L2      _const1
+ L2      enviar_literal ..
+ L2      retardo_20u
+ L2      retardo_20u
+ L2      _const1
+ L2      enviar_literal ..
+ L2      retardo_20u
+ L2      retardo_20u
+ L2      _const1
+ L2      enviar_literal ..
+ L2      retardo_20u
+ L2      retardo_20u
+ L2      _const1
+ L2      enviar_literal ..
+ L2      retardo_20u
+ L2      retardo_20u
+ L2      _const1
+ L2      enviar_literal ..
+ L2      retardo_20u
+ L2      retardo_20u
+ L2      _const1
+ L2      enviar_literal ..
+ L2      retardo_20u
+ L2      retardo_20u
+ L1      enviar_comando [T-GOTO] ..
+ L1    retardo_100m
+ L1    borrar_lcd ..
+ L1    escribir_posicion
+ L2      enviar_comando ..
+ L2      enviar_comando ..
+ L2      enviar_comando ..
+ L2      enviar_comando ..
+ L1      enviar_comando [T-GOTO] ..
  L1    _const1
+ L1    enviar_literal ..
+ L1    enviar_literal ..
+ L1    escribir_posicion ..
+ L1    _const1
+ L1    enviar_literal ..
+ L1    escribir_posicion ..
+ L1    _const1
+ L1    enviar_literal ..
+ L1    escribir_posicion ..
+ L1    _const1
+ L1    enviar_literal ..
+ L1    medir
+ L1    retardo_20u
+ L1    retardo_20u
+ L1    retardo_20u
+ L1    retardo_20u
+ L1    retardo_20u
+ L1    retardo_20u
+ L1    retardo_20u
+ L1    retardo_20u
+ L1    retardo_20u
+ L1    _const1
+ L1    medir
+ L1    escribir_posicion ..
+ L1    enviar_cifra
+ L2      retardo_20u
+ L2      retardo_20u
+ L2      retardo_20u
+ L2      retardo_1m
+ L2      retardo_1m
+ L2      retardo_20u
+ L2      retardo_20u
+ L1      enviar_comando [T-GOTO] ..
+ L1    escribir_posicion ..
+ L1    enviar_cifra ..
+ L1    Enviar_uns16
+ L2      enviar_comando ..
+ L2      enviar_comando ..
+ L2      enviar_comando ..
+ L2      enviar_comando ..
+ L2      enviar_comando ..
+ L2      retardo_20u
+ L2      retardo_20u
+ L2      retardo_20u
+ L2      retardo_1m
+ L2      retardo_1m
+ L2      retardo_20u
+ L2      retardo_20u
+ L2      enviar_comando ..
+ L1    escribir_posicion ..
+ L1    enviar_cifra ..
+ L1    escribir_posicion ..
+ L1    enviar_literal ..
+ L1    Enviar_uns16 ..
 

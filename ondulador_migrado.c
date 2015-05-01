@@ -20,7 +20,7 @@
  #pragma config[5] = 0b.1000.1000//Mirar CCP2 MUX bit 0 
  				//-->1 = CCP2 input/output is multiplexed with RC1
 				//   -->0 = CCP2 input/output is multiplexed with RB3 
- #pragma config[6] = 0b.1000.0101
+ #pragma config[6] = 0b.1000.0001
  // resto configs son para la proteccion del programa 
 
  #pragma sharedAllocation//evita error en las interrupciones
@@ -36,20 +36,27 @@
 #define LECTURAS_VARIAS 4
 #define ENVIO_LCD    5
 
+#define LOGO_SC		 0
+#define BATT_FULL	 1
+#define BATT_75		 2
+#define BATT_50		 3
+#define BATT_25		 4
+#define BATT_10		 5
+#define BATT_LW		 6 
+#define BATT_CLEAR	 7
+
 
 #pragma rambank 0
 bit bUdw; // a 1 puja en la taula (incrementa) , a 0 decrementa
 uns16 ancho_pwm;
 uns16 Vmax;
 uns8 SENO;
-
-
-char T,i; // Index de la taula
+char T,i,estado; // Index de la taula
 
 
 static const char sen [26] = 			
 {0,8,16,23,31,39,47,54,61,68,75,81,87,93,98,103,108,112,115,119,121,123,125,126,127,128};
-
+// PWM maximo 799 para ser 100% 
 
 //=======================================================================
 #include "int18XXX.h"	 // Capçalera de interrupcions.
@@ -92,7 +99,7 @@ interrupt highPriorityTimer_0 (void)		// Interrupción por desbordamiento de Tim
 			//	TMR2IF =0; // Postscaler a 2
 			while(!TMR2IF); // espeor que acabi la 1era meitat del T=0, postsclaer =2
 			TMR2IF =0; 	T2CON = 0b.0.0000.1.01;  	CCPR1L = 0;		CCP1CON.5 = 0;	CCP1CON.4 = 0;
-			LATD.0= !LATD.0;	bUdw=1;  T=1; // el deixo sortir
+			LATD.0= !LATD.0;	bUdw=1;  T=1; if(estado==ENVIO_LCD) estado = LECTURA_VAC;  // el deixo sortir
 		}			  
 							
 		SENO = sen[T];			
@@ -115,15 +122,19 @@ interrupt highPriorityTimer_0 (void)		// Interrupción por desbordamiento de Tim
 }
 
 //==============================================================================================
-#include "Temporiz_20Mhz.h"
+#include "Temporiz_64Mhz.h"
 void configuraPic (void);
 void configura1_PWM (void); 				// Configura todos los prámetros excepto M.
 uns8 lectura_VAC (void);
-
-#include "math24F.h"
-#include "math24LB.h"	
-
+	
 #include "LCD_4bit.h"
+#include "medir_18F4XK20.h"
+
+static const char mensaje1[19] ="ONDULADOR 50HZ  by ";
+static const char mensaje2[7] ="ESTADO:";
+static const char mensaje3[5] ="VMAX:";
+static const char mensaje4[13] ="LECTURAS_VAC:";
+static const char ref [6] = {100,100,100,100,100,100};
 //==============================================================================================
 //==============================================================================================
 
@@ -132,12 +143,12 @@ void main (void)
 
 	GIE = 0;								// Desactivamos inicialmente todas las interrupciones.
 	configuraPic (); 						// Configuramos todos los puertos y PWM
-	inicializar_lcd();    
+	
 	T0CON   = 0b.01000.001; //(PIC 18F4550)	// Equivale junto con INTCON2 al OPTION_REG del 16F88x).								
 	INTCON2 = 0b.0000.0100; //(PIC 18F4550)	// Equivale junto con T0CON al OPTION_REG del 16F88x).	
 	TMR0IF = 0;   //T0IF = 0; (PIC 16F88x)	// Ponemos el flanco de interrupciones a cero (aun no se ha efectuado ninguna).
    // w1   =   0;								// Reseteamos la variable índice de la tabla.
-	LATD.0 =0;            Vmax = 4;
+	LATD.0 =0;            Vmax = 2; //2 el pwm maximo en 
 
 	
 	INTCON = 0b.0100.0000;				// Interrupciones globales (bit 7) e interrupción por Timer0 (bit 5) activadas.
@@ -151,99 +162,140 @@ void main (void)
  //**************************************************************************************//
  //*******************  V A R I A B L E S   L O C A L E L E S ***************************//
  //**************************************************************************************//
-	char estado;
+	estado=0; //empieza por estado 0
 	uns8 x;
 	char vac[6];
+	char ac,rf,dif,vbat,o=0; //variables para guardar temporalmente las arrays
+	bit a,b,c,vuelta=0;
 
 
 	OSCTUNE=0b.01.000000; //PLL enable 
 	
 	RCON = 0b.01111111; //C18 pag 80 i 167  Causes del RESET i IPEN (priority Enabled o no)
 	OSCCON    = 0b.0.111.0.0.00;
+
+	inicializar_lcd(); 
+	borrar_lcd();
+	retardo_100m();
+	RAM_LCD();
+	retardo_100m();
+	borrar_lcd();
+	escribir_posicion (1, 1);
+	char p,h;
+	for(p=0;p<19;p++ )enviar_literal(mensaje1[p]);
+	enviar_literal(LOGO_SC);
+	escribir_posicion (2, 1);
+ 	for(p=0;p<7;p++ )enviar_literal(mensaje2[p]);
+ 	escribir_posicion (3, 1);
+ 	for(p=0;p<5;p++ )enviar_literal(mensaje3[p]);
+ 	escribir_posicion (4, 1);
+ 	for(p=0;p<13;p++ )enviar_literal(mensaje4[p]);
+	
+	ADCON2=0b.10.001.110;
+
  //**************************************************************************************//
  //**************************  B U C L E   I N F I N I T O  *****************************//
  //**************************************************************************************//
-	
 	while (1)       					
 	{
 		PORTC.1^=1;
 	
 		switch(estado){
 			case LECTURA_VAC:
-				while(T!=0);//espero a que sea paso por cero
-				if(LATD.0==1){
-					while(LATD.0==1){
-						if ((T == 6) || (T == 15 ) || (T == 20)) {	
-							vac[x]=lectura_VAC();
-							x++;
-						}				
-						x=0;
-					}
-					estado = ENVIO_LCD; // envio lecturas de referencia para luego hacer calculos
-					//estado = CALCULOS_VAC;
+				x=0;
+				while(LATD.0==1){
+					PORTC.4=1;
+					if (((T == 6)&&((x==0)||(x==5))) || ((T == 12 )&&((x==1)||(x==4))) || ((T == 20)&&((x==2)||(x==3)))) {
+						PORTC.3=1;
+						ac=medir(0,8);
+						PORTC.3=0;	
+						vac[x]=ac;
+						x++;
+						h=x;
+						if ((T==20&&x==3)) {retardo_20u();retardo_20u();retardo_20u();retardo_20u();
+							retardo_20u();retardo_20u();retardo_20u();retardo_20u();retardo_20u();}
+					}		
+					PORTC.4=0;		
 				}
-				else estado = LECTURA_VAC; 
-				
-				
-				break;
+				estado = CALCULOS_VAC;
+				if(x<=4) estado = LECTURA_VAC;
+			break;
 			case CALCULOS_VAC:
-				
-				nop();
+				for(p=0;p<=5;p++){
+					ac= vac[p];
+					rf =ref[p];
+					if((p==0||p==5)){
+						dif=ac-rf;
 
-				break;
+						
+					}
+					else if((p==1|| p==4)){
+
+					}
+					else {
+
+					}
+				}
+				
+				estado = LECTURAS_VARIAS;
+			break;
 			case LECTURA_IAC:
-				while(T!=0);//espero a que sea paso por cero
+				
 				while (estado== LECTURA_IAC){
 					if ((T == 6) || (T == 15 ) || (T == 20)) {	
 					nop();
 					}
 				}
-				break;
+			break;
 			case CALCULOS_IAC:
 				nop();
-				break;
+			break;
 			case LECTURAS_VARIAS:
-				nop();
-				break;
+				char bat = medir(1,8);
+				if (bat>216)				vbat=BATT_FULL;
+				else if((bat>173&&bat<215))	vbat=BATT_75;
+				else if((bat>133&&bat<172)) vbat=BATT_50;
+				else if((bat>87 &&bat<130)) vbat=BATT_25;
+				else if((bat>43 && bat<85)) vbat=BATT_10;
+				else if(bat<=42){
+					o++;
+					if(o<=5)vbat=BATT_LW;
+					if(o>6)vbat=BATT_CLEAR;
+					if(o==10)o=0;
+				} 			
+				estado= ENVIO_LCD;
+			break;
 			case ENVIO_LCD:
 
-				Enviar_uns16(1,1,var[0]);
-				Enviar_uns16(1,10,var[1]);
-				Enviar_uns16(2,1,var[2]);
-				Enviar_uns16(2,10,var[3]);
-				Enviar_uns16(3,1,var[4]);
-				Enviar_uns16(3,10,var[5]);
-
+				if(vuelta){
+					escribir_posicion(2,9);
+					enviar_cifra(estado);
+					escribir_posicion(3,9);
+					enviar_cifra(Vmax);
+					Enviar_uns16(3,16,bat);	
+					
+				}
+				else{
+					escribir_posicion(4,14);
+					enviar_cifra(x);
+					escribir_posicion(4,20);
+					enviar_literal(vbat);
+					Enviar_uns16(2,16,vac[0]);
+				//Enviar_uns16(2,10,vac[1]);
+				//Enviar_uns16(3,1,vac[2]);
+				//Enviar_uns16(3,10,vac[3]);
+				//Enviar_uns16(4,1,vac[4]);
+				//Enviar_uns16(4,10,vac[5]);
+				}
+				vuelta^=1;
 				estado = LECTURA_VAC;
 				
-				break;
-
+			break;
 		}
-													
-	
 	}	
 }
 
 //=============================================================================================================
-uns8 lectura_VAC (void)						// Lee el canal analógico AN0 con resolución de 8 bits:
-{
-	uns8 valor_AD;
-	TRISA.0 = 1;
-	//ADCON0 = 0b.00.0000.01; 				// ADCON0 = 0b.01.0000.01; // Canal AN0. (PIC 16F887)
-	ADCON0 = 0b.10.000.0.0.1;				// (PIC 16F877)
-	//ADCON1 = 0b.1000.0000; 				// Justificado a la derecha.	(PIC 16F887)
-	ADCON1 = 0b.1.1.00.0000;				// (PIC 16F877)
-	retardo_20u ();							// Retardo de 20 us (para 20 MHz) necesario para adquirir la señal.
-	GO = 1;									// Activamos la conversión A -> D
-	while (GO);								// Bloqueo mientras realiza la conversión. Al terminar, el resultado está en ADRESH y ADRESL
-	//valor_AD.low8  = ADRESL;    			// Cargo en "valor_AD" el valor digital (10 bits: de 0 a 1023) de la conversión.                                                               
-	//valor_AD.high8 = ADRESH;				// Cargo en "valor_AD" el valor digital (10 bits: de 0 a 1023) de la conversión. 
-	valor_AD = ADRESH;						// Despreciamos los dos bits más bajos para poder trabajar con un char.
-	//PORTD = valor_AD.low8; 				// ****** PRUEBA PARA VER SI HACE LA CONVERSIÓN A/D.******************
-	//PORTC.1 = !PORTC.1; 					// Conmutamos PORTC.1 para generar un pulso que nos indique el tiempo de conversión A/D.
-	
-return valor_AD;
-}
 			
 void configuraPic (void)					
 {
@@ -256,11 +308,11 @@ void configuraPic (void)
 	//ANSEL  = 0b.0000.0001;					// Solo el canal AN0 será entrada analógica, el resto serán entradas/salidas digitales.(PIC 816F87)
 	//ANSELH = 0b.0000.0000;					// Solo el canal AN0 será entrada analógica, el resto serán entradas/salidas digitales.(PIC 816F87)
 	
-	TRISA  = 0b.0000.0001;					// PORTA.0 es entrada, el resto son salidas.
+	TRISA  = 0b.0000.1111;					// PORTA.0 es entrada, el resto son salidas.
 	TRISB  = 0b.0000.0000;					// PORTB todo salidas.
 	TRISC  = 0b.0000.0000;					// PORTC todo salidas además de la salida del PWM.
 	TRISD  = 0b.0000.0000;					// PORTD todo salidas.				
-	PORTB  = 0x00;							// Inicializa las salidas de PORTB a 0.
+	LATB  = 0x00;							// Inicializa las salidas de PORTB a 0.
 	PORTC  = 0x00;							// Inicializa las salidas de PORTC a 0.
 	PORTD  = 0x00;							// Inicializa las salidas de PORTD a 0.
 
@@ -277,11 +329,3 @@ void configuraPic (void)
 		//0b.0000.0100;-->240nS
 		//0b.0111.1111;-->7.9uS !! se solapan los tiempos e invierte la salida con lo que quedan las 2 conduciendo!!
 }
-
-void configura2_PWM (void) //void configura2_PWM (unsigned long ancho_pwm)	// Configura el "delta" del PWM.
-{
-	for (i = 1; i <= 6; i ++)  ancho_pwm = rl (ancho_pwm);
-	CCPR1L    = ancho_pwm.high8;
-	CCP1CON.5 = ancho_pwm.7;
-	CCP1CON.4 = ancho_pwm.6;
-}	
