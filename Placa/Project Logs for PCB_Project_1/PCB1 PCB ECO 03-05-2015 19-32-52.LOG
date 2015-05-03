@@ -1,4 +1,0 @@
-Added Component: Designator=D6(DO35)
-Added Pin To Net: NetName=AN12V Pin=D6-1
-Added Pin To Net: NetName=+5V Pin=D6-2
-Added Member To Class: ClassName=Sheet1 Member=Component D6 D
