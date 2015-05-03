@@ -1,0 +1,11 @@
+Removed Pin From Net: NetName=+12V Pin=CP1-1
+Removed Pin From Net: NetName=+12V Pin=D1-2
+Removed Pin From Net: NetName=+12V Pin=Z1-1
+Added Component: Designator=SW1(SW1SPDT)
+Added Pin To Net: NetName=+12V Pin=SW1-1
+Added Pin To Net: NetName=NetCP1_1 Pin=CP1-1
+Added Pin To Net: NetName=NetCP1_1 Pin=D1-2
+Added Pin To Net: NetName=NetCP1_1 Pin=SW1-2
+Added Pin To Net: NetName=NetCP1_1 Pin=Z1-1
+Added Net: Name=NetCP1_1
+Added Member To Class: ClassName=Sheet1 Member=Component SW1 SW
