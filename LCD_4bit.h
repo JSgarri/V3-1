@@ -1,17 +1,23 @@
+
+/*
+	ESTA LIBRERIA NO SIRVE PARA LA PLACA DE PROTOTIPOS 
+	¡¡¡¡¡ES SOLO PARA LA PLACA DEL ONDULADOR!!!!!
+*/
+
 void envia_codigo_inicial (char codigo)
 {
-	PORTB.4=0;nop();
-	PORTB.0 = codigo.4;
+	PORTB.5=0;nop();
+	PORTB.3 = codigo.4;
 	nop();
-	PORTB.1 = codigo.5;
+	PORTB.2 = codigo.5;
 	nop();
-	PORTB.2 = codigo.6;
+	PORTB.1 = codigo.6;
 	nop();
-	PORTB.3 = codigo.7;
+	PORTB.0 = codigo.7;
 	nop();
-	PORTB.5 = 1; 
+	PORTB.4 = 1; 
 	retardo_20u();
-	PORTB.5 = 0; 
+	PORTB.4 = 0; 
 
 	return;
 }
@@ -19,29 +25,29 @@ void envia_codigo_inicial (char codigo)
 void enviar_comando (char comando) 
 {
 	
-	PORTB.0 =  comando.4;nop();
-	PORTB.1 =  comando.5;nop();
-	PORTB.2 =  comando.6;nop();
-	PORTB.3 =  comando.7;
+	PORTB.3 =  comando.4;nop();
+	PORTB.2 =  comando.5;nop();
+	PORTB.1 =  comando.6;nop();
+	PORTB.0 =  comando.7;
 	retardo_1m ();
-	PORTB.4 = 0;  									// Modo comando.
+	PORTB.5 = 0;  									// Modo comando.
 	retardo_20u (); //
-	PORTB.5 = 1;  									// Breve pulso.
+	PORTB.4 = 1;  									// Breve pulso.
 	retardo_20u ();
-	PORTB.5 = 0; 									// Lo envia y saca por LCD; deshabilita LCD.
+	PORTB.4 = 0; 									// Lo envia y saca por LCD; deshabilita LCD.
 	retardo_1m ();
 	retardo_1m ();
 	comando = swap (comando);
-	PORTB.0 =  comando.4;nop();
-	PORTB.1 =  comando.5;nop();
-	PORTB.2 =  comando.6;nop();
-	PORTB.3 =  comando.7;nop();
+	PORTB.3 =  comando.4;nop();
+	PORTB.2 =  comando.5;nop();
+	PORTB.1 =  comando.6;nop();
+	PORTB.0 =  comando.7;nop();
 	retardo_1m ();
-	PORTB.4 = 0;  									// Modo comando.
+	PORTB.5 = 0;  									// Modo comando.
 	retardo_20u ();
-	PORTB.5 = 1;  									// Breve pulso.
+	PORTB.4 = 1;  									// Breve pulso.
 	retardo_20u ();
-	PORTB.5 = 0; 									// Lo envia y saca por LCD; deshabilita LCD.
+	PORTB.4 = 0; 									// Lo envia y saca por LCD; deshabilita LCD.
 	retardo_1m ();
 	retardo_1m ();
 	//leds_OFF (10);
@@ -55,31 +61,31 @@ void enviar_literal (char dato)
     char i;
 
 	
-	PORTB.0 = dato.4;
+	PORTB.3 = dato.4;
 	nop();
-	PORTB.1 = dato.5;
+	PORTB.2 = dato.5;
 	nop();
-	PORTB.2 = dato.6;
+	PORTB.1 = dato.6;
 	nop();
-	PORTB.3 = dato.7;
+	PORTB.0 = dato.7;
 	nop();
-	PORTB.4 = 1;  									// Modo dato.
+	PORTB.5 = 1;  									// Modo dato.
 	retardo_20u ();
-	PORTB.5 = 1;  									// Breve pulso.
+	PORTB.4 = 1;  									// Breve pulso.
 	retardo_20u ();
-	PORTB.5 = 0;									// Lo envia y saca por LCD; deshabilita LCD.
+	PORTB.4 = 0;									// Lo envia y saca por LCD; deshabilita LCD.
 	for (i = 1; i <= 6; i++) retardo_20u ();
 	dato = swap (dato);
-	PORTB.0 = dato.4;nop();
-	PORTB.1 = dato.5;nop();
-	PORTB.2 = dato.6;nop();
-	PORTB.3 = dato.7;nop();
+	PORTB.3 = dato.4;nop();
+	PORTB.2 = dato.5;nop();
+	PORTB.1 = dato.6;nop();
+	PORTB.0 = dato.7;nop();
 	retardo_1m ();
-	PORTB.4 = 1;  									// Modo dato.
+	PORTB.5 = 1;  									// Modo dato.
 	retardo_1m ();
-	PORTB.5 = 1;  									// Breve pulso.
+	PORTB.4 = 1;  									// Breve pulso.
 	retardo_20u ();
-	PORTB.5 = 0; 									// Lo envia y saca por LCD; deshabilita LCD.
+	PORTB.4 = 0; 									// Lo envia y saca por LCD; deshabilita LCD.
 	for (i = 1; i<= 6; i++) retardo_20u ();
 	enviar_comando (0b.0000.1100);					// Pantalla encendida, sin cursor.	
 	return;
@@ -89,34 +95,34 @@ void enviar_cifra (char dato)
 {
     char i;
 	dato = dato + 0x30; 							// Convierto el número en su equivalente ASCII literal. 
-	PORTB.0 = dato.4;
+	PORTB.3 = dato.4;
 	nop();
-	PORTB.1 = dato.5;
+	PORTB.2 = dato.5;
 	nop();
-	PORTB.2 = dato.6;
+	PORTB.1 = dato.6;
 	nop();
-	PORTB.3 = dato.7;
+	PORTB.0 = dato.7;
 	nop();
-	PORTB.4 = 1;  									// Modo dato.
+	PORTB.5 = 1;  									// Modo dato.
 	retardo_20u ();
-	PORTB.5 = 1;  									// Breve pulso.
+	PORTB.4 = 1;  									// Breve pulso.
 	retardo_20u ();
-	PORTB.5 = 0;									// Lo envia y saca por LCD; deshabilita LCD.
+	PORTB.4 = 0;									// Lo envia y saca por LCD; deshabilita LCD.
 	for (i = 1; i <= 6; i++) retardo_20u ();
 	dato = swap (dato);
-	PORTB.0 = dato.4;
+	PORTB.3 = dato.4;
 	nop();
-	PORTB.1 = dato.5;
+	PORTB.2 = dato.5;
 	nop();
-	PORTB.2 = dato.6;
+	PORTB.1 = dato.6;
 	nop();
-	PORTB.3 = dato.7;
+	PORTB.0 = dato.7;
 	retardo_1m ();
-	PORTB.4 = 1;  									// Modo dato.
+	PORTB.5 = 1;  									// Modo dato.
 	retardo_1m ();
-	PORTB.5 = 1;  									// Breve pulso.
+	PORTB.4 = 1;  									// Breve pulso.
 	retardo_20u ();
-	PORTB.5 = 0; 									// Lo envia y saca por LCD; deshabilita LCD.
+	PORTB.4 = 0; 									// Lo envia y saca por LCD; deshabilita LCD.
 	for (i = 1; i<= 6; i++) retardo_20u ();
 	enviar_comando (0b.0000.1100);					// Pantalla encendida, sin cursor.
 	return;
@@ -284,27 +290,27 @@ sa:			cent   = dato   / 100;
 						
 			if ((dat!='.')&&(dat!=' ')) dat = dat + 0x30;
 
-			PORTB.0 = dat.4;nop();
-			PORTB.1 = dat.5;nop();
-			PORTB.2 = dat.6;nop();
-			PORTB.3 = dat.7;nop();
-			PORTB.4 = 1;  									// Modo dato.
+			PORTB.3 = dat.4;nop();
+			PORTB.2 = dat.5;nop();
+			PORTB.1 = dat.6;nop();
+			PORTB.0 = dat.7;nop();
+			PORTB.5 = 1;  									// Modo dato.
 			retardo_20u ();
-			PORTB.5 = 1;  									// Breve pulso.
+			PORTB.4 = 1;  									// Breve pulso.
 			retardo_20u ();
-			PORTB.5 = 0;									// Lo envia y saca por LCD; deshabilita LCD.
+			PORTB.4 = 0;									// Lo envia y saca por LCD; deshabilita LCD.
 			for (i = 1; i <= 6; i++) retardo_20u ();
 			dat = swap (dat);
-			PORTB.0 = dat.4;nop();
-			PORTB.1 = dat.5;nop();
-			PORTB.2 = dat.6;nop();
-			PORTB.3 = dat.7;
+			PORTB.3 = dat.4;nop();
+			PORTB.2 = dat.5;nop();
+			PORTB.1 = dat.6;nop();
+			PORTB.0 = dat.7;
 			retardo_1m ();
-			PORTB.4 = 1;  									// Modo dato.
+			PORTB.5 = 1;  									// Modo dato.
 			retardo_1m ();
-			PORTB.5 = 1;  									// Breve pulso.
+			PORTB.4 = 1;  									// Breve pulso.
 			retardo_20u ();
-			PORTB.5 = 0; 									// Lo envia y saca por LCD; deshabilita LCD.
+			PORTB.4 = 0; 									// Lo envia y saca por LCD; deshabilita LCD.
 			for (i = 1; i<= 6; i++) retardo_20u ();
 			enviar_comando (0b.0000.1100);					// Pantalla encendida, sin cursor.			
 		}
@@ -367,27 +373,27 @@ void Enviar_uns16(char linea,char columna,uns16 dato){
 					break;
 			}		
 			if (dat!=' ') dat = dat + 0x30;
-			PORTB.0 = dat.4;nop();
-			PORTB.1 = dat.5;nop();
-			PORTB.2 = dat.6;nop();
-			PORTB.3 = dat.7;nop();
-			PORTB.4 = 1;  									// Modo dato.
+			PORTB.3 = dat.4;nop();
+			PORTB.2 = dat.5;nop();
+			PORTB.1 = dat.6;nop();
+			PORTB.0 = dat.7;nop();
+			PORTB.5 = 1;  									// Modo dato.
 			retardo_20u ();
-			PORTB.5 = 1;  									// Breve pulso.
+			PORTB.4 = 1;  									// Breve pulso.
 			retardo_20u ();
-			PORTB.5 = 0;									// Lo envia y saca por LCD; deshabilita LCD.
+			PORTB.4 = 0;									// Lo envia y saca por LCD; deshabilita LCD.
 			for (i = 1; i <= 6; i++) retardo_20u ();
 			dat = swap (dat);
-			PORTB.0 = dat.4;nop();
-			PORTB.1 = dat.5;nop();
-			PORTB.2 = dat.6;nop();
-			PORTB.3 = dat.7;
+			PORTB.3 = dat.4;nop();
+			PORTB.2 = dat.5;nop();
+			PORTB.1 = dat.6;nop();
+			PORTB.0 = dat.7;
 			retardo_1m ();
-			PORTB.4 = 1;  									// Modo dato.
+			PORTB.5 = 1;  									// Modo dato.
 			retardo_1m ();
-			PORTB.5 = 1;  									// Breve pulso.
+			PORTB.4 = 1;  									// Breve pulso.
 			retardo_20u ();
-			PORTB.5 = 0; 									// Lo envia y saca por LCD; deshabilita LCD.
+			PORTB.4 = 0; 									// Lo envia y saca por LCD; deshabilita LCD.
 			for (i = 1; i<= 6; i++) retardo_20u ();
 			enviar_comando (0b.0000.1100);					// Pantalla encendida, sin cursor.			
 		}

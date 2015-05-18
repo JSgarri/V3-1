@@ -30,7 +30,7 @@ F: enviar_comando         :#30
     retardo_1m            : #16
     retardo_1m            : #16
 
-F: enviar_literal         :#21
+F: enviar_literal         :#20
     retardo_20u           : #62
     retardo_20u           : #62
     retardo_20u           : #62
@@ -40,7 +40,7 @@ F: enviar_literal         :#21
     retardo_20u           : #62
     enviar_comando        : #30
 
-F: enviar_cifra           :#4 
+F: enviar_cifra           :#0 
     retardo_20u           : #62
     retardo_20u           : #62
     retardo_20u           : #62
@@ -63,7 +63,7 @@ F: inicializar_lcd        :#1
     enviar_comando        : #30
     enviar_comando        : #30
 
-F: escribir_posicion      :#8 
+F: escribir_posicion      :#4 
     enviar_comando        : #30
     enviar_comando        : #30
     enviar_comando        : #30
@@ -75,7 +75,7 @@ F: borrar_linea           :#0
     enviar_comando        : #30
     enviar_comando        : #30
     enviar_comando        : #30
-    enviar_literal        : #21
+    enviar_literal        : #20
     enviar_comando        : #30
 
 F: borrar_lcd             :#2 
@@ -87,12 +87,12 @@ F: Enviar_lcd             :#0
     enviar_comando        : #30
     enviar_comando        : #30
     enviar_comando        : #30
-    enviar_literal        : #21
-    enviar_literal        : #21
-    enviar_literal        : #21
-    enviar_literal        : #21
-    enviar_literal        : #21
-    enviar_literal        : #21
+    enviar_literal        : #20
+    enviar_literal        : #20
+    enviar_literal        : #20
+    enviar_literal        : #20
+    enviar_literal        : #20
+    enviar_literal        : #20
     retardo_20u           : #62
     retardo_20u           : #62
     retardo_20u           : #62
@@ -102,7 +102,7 @@ F: Enviar_lcd             :#0
     retardo_20u           : #62
     enviar_comando        : #30
 
-F: Enviar_uns16           :#6 
+F: Enviar_uns16           :#8 
     enviar_comando        : #30
     enviar_comando        : #30
     enviar_comando        : #30
@@ -121,40 +121,63 @@ F: RAM_LCD                :#1
     enviar_comando        : #30
     retardo_20u           : #62
     _const1               : #16
-    enviar_literal        : #21
+    enviar_literal        : #20
     retardo_20u           : #62
     retardo_20u           : #62
     _const1               : #16
-    enviar_literal        : #21
+    enviar_literal        : #20
     retardo_20u           : #62
     retardo_20u           : #62
     _const1               : #16
-    enviar_literal        : #21
+    enviar_literal        : #20
     retardo_20u           : #62
     retardo_20u           : #62
     _const1               : #16
-    enviar_literal        : #21
+    enviar_literal        : #20
     retardo_20u           : #62
     retardo_20u           : #62
     _const1               : #16
-    enviar_literal        : #21
+    enviar_literal        : #20
     retardo_20u           : #62
     retardo_20u           : #62
     _const1               : #16
-    enviar_literal        : #21
+    enviar_literal        : #20
     retardo_20u           : #62
     retardo_20u           : #62
     _const1               : #16
-    enviar_literal        : #21
+    enviar_literal        : #20
     retardo_20u           : #62
     retardo_20u           : #62
     _const1               : #16
-    enviar_literal        : #21
+    enviar_literal        : #20
     retardo_20u           : #62
     retardo_20u           : #62
     enviar_comando        : #30
 
 F: medir                  :#3 
+
+F: _fmul24                :#4 
+
+F: _fdiv24                :#1 
+
+F: _fadd24                :#2 
+
+F: _fsub24                :#1 
+    _fadd24               : #2 
+
+F: _int24ToFloat24        :#2 
+
+F: _int32ToFloat24        :#0 
+
+F: _float24ToInt24        :#3 
+
+F: _f24_LT_f24            :#0 
+
+F: _f24_GE_f24            :#0 
+
+F: _f24_GT_f24            :#0 
+
+F: _f24_LE_f24            :#0 
 
 F: main                   :#0 
     configuraPic          : #1 
@@ -162,20 +185,41 @@ F: main                   :#0
     borrar_lcd            : #2 
     RAM_LCD               : #1 
     borrar_lcd            : #2 
-    escribir_posicion     : #8 
+    escribir_posicion     : #4 
     _const1               : #16
-    enviar_literal        : #21
-    enviar_literal        : #21
+    enviar_literal        : #20
+    enviar_literal        : #20
     _const1               : #16
-    escribir_posicion     : #8 
+    _int24ToFloat24       : #2 
+    _fmul24               : #4 
+    _float24ToInt24       : #3 
+    escribir_posicion     : #4 
     _const1               : #16
-    enviar_literal        : #21
-    escribir_posicion     : #8 
+    enviar_literal        : #20
+    escribir_posicion     : #4 
     _const1               : #16
-    enviar_literal        : #21
-    escribir_posicion     : #8 
+    enviar_literal        : #20
+    escribir_posicion     : #4 
     _const1               : #16
-    enviar_literal        : #21
+    enviar_literal        : #20
+    medir                 : #3 
+    retardo_20u           : #62
+    retardo_20u           : #62
+    retardo_20u           : #62
+    retardo_20u           : #62
+    retardo_20u           : #62
+    retardo_20u           : #62
+    retardo_20u           : #62
+    retardo_20u           : #62
+    retardo_20u           : #62
+    _const1               : #16
+    _int24ToFloat24       : #2 
+    _fmul24               : #4 
+    _fdiv24               : #1 
+    _fadd24               : #2 
+    _fsub24               : #1 
+    _fmul24               : #4 
+    _float24ToInt24       : #3 
     medir                 : #3 
     retardo_20u           : #62
     retardo_20u           : #62
@@ -188,32 +232,16 @@ F: main                   :#0
     retardo_20u           : #62
     _const1               : #16
     medir                 : #3 
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_20u           : #62
-    _const1               : #16
-    medir                 : #3 
-    escribir_posicion     : #8 
-    enviar_cifra          : #4 
-    Enviar_uns16          : #6 
-    Enviar_uns16          : #6 
-    Enviar_uns16          : #6 
-    escribir_posicion     : #8 
-    enviar_cifra          : #4 
-    escribir_posicion     : #8 
-    enviar_cifra          : #4 
-    enviar_literal        : #21
-    Enviar_uns16          : #6 
-    Enviar_uns16          : #6 
-    Enviar_uns16          : #6 
-    escribir_posicion     : #8 
-    enviar_cifra          : #4 
+    Enviar_uns16          : #8 
+    Enviar_uns16          : #8 
+    Enviar_uns16          : #8 
+    Enviar_uns16          : #8 
+    _fmul24               : #4 
+    _float24ToInt24       : #3 
+    Enviar_uns16          : #8 
+    Enviar_uns16          : #8 
+    Enviar_uns16          : #8 
+    Enviar_uns16          : #8 
 
 F: configuraPic           :#1 
 
@@ -315,6 +343,9 @@ F: _const1                :#16
  L1    enviar_literal ..
  L1    enviar_literal ..
  L1    _const1
+ L1    _int24ToFloat24
+ L1    _fmul24
+ L1    _float24ToInt24
  L1    escribir_posicion ..
  L1    _const1
  L1    enviar_literal ..
@@ -335,6 +366,14 @@ F: _const1                :#16
  L1    retardo_20u
  L1    retardo_20u
  L1    _const1
+ L1    _int24ToFloat24
+ L1    _fmul24
+ L1    _fdiv24
+ L1    _fadd24
+ L1    _fsub24
+ L2      _fadd24
+ L1    _fmul24
+ L1    _float24ToInt24
  L1    medir
  L1    retardo_20u
  L1    retardo_20u
@@ -347,16 +386,6 @@ F: _const1                :#16
  L1    retardo_20u
  L1    _const1
  L1    medir
- L1    escribir_posicion ..
- L1    enviar_cifra
- L2      retardo_20u
- L2      retardo_20u
- L2      retardo_20u
- L2      retardo_1m
- L2      retardo_1m
- L2      retardo_20u
- L2      retardo_20u
- L1      enviar_comando [T-GOTO] ..
  L1    Enviar_uns16
  L2      enviar_comando ..
  L2      enviar_comando ..
@@ -373,14 +402,11 @@ F: _const1                :#16
  L2      enviar_comando ..
  L1    Enviar_uns16 ..
  L1    Enviar_uns16 ..
- L1    escribir_posicion ..
- L1    enviar_cifra ..
- L1    escribir_posicion ..
- L1    enviar_cifra ..
- L1    enviar_literal ..
+ L1    Enviar_uns16 ..
+ L1    _fmul24
+ L1    _float24ToInt24
  L1    Enviar_uns16 ..
  L1    Enviar_uns16 ..
  L1    Enviar_uns16 ..
- L1    escribir_posicion ..
- L1    enviar_cifra ..
+ L1    Enviar_uns16 ..
 

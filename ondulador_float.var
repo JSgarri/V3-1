@@ -1,7 +1,7 @@
 
 CC8E Version 1.4, Copyright (c) B Knudsen Data
  * VARIABLE LIST FILE
-Source 'ondulador_migrado.c'
+Source 'ondulador_float.c'
 Chip = 18F44K20
 
 Sorted by address.
@@ -12,21 +12,21 @@ Size := number of bytes
 #AC  := number of direct accesses
 
  X  B  Address  Size  #AC   Name
+ C  0  0x000      8  :  1:  Carac_8
+ C  0  0x000     19  :  1:  mensaje1
+ C  0  0x000      3  :  1:  mensaje2
+ C  0  0x000      5  :  1:  mensaje3
  C  0  0x000      8  :  1:  Carac_1
+ C  0  0x000     26  :  2:  sen
  C  0  0x000      8  :  1:  Carac_2
- C  0  0x000      8  :  1:  Carac_3
  C  0  0x000      8  :  1:  Carac_4
  C  0  0x000      8  :  1:  Carac_5
  C  0  0x000      8  :  1:  Carac_6
  C  0  0x000      8  :  1:  Carac_7
- C  0  0x000      8  :  1:  Carac_8
  C  0  0x000     12  :  1:  refIC
- C  0  0x000      3  :  1:  mensaje4
+ C  0  0x000      8  :  1:  Carac_3
+ C  0  0x000      4  :  1:  mensaje4
  C  0  0x000     12  :  1:  refAC
- C  0  0x000     26  :  2:  sen
- C  0  0x000     19  :  1:  mensaje1
- C  0  0x000      3  :  1:  mensaje2
- C  0  0x000      5  :  1:  mensaje3
  L  0  0x060      1  :  2:  svrSTATUS
  L  0  0x061      1  :  2:  svrBSR
  L  0  0x062      1  :  2:  svrWREG
@@ -36,93 +36,122 @@ Size := number of bytes
  L  0  0x068      1  :  2:  sv_TABLAT
  L  0  0x069      1  :  0:  C1cnt
  L  0  0x069      1  :  2:  ci
+ L  0  0x069      1  :  2:  C3cnt
+ L  0  0x06A      2  :  4:  C4tmp
  L  0  0x06A      2  :  0:  C2tmp
- L  0  0x06C      1  : 26:  p
- L  0  0x06D      1  :  9:  h
- L  0  0x06E      1  : 22:  x
- L  0  0x06F     12  :  0:  vac
- L  0  0x07B      2  : 12:  ac
- L  0  0x07D     12  :  0:  iac
- L  0  0x089      2  : 12:  ic
- L  0  0x08B      2  : 16:  rf
- L  0  0x08D      2  : 12:  dif
- L  0  0x08F      2  : 10:  difMediaAC
- L  0  0x091      2  : 10:  difMediaIC
- L  0  0x093      1  :  8:  vbat
- L  0  0x094      1  :  6:  o
- L  0  0x095.0    0  :  0:  a
- L  0  0x095.1    0  :  0:  b
- L  0  0x095.2    0  :  0:  c
- L  0  0x095.3    0  :  3:  vuelta
- L  0  0x095.4    0  :  3:  flancoVAC
- L  0  0x095.5    0  :  3:  flancoIAC
- L  0  0x096      1  : 32:  i_8
- L  0  0x096      1  :  0:  C38cnt
- L  0  0x096      1  : 12:  i_4
- L  0  0x096      2  : 22:  bat
- L  0  0x097      1  :  9:  codigo
- L  0  0x097      2  :  0:  C39tmp
- L  0  0x098      1  :  9:  linea
- L  0  0x098      1  :  7:  linea_4
- L  0  0x098      1  :  2:  C43cnt
- L  0  0x098      1  :  4:  canal
- L  0  0x098      1  : 19:  dato_2
- L  0  0x098      1  : 18:  dato
- L  0  0x098      1  :  2:  C40cnt
- L  0  0x099      2  :  4:  C44tmp
- L  0  0x099      1  :  6:  i_3
- L  0  0x099      1  :  6:  i_2
- L  0  0x099      2  :  4:  C41tmp
+ L  0  0x06C      1  :  4:  C5rem
+ L  0  0x06D      1  : 26:  p
+ L  0  0x06E      1  :  1:  h
+ L  0  0x06F      1  : 22:  x
+ L  0  0x070     12  : 12:  vac
+ L  0  0x07C      2  : 12:  ac
+ L  0  0x07E     12  :  0:  iac
+ L  0  0x08A      2  : 12:  ic
+ L  0  0x08C      2  : 16:  rf
+ L  0  0x08E      2  : 12:  dif
+ L  0  0x090      2  : 12:  difMediaAC
+ L  0  0x092      2  :  8:  difMediaIC
+ L  0  0x094      1  :  7:  vbat
+ L  0  0x095      1  :  6:  o
+ L  0  0x096      1  :  1:  BP
+ L  0  0x097.0    0  :  0:  a
+ L  0  0x097.1    0  :  0:  b
+ L  0  0x097.2    0  :  0:  c
+ L  0  0x097.3    0  :  3:  vuelta
+ L  0  0x097.4    0  :  3:  flancoVAC
+ L  0  0x097.5    0  :  2:  flancoIAC
+ L  0  0x098      3  : 23:  variacion
+ L  0  0x098      1  : 32:  i_8
+ L  0  0x098      1  : 12:  i_4
+ L  0  0x098      1  :  5:  linea
+ L  0  0x099      1  : 18:  dato
+ L  0  0x099      1  :  9:  codigo
  L  0  0x099      1  :  5:  columna
- L  0  0x099      1  :  2:  bits
- L  0  0x099      1  : 10:  columna_3
- L  0  0x09A      2  : 11:  resultado
- L  0  0x09A      2  : 26:  dato_4
- L  0  0x09B      1  :  4:  C42rem
- L  0  0x09B      1  :  4:  C45rem
- L  0  0x09C      2  : 18:  num_2
- L  0  0x09E      2  :  9:  u_milers_2
- L  0  0x0A0      2  :  7:  cent_2
- L  0  0x0A2      2  : 11:  d_milers
- L  0  0x0A4      1  :  3:  dec_2
- L  0  0x0A5      1  :  5:  unid_2
- L  0  0x0A6      1  :  6:  resto1_2
- L  0  0x0A7      1  :  6:  i_7
- L  0  0x0A8      1  :  4:  xx_2
- L  0  0x0A9      1  :  0:  yy_2
- L  0  0x0AA      1  : 28:  dat_2
- L  0  0x0AB      1  :  0:  xy_2
- L  0  0x0AC      1  :  2:  C26cnt
- L  0  0x0AC      1  :  2:  C36cnt
- L  0  0x0AC      1  : 18:  comando
- L  0  0x0AC      1  :  2:  C31cnt
- L  0  0x0AC      1  :  2:  C18cnt
- L  0  0x0AC      1  :  2:  C23cnt
- L  0  0x0AC      1  :  2:  C28cnt
- L  0  0x0AC      1  :  2:  C21cnt
- L  0  0x0AC      1  :  2:  C33cnt
- L  0  0x0AD      1  :  2:  PDel0_2
- L  0  0x0AD      2  :  4:  C29tmp
- L  0  0x0AD      2  :  4:  C24tmp
- L  0  0x0AD      2  :  4:  C22tmp
- L  0  0x0AD      2  :  4:  C19tmp
- L  0  0x0AD      2  :  4:  C27tmp
- L  0  0x0AD      1  :  2:  C37tmp
- L  0  0x0AD      2  :  4:  C32tmp
- L  0  0x0AD      1  :  2:  C34tmp
- L  0  0x0AD      1  :  2:  PDel0
- L  0  0x0AE      1  :  2:  PDel1
- L  0  0x0AE      1  :  4:  C35rem
- L  0  0x0AF      2  :  8:  C20rem
- L  0  0x0AF      2  :  8:  C25rem
- L  0  0x0AF      1  :  4:  C30rem
- G  0  0x0B1.0    0  :  5:  bUdw
- G  0  0x0B2      2  : 22:  ancho_pwm
- G  0  0x0B4      2  :  7:  Vmax
- G  0  0x0B6      1  :  6:  SENO
- G  0  0x0B7      1  : 17:  T
- G  0  0x0B8      1  :  6:  i
- G  0  0x0B9      1  : 12:  estado
+ L  0  0x09A      1  :  6:  i_2
+ L  0  0x09B      2  : 22:  bat
+ L  0  0x09D      1  :  4:  canal
+ L  0  0x09D      1  :  2:  C44cnt
+ L  0  0x09D      1  :  2:  C41cnt
+ L  0  0x09D      2  :  4:  g
+ L  0  0x09E      1  :  2:  bits
+ L  0  0x09E      2  :  4:  C42tmp
+ L  0  0x09E      2  :  4:  C45tmp
+ L  0  0x09F      3  :175:  arg1f24
+ L  0  0x09F      1  :  9:  linea_4
+ R  0  0x09F      3  :  7:  rval_3
+ L  0  0x09F      2  : 11:  resultado
+ R  0  0x09F      3  :  1:  rval
+ L  0  0x0A0      1  :  4:  C43rem
+ L  0  0x0A0      1  :  4:  C46rem
+ L  0  0x0A0      1  : 12:  columna_3
+ L  0  0x0A1      2  : 30:  dato_4
+ L  0  0x0A2      3  : 59:  arg2f24
+ L  0  0x0A3      2  : 18:  num_2
+ L  0  0x0A5      1  :  6:  expo_2
+ L  0  0x0A5      1  : 11:  xtra
+ L  0  0x0A5      2  : 13:  aarg_2
+ L  0  0x0A5      2  :  9:  u_milers_2
+ L  0  0x0A5      1  :  2:  sign_6
+ L  0  0x0A5      2  :  7:  aarg
+ L  0  0x0A6      1  :  4:  xtra_2
+ L  0  0x0A6      1  :  8:  expo_4
+ L  0  0x0A6      1  :  9:  temp
+ L  0  0x0A7      1  :  3:  sign_4
+ L  0  0x0A7      1  :  8:  expo
+ L  0  0x0A7      1  :  4:  sign_2
+ L  0  0x0A7      1  :  2:  sign
+ L  0  0x0A7      1  :  4:  xtra_4
+ L  0  0x0A7      2  :  7:  cent_2
+ L  0  0x0A8      1  :  2:  sign_3
+ L  0  0x0A8      1  :  5:  tmpL
+ L  0  0x0A8      1  :  3:  counter
+ L  0  0x0A9      2  : 11:  d_milers
+ L  0  0x0AB      1  :  3:  dec_2
+ L  0  0x0AC      1  :  5:  unid_2
+ L  0  0x0AD      1  :  6:  resto1_2
+ L  0  0x0AE      1  :  6:  i_7
+ L  0  0x0AF      1  :  4:  xx_2
+ L  0  0x0B0      1  :  0:  yy_2
+ L  0  0x0B1      1  : 28:  dat_2
+ L  0  0x0B2      1  :  0:  xy_2
+ L  0  0x0B3      1  :  2:  C36cnt
+ L  0  0x0B3      1  :  2:  C24cnt
+ L  0  0x0B3      1  :  2:  C21cnt
+ L  0  0x0B3      1  : 18:  comando
+ L  0  0x0B3      1  :  2:  C34cnt
+ L  0  0x0B3      1  :  2:  C26cnt
+ L  0  0x0B3      1  :  2:  C29cnt
+ L  0  0x0B3      1  :  2:  C31cnt
+ L  0  0x0B3      1  :  2:  C39cnt
+ L  0  0x0B4      2  :  4:  C25tmp
+ L  0  0x0B4      2  :  4:  C22tmp
+ L  0  0x0B4      2  :  4:  C32tmp
+ L  0  0x0B4      2  :  4:  C30tmp
+ L  0  0x0B4      2  :  4:  C35tmp
+ L  0  0x0B4      1  :  2:  C40tmp
+ L  0  0x0B4      2  :  4:  C27tmp
+ L  0  0x0B4      1  :  2:  PDel0_2
+ L  0  0x0B4      1  :  2:  C37tmp
+ L  0  0x0B4      1  :  2:  PDel0
+ L  0  0x0B5      1  :  2:  PDel1
+ L  0  0x0B5      1  :  4:  C38rem
+ L  0  0x0B6      1  :  4:  C33rem
+ L  0  0x0B6      2  :  8:  C28rem
+ L  0  0x0B6      2  :  8:  C23rem
+ G  0  0x0B8.0    0  :  5:  bUdw
+ G  0  0x0B9      2  : 26:  ancho_pwm
+ G  0  0x0BB      2  :  5:  r
+ G  0  0x0BD      3  : 33:  Vmax
+ G  0  0x0C0      2  :  9:  SENO
+ G  0  0x0C2      1  : 17:  T
+ G  0  0x0C3      1  :  6:  i
+ G  0  0x0C4      1  : 12:  estado
+ G  0  0x0C5      1  :  0:  FpFlags
+ R  0  0x0C5.1    0  :  4:  FpOverflow
+ R  0  0x0C5.2    0  :  2:  FpUnderFlow
+ R  0  0x0C5.3    0  :  1:  FpDiv0
+ R  0  0x0C5.5    0  :  0:  FpDomainError
+ R  0  0x0C5.6    0  :  6:  FpRounding
  P  -  0xF77      1  :  0:  SSPMSK
  P  -  0xF78      1  :  0:  SLRCON
  P  -  0xF78.0    0  :  0:  SLRA
@@ -156,54 +185,61 @@ Size := number of bytes
  P  -  0xF7C      1  :  0:  WPUB
  P  -  0xF7D      1  :  0:  IOCB
  P  -  0xF7E      1  :  1:  ANSEL
- L  -  0xF7F      1  :  2<> PDel0_3
- L  -  0xF7F      1  :  4<> C15rem
- L  -  0xF7F      1  :  2<> linea_2
- L  -  0xF7F      1  :  2<> PDel0_4
- L  -  0xF7F      1  :  2<> PDel1_3
- L  -  0xF7F      1  :  2<> PDel2
- L  -  0xF7F      1  :  2<> PDel1_4
- L  -  0xF7F      1  :  2<> PDel1_2
- L  -  0xF7F      1  :  2<> C13cnt
- L  -  0xF7F      1  :  2<> C14tmp
  L  -  0xF7F      1  :  2<> PDel2_3
- L  -  0xF7F      2  :  6<> num
- L  -  0xF7F      2  : 11<> u_milers
- L  -  0xF7F      2  :  7<> cent
- L  -  0xF7F      1  :  3<> dec
+ L  -  0xF7F      1  :  0<> sign_5
  L  -  0xF7F      1  :  5<> unid
- L  -  0xF7F      1  :  6<> resto1
+ L  -  0xF7F      1  : 29<> dat
+ L  -  0xF7F      1  :  3<> xy
+ R  -  0xF7F      3  :  0<> rval_2
+ L  -  0xF7F      2  :  4<> C7tmp
+ L  -  0xF7F      2  :  8<> C8rem
+ L  -  0xF7F      1  :  2<> C9cnt
+ L  -  0xF7F      2  :  4<> C10tmp
+ L  -  0xF7F      1  :  2<> C11cnt
+ L  -  0xF7F      2  :  4<> C12tmp
+ L  -  0xF7F      1  :  4<> C13rem
+ L  -  0xF7F      1  :  2<> C14cnt
+ L  -  0xF7F      2  :  4<> C15tmp
+ L  -  0xF7F      1  :  2<> C16cnt
+ L  -  0xF7F      1  :  2<> C17tmp
+ L  -  0xF7F      1  :  4<> C18rem
+ L  -  0xF7F      1  :  2<> C19cnt
+ L  -  0xF7F      1  :  2<> PDel2_2
+ L  -  0xF7F      1  :  2<> PDel0_5
+ L  -  0xF7F      1  :  2<> PDel1_4
+ L  -  0xF7F      2  : 11<> u_milers
+ L  -  0xF7F      1  :  2<> C6cnt
  L  -  0xF7F      1  :  6<> i_6
  L  -  0xF7F      1  : 13<> xx
  L  -  0xF7F      1  :  0<> yy
- L  -  0xF7F      1  : 29<> dat
- L  -  0xF7F      1  :  3<> xy
- L  -  0xF7F      1  :  2<> C3cnt
- L  -  0xF7F      2  :  4<> C4tmp
- L  -  0xF7F      2  :  8<> C5rem
- P  -  0xF7F      1  :  0:  ANSELH
- L  -  0xF7F      1  :  2<> C17tmp
- L  -  0xF7F      1  :  2<> PDel2_2
- L  -  0xF7F      1  :  2<> PDel0_5
- L  -  0xF7F      1  :  2<> C6cnt
- L  -  0xF7F      2  :  4<> C7tmp
- L  -  0xF7F      1  :  2<> C8cnt
- L  -  0xF7F      2  :  4<> C9tmp
- L  -  0xF7F      1  :  4<> C10rem
- L  -  0xF7F      1  :  2<> C11cnt
- L  -  0xF7F      2  :  4<> C12tmp
+ L  -  0xF7F      2  :  7<> cent
+ L  -  0xF7F      1  :  2<> linea_2
+ L  -  0xF7F      1  :  3<> i_5
+ L  -  0xF7F      1  :  1<> linea_3
  L  -  0xF7F      1  :  4<> columna_2
  L  -  0xF7F      2  : 18<> dato_3
- L  -  0xF7F      1  :  1<> linea_3
- L  -  0xF7F      1  :  3<> i_5
- L  -  0xF7F      1  :  2<> C16cnt
- L  -  0xF7F.0    0  :  1<> xi
- L  -  0xF7F.0    0  :  2<> ndp
+ L  -  0xF7F      1  :  2<> PDel1_3
+ L  -  0xF7F      4  :  0<> arg32
+ L  -  0xF7F      1  :  0<> expo_3
+ P  -  0xF7F      1  :  0:  ANSELH
+ L  -  0xF7F      1  :  2<> PDel0_3
+ L  -  0xF7F      1  : 19<> dato_2
+ L  -  0xF7F      1  :  6<> i_3
+ L  -  0xF7F      1  :  3<> dec
+ L  -  0xF7F      1  :  2<> C20tmp
+ L  -  0xF7F      1  :  6<> resto1
+ L  -  0xF7F      1  :  2<> PDel1_2
+ L  -  0xF7F      1  :  2<> PDel2
+ L  -  0xF7F      2  :  6<> num
+ L  -  0xF7F      1  :  2<> PDel0_4
  L  -  0xF7F.0    0  :  3<> bd
+ L  -  0xF7F.0    0  :  2<> ndp
  L  -  0xF7F.0    0  :  2<> dp
+ L  -  0xF7F.0    0  :  1<> xi
  P  -  0xF80      1  :  0:  PORTA
  P  -  0xF81      1  :121:  PORTB
- P  -  0xF82      1  :  6:  PORTC
+ R  -  0xF82      1  :  0<> xtra_3
+ P  -  0xF82      1  :  1:  PORTC
  P  -  0xF83      1  :  1:  PORTD
  P  -  0xF84      1  :  0:  PORTE
  P  -  0xF89      1  :  0:  LATA
@@ -454,23 +490,23 @@ Size := number of bytes
  P  -  0xFD6      1  :  0:  TMR0L
  P  -  0xFD7      1  :  0:  TMR0H
  P  -  0xFD8      1  :  2:  STATUS
- P  -  0xFD8.0    0  : 55:  Carry
+ P  -  0xFD8.0    0  : 87:  Carry
  P  -  0xFD8.1    0  :  0:  DC
- P  -  0xFD8.2    0  : 69:  Zero_
+ P  -  0xFD8.2    0  : 84:  Zero_
  P  -  0xFD8.3    0  :  0:  Overflow
  P  -  0xFD8.4    0  :  0:  Negative
- P  -  0xFD9      1  :  0:  FSR2L
  P  -  0xFD9      2  :  0:  FSR2
+ P  -  0xFD9      1  :  0:  FSR2L
  P  -  0xFDA      1  :  0:  FSR2H
  P  -  0xFDB      1  :  0:  PLUSW2
  P  -  0xFDC      1  :  0:  PREINC2
  P  -  0xFDD      1  :  0:  POSTDEC2
  P  -  0xFDE      1  :  0:  POSTINC2
  P  -  0xFDF      1  :  0:  INDF2
- P  -  0xFE0      1  :  2:  BSR
  P  -  0xFE0      1  :  0:  BSRL
- P  -  0xFE1      1  :  0:  FSR1L
+ P  -  0xFE0      1  :  2:  BSR
  P  -  0xFE1      2  :  0:  FSR1
+ P  -  0xFE1      1  :  0:  FSR1L
  P  -  0xFE2      1  :  0:  FSR1H
  P  -  0xFE3      1  :  0:  PLUSW1
  P  -  0xFE4      1  :  0:  PREINC1
@@ -479,13 +515,13 @@ Size := number of bytes
  P  -  0xFE7      1  :  0:  INDF1
  P  -  0xFE8      1  :  0:  WREG
     -  0xFE8      1  :  0:  W
- P  -  0xFE9      2  : 16:  FSR0
  P  -  0xFE9      1  :  0:  FSR0L
+ P  -  0xFE9      2  :  8:  FSR0
  P  -  0xFEA      1  :  0:  FSR0H
  P  -  0xFEB      1  :  0:  PLUSW0
  P  -  0xFEC      1  :  0:  PREINC0
  P  -  0xFED      1  :  0:  POSTDEC0
- P  -  0xFEE      1  : 16:  POSTINC0
+ P  -  0xFEE      1  :  8:  POSTINC0
  P  -  0xFEF      1  :  0:  INDF0
  P  -  0xFF0      1  :  0:  INTCON3
  P  -  0xFF0.0    0  :  0:  INT1IF
@@ -508,15 +544,15 @@ Size := number of bytes
  P  -  0xFF2.3    0  :  0:  RBIE
  P  -  0xFF2.4    0  :  0:  INT0IE
  P  -  0xFF2.5    0  :  0:  TMR0IE
- P  -  0xFF2.6    0  :  0:  PEIE
  P  -  0xFF2.6    0  :  0:  GIEL
- P  -  0xFF2.7    0  :  2:  GIE
+ P  -  0xFF2.6    0  :  0:  PEIE
  P  -  0xFF2.7    0  :  0:  GIEH
- P  -  0xFF3      1  :  6:  PRODL
- P  -  0xFF4      1  :  4:  PRODH
+ P  -  0xFF2.7    0  :  2:  GIE
+ P  -  0xFF3      1  :  8:  PRODL
+ P  -  0xFF4      1  :  7:  PRODH
  P  -  0xFF5      1  :  5:  TABLAT
- P  -  0xFF6      3  : 10:  TBLPTR
  P  -  0xFF6      1  :  0:  TBLPTRL
+ P  -  0xFF6      3  : 10:  TBLPTR
  P  -  0xFF7      1  :  0:  TBLPTRH
  P  -  0xFF8      1  :  0:  TBLPTRU
  P  -  0xFF9      1  :  0:  PCL

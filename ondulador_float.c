@@ -28,8 +28,8 @@
  //**************************************************************************************//
  //********************************  V A R I A B L E S  *********************************//
  //**************************************************************************************//
-#define NEGATIVO 0
-#define POSITIVO 1
+#define PORDEBAJO 0
+#define PORENCIMA 1
 
 #define LECTURA_VAC  0
 #define CALCULOS_VAC 1
@@ -54,9 +54,9 @@
 
 #pragma rambank 0
 bit bUdw; // a 1 puja en la taula (incrementa) , a 0 decrementa
-uns16 ancho_pwm;
-uns16 Vmax;
-uns8 SENO;
+uns16 ancho_pwm,r;
+float Vmax;
+uns16 SENO;
 char T,i,estado; // Index de la taula
 
 
@@ -66,6 +66,7 @@ static const char sen [26] =
 
 //=======================================================================
 #include "int18XXX.h"	 // Capçalera de interrupcions.
+
 
 #pragma origin 0x08	//#pragma origin 0x18	(PIC 16F88x)
 
@@ -91,25 +92,41 @@ interrupt highPriorityTimer_0 (void)		// Interrupción por desbordamiento de Tim
 	{ 
 		T2CON = 0b.0.0011.1.01; TMR2IF =0; //TMR2ON =1; // PostScaler per 4
 		for (i = 1; i <= 6; i ++)  ancho_pwm = rl (ancho_pwm);
-		CCPR1L    = ancho_pwm.high8;	CCP1CON.5 = ancho_pwm.7;	CCP1CON.4 = ancho_pwm.6;
+		CCPR1L = ancho_pwm.high8;
+		CCP1CON.5 = ancho_pwm.7;
+		CCP1CON.4 = ancho_pwm.6;
 				  
-		if(bUdw) 	{ if(T>=25)  bUdw=0;      
-				      else        T++;
-					} 
-		if(!bUdw)   T--;                       
-		if(T==0) 
-		{  	while(!TMR2IF); TMR2IF =0; // ESPERO QUE ACABI  T=1
-			T2CON = 0b.0.0001.1.01;  	CCPR1L = 0;		CCP1CON.5 = 0;	CCP1CON.4 = 0;	 
+		if(bUdw){ 
+			if(T>=25)  bUdw=0;      
+			else T++;
+		} 
+		if(!bUdw) T--;                       
+		if(T==0) {
+		  	while(!TMR2IF);TMR2IF =0; // ESPERO QUE ACABI  T=1
+			T2CON = 0b.0.0001.1.01;
+			CCPR1L = 0;
+			CCP1CON.5 = 0;
+			CCP1CON.4 = 0;	 
 			// Posrescaler a 2
 			//while(!TMR2IF); // espero que acabi el T=0
 			//	TMR2IF =0; // Postscaler a 2
 			while(!TMR2IF); // espeor que acabi la 1era meitat del T=0, postsclaer =2
-			TMR2IF =0; 	T2CON = 0b.0.0000.1.01;  	CCPR1L = 0;		CCP1CON.5 = 0;	CCP1CON.4 = 0;
-			LATD.0= !LATD.0;	bUdw=1;  T=1; if(estado==ENVIO_LCD) estado = LECTURA_VAC;  // el deixo sortir
+			TMR2IF =0;
+			T2CON = 0b.0.0000.1.01;
+			CCPR1L = 0;
+			CCP1CON.5 = 0;
+			CCP1CON.4 = 0;
+			LATD.0= !LATD.0;
+			
+			bUdw=1;  
+			T=1; 
+			if(estado==ENVIO_LCD) estado = LECTURA_VAC;  // el deixo sortir
 		}			  
 							
-		SENO = sen[T];			
-		ancho_pwm = (uns16)SENO*Vmax;
+		SENO = sen[T];
+		ancho_pwm = (uns16)SENO*r;
+		ancho_pwm=ancho_pwm/10;
+		//Vmax=3.0;
 				  			  
 	} 
 			
@@ -135,12 +152,15 @@ uns8 lectura_VAC (void);
 	
 #include "LCD_4bit.h"
 #include "medir_18F4XK20.h"
+#include "MATH24F.H"
+
 
 static const char mensaje1[19] ="ONDULADOR 50HZ  by ";
 static const char mensaje2[3] ="VAC";
 static const char mensaje3[5] ="VMAX:";
-static const char mensaje4[3] ="IAC";
-static const uns16 refAC [6] = {600,750,900,900,750,600};
+static const char mensaje4[4] ="DIFF";
+static const uns16 refAC [6] = {567,624,725,781,736,561}; //valores para 230VAC
+
 static const uns16 refIC [6] = {600,750,900,900,750,600};
 //==============================================================================================
 //==============================================================================================
@@ -170,40 +190,46 @@ void main (void)
 	for(p=0;p<19;p++ )enviar_literal(mensaje1[p]);
 	enviar_literal(LOGO_SC);
 
-
-	
 	T0CON   = 0b.01000.001; //(PIC 18F4550)	// Equivale junto con INTCON2 al OPTION_REG del 16F88x).								
 	INTCON2 = 0b.0000.0100; //(PIC 18F4550)	// Equivale junto con T0CON al OPTION_REG del 16F88x).	
 	TMR0IF = 0;   //T0IF = 0; (PIC 16F88x)	// Ponemos el flanco de interrupciones a cero (aun no se ha efectuado ninguna).
    // w1   =   0;								// Reseteamos la variable índice de la tabla.
-	LATD.0 =0;            Vmax = 3; //2 el pwm maximo en 
+	LATD.0 =0;           
 
-	
+	Vmax = 3.0; //2 el pwm maximo en 
+
 	INTCON = 0b.0100.0000;				// Interrupciones globales (bit 7) e interrupción por Timer0 (bit 5) activadas.
 
 	// COMENÇO AL PAS PER 0, AMB 2 CICLES DE PWM A Ton=0 --> SON 100uS
-	T=0; ancho_pwm =0; bUdw=1;	// Començo carregant 0
+	T=0;
+	ancho_pwm =0; 
+	bUdw=1;	// Començo carregant 0
 	for (i = 1; i <= 6; i ++)  ancho_pwm = rl (ancho_pwm);
-	CCPR1L    = ancho_pwm.high8;	CCP1CON.5 = ancho_pwm.7;	CCP1CON.4 = ancho_pwm.6; // PWM carregat a 0
-	TMR2IF=0;	TMR2IE=1; TMR2ON  = 1;
-	T++; SENO = sen[T];		ancho_pwm = (uns16)SENO*Vmax; // PREPARO SEGUENT VALOR
+	CCPR1L = ancho_pwm.high8;
+	CCP1CON.5 = ancho_pwm.7;
+	CCP1CON.4 = ancho_pwm.6; // PWM carregat a 0
+	TMR2IF=0;	
+	TMR2IE=1; 
+	TMR2ON  = 1;
+	T++; SENO = sen[T];		
+	ancho_pwm = (uns16)SENO*Vmax; // PREPARO SEGUENT VALOR
  //**************************************************************************************//
  //*******************  V A R I A B L E S   L O C A L E L E S ***************************//
  //**************************************************************************************//
 	estado=0; //empieza por estado 0
 	uns8 x;
-	uns16 vac[6],ac;
+	uns16 vac[6],ac;    //variables para guardar temporalmente las arrays
 	uns16 iac[6],ic,rf;
 	uns16 dif,difMediaAC,difMediaIC;
-	char vbat,o=0; //variables para guardar temporalmente las arrays
+	char vbat,o=0,BP=10; //Banda proporcional 10% 
 	bit a,b,c,vuelta=0,flancoVAC,flancoIAC;
 	
 	escribir_posicion (2, 1);
  	for(p=0;p<3;p++ )enviar_literal(mensaje2[p]);
  	escribir_posicion (4, 1);
  	for(p=0;p<5;p++ )enviar_literal(mensaje3[p]);
- 	escribir_posicion (3, 1);
-	for(p=0;p<3;p++ )enviar_literal(mensaje4[p]);
+ 	escribir_posicion (4, 12);
+	for(p=0;p<4;p++ )enviar_literal(mensaje4[p]);
  	GIE=1;
 	ADCON1=0b.0000.0000;
 	ADCON2=0b.10.001.110;
@@ -213,24 +239,19 @@ void main (void)
  //**************************************************************************************//
 	while (1)       					
 	{
-		PORTC.1^=1;
-	
+				
 		switch(estado){
 			case LECTURA_VAC:
 				x=0;
 				while(LATD.0==1){   //vmax en LEO_VAC 18V 22k serie 8k2
-					PORTC.4=1;
-					if (((T == 6)&&((x==0)||(x==5))) || ((T == 12 )&&((x==1)||(x==4))) || ((T == 20)&&((x==2)||(x==3)))) {
-						PORTC.3=1;
+						if (((T == 6)&&((x==0)||(x==5))) || ((T == 12 )&&((x==1)||(x==4))) || ((T == 20)&&((x==2)||(x==3)))) {
 						ac=medir(LEO_VAC,10);
-						PORTC.3=0;	
 						vac[x]=ac;
 						x++;
 						
 						if ((T==20&&x==3)) {retardo_20u();retardo_20u();retardo_20u();retardo_20u();
 							retardo_20u();retardo_20u();retardo_20u();retardo_20u();retardo_20u();}
 					}		
-					PORTC.4=0;		
 				}
 				estado = CALCULOS_VAC;
 				if(x<=4) estado = LECTURA_VAC;
@@ -243,18 +264,34 @@ void main (void)
 					rf= refAC[p];
 					if(ac>=rf){
 						dif=ac-rf;
-						flancoVAC=POSITIVO;
+						flancoVAC=PORENCIMA;
 					}
 					else {
 						dif= rf-ac;
-						flancoVAC=NEGATIVO;
+						flancoVAC=PORDEBAJO;
 					}
 					difMediaAC+=dif; 
 				}
+
 				difMediaAC/=6;
 				
+				//intento de PID	
+				Vmax=3.0; //reset Vmax
+				float variacion= 3.0*difMediaAC;
+				variacion/=240.0;
+				
+				if(flancoVAC==PORENCIMA){	
+					if(variacion<=3.0) Vmax+=variacion;
+					else Vmax=6.0;
+				}
+				else{
+					if(variacion<=3.0) Vmax-=variacion;
+					else Vmax=1.0;
+				}
+				
+				r= Vmax*10;
 				estado = LECTURA_IAC;
-			break;
+				break;
 
 			case LECTURA_IAC:
 				x=0;
@@ -281,19 +318,19 @@ void main (void)
 
 					if(ic>rf){
 						dif=ic-rf;
-						flancoIAC=POSITIVO;
+						flancoIAC=PORENCIMA;
 					}
 					else{
 						dif = rf - ic;
-						flancoIAC=NEGATIVO;
+						flancoIAC=PORDEBAJO;
 					}
 					difMediaIC+=dif; 
 				}
 				difMediaIC/=6;
-				estado=ENVIO_LCD;// para version final quitar esto y descomentar el siguiente!!!!!!!
-			//	estado = LECTURAS_VARIAS;
+			
+				estado = LECTURAS_VARIAS;
 			break;
-															///11,5v-->700
+																///11,5v-->700
 			case LECTURAS_VARIAS:								///11,8v-->728
 				uns16 bat = medir(LEO_BAT,10);				 	///12,0v-->730
 				if (bat>785)				vbat=BATT_FULL;  	///12,3v-->763
@@ -313,9 +350,14 @@ void main (void)
 			case ENVIO_LCD:
 
 				if(vuelta){
-					escribir_posicion(4,6);
-					enviar_cifra(Vmax);
-					//Enviar_uns16(3,16,bat); // ya no hace falta...
+
+					Enviar_uns16(3,1,vac[3]);
+					Enviar_uns16(3,6,vac[4]);
+					Enviar_uns16(3,11,vac[5]);
+					Enviar_uns16(4,16, difMediaAC);
+	/*				//escribir_posicion(4,6);
+					uns16 g =Vmax*10;
+					Enviar_uns16(4,6,g);
 					Enviar_uns16(3,4,iac[h]);
 					Enviar_uns16(3,9,iac[h+1]);
 					Enviar_uns16(3,14, difMediaIC);
@@ -323,19 +365,27 @@ void main (void)
 					enviar_cifra(flancoIAC);
 					h++;
 					if(h==6)h=0;	
-					
+	*/				
 				}
 				else{
+					uns16 g =Vmax*10;
+					Enviar_uns16(4,6,g);
+					Enviar_uns16(2,1,vac[0]);
+					Enviar_uns16(2,6,vac[1]);
+					Enviar_uns16(2,11,vac[2]);
+					//Enviar_uns16(3,1,vac[3]);
 					
-					escribir_posicion(4,19);
-					enviar_cifra(h);
+	/*				
+					escribir_posicion(4,20);
 					enviar_literal(vbat);
+					uns16 j = sen[26]*r;
+					Enviar_uns16(4,14,j);
 					Enviar_uns16(2,4,vac[h]);
 					Enviar_uns16(2,9,vac[h+1]);
 					Enviar_uns16(2,14, difMediaAC);
 					escribir_posicion(2,20);
 					enviar_cifra(flancoVAC);
-				}
+	*/			}
 				vuelta^=1;
 				estado = LECTURA_VAC;
 			break;
