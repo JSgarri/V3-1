@@ -402,6 +402,77 @@ void Enviar_uns16(char linea,char columna,uns16 dato){
 
 }
 
+
+
+void Enviar_char(char linea,char columna,char dato){
+	//utilizaremos esta funcion en caso de necesitar un numero entero hasta 65536(16bits)
+	char num, cent;
+	char dec, unid, resto1;
+	char i, xx, yy, dat,xy;
+
+	switch (linea) 									// (se resta una unidad a la coordenada línea para que la posición columna inicial sea 1 y no 0).
+		{
+			case 1:	enviar_comando (127 + columna); 	// inicio primera linea.
+			break;	
+			case 2:	enviar_comando (191 + columna); 	// inicio segunda línea.
+			break;			
+			case 3:	enviar_comando (147 + columna); 	// inicio tercera línea (cursor en posición 20 de la primera línea).
+			break;				
+			case 4:	enviar_comando (211 + columna); 	// inicio cuarta línea (cursor en posición 20 de la segunda línea).
+			break;	
+			enviar_comando (0b.0000.1100);			// pantalla encendida, sin cursor
+		}				
+
+			cent   = dato   / 100;   	
+			resto1 = dato   % 100;
+			dec    = resto1 /  10;  
+			unid   = resto1 %  10; 		
+		// Envio
+		for (xx=0 ; xx < 3; xx++)
+		{
+			switch(xx){
+				case 0:
+					if (cent==0) dat = ' '; 
+					else dat = cent;
+					break;
+				case 1:
+					if ((cent==0)&&(dec==0)) dat = ' ';
+					else dat = dec ;
+					break;
+				case 2 :
+					dat = unid;
+					break;
+			}		
+			if (dat!=' ') dat = dat + 0x30;
+			PORTB.3 = dat.4;nop();
+			PORTB.2 = dat.5;nop();
+			PORTB.1 = dat.6;nop();
+			PORTB.0 = dat.7;nop();
+			PORTB.5 = 1;  									// Modo dato.
+			retardo_20u ();
+			PORTB.4 = 1;  									// Breve pulso.
+			retardo_20u ();
+			PORTB.4 = 0;									// Lo envia y saca por LCD; deshabilita LCD.
+			for (i = 1; i <= 6; i++) retardo_20u ();
+			dat = swap (dat);
+			PORTB.3 = dat.4;nop();
+			PORTB.2 = dat.5;nop();
+			PORTB.1 = dat.6;nop();
+			PORTB.0 = dat.7;
+			retardo_1m ();
+			PORTB.5 = 1;  									// Modo dato.
+			retardo_1m ();
+			PORTB.4 = 1;  									// Breve pulso.
+			retardo_20u ();
+			PORTB.4 = 0; 									// Lo envia y saca por LCD; deshabilita LCD.
+			for (i = 1; i<= 6; i++) retardo_20u ();
+			enviar_comando (0b.0000.1100);					// Pantalla encendida, sin cursor.			
+		}
+
+	return;
+
+}
+
 //***********************************************************************************************
 //***********************************************************************************************
 // Definicio caracter especial : PROCES  -> posar x, on volguem el pixel ,pes 16 8 4 2 1  Rtat Hexa

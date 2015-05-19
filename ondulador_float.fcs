@@ -3,173 +3,22 @@ CC8E Version 1.4, Copyright (c) B Knudsen Data.
 * FUNCTION CALL STRUCTURE
 
 F: highPriorityTimer_0    :#0 
-    _const1               : #16
+    _const1               : #10
 
-F: retardo_20u            :#62
+F: _fmul24                :#55
 
-F: retardo_1m             :#16
+F: _fdiv24                :#3 
 
-F: retardo_50m            :#0 
+F: _fadd24                :#46
 
-F: retardo_100m           :#0 
+F: _fsub24                :#4 
+    _fadd24               : #46
 
-F: retardo_500m           :#0 
-
-F: envia_codigo_inicial   :#4 
-    retardo_20u           : #62
-
-F: enviar_comando         :#30
-    retardo_1m            : #16
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_1m            : #16
-    retardo_1m            : #16
-    retardo_1m            : #16
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_1m            : #16
-    retardo_1m            : #16
-
-F: enviar_literal         :#20
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_1m            : #16
-    retardo_1m            : #16
-    retardo_20u           : #62
-    retardo_20u           : #62
-    enviar_comando        : #30
-
-F: enviar_cifra           :#0 
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_1m            : #16
-    retardo_1m            : #16
-    retardo_20u           : #62
-    retardo_20u           : #62
-    enviar_comando        : #30
-
-F: inicializar_lcd        :#1 
-    retardo_1m            : #16
-    envia_codigo_inicial  : #4 
-    retardo_1m            : #16
-    envia_codigo_inicial  : #4 
-    retardo_20u           : #62
-    envia_codigo_inicial  : #4 
-    retardo_20u           : #62
-    envia_codigo_inicial  : #4 
-    enviar_comando        : #30
-    enviar_comando        : #30
-    enviar_comando        : #30
-
-F: escribir_posicion      :#4 
-    enviar_comando        : #30
-    enviar_comando        : #30
-    enviar_comando        : #30
-    enviar_comando        : #30
-    enviar_comando        : #30
-
-F: borrar_linea           :#0 
-    enviar_comando        : #30
-    enviar_comando        : #30
-    enviar_comando        : #30
-    enviar_comando        : #30
-    enviar_literal        : #20
-    enviar_comando        : #30
-
-F: borrar_lcd             :#2 
-    enviar_comando        : #30
-
-F: Enviar_lcd             :#0 
-    enviar_comando        : #30
-    enviar_comando        : #30
-    enviar_comando        : #30
-    enviar_comando        : #30
-    enviar_comando        : #30
-    enviar_literal        : #20
-    enviar_literal        : #20
-    enviar_literal        : #20
-    enviar_literal        : #20
-    enviar_literal        : #20
-    enviar_literal        : #20
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_1m            : #16
-    retardo_1m            : #16
-    retardo_20u           : #62
-    retardo_20u           : #62
-    enviar_comando        : #30
-
-F: Enviar_uns16           :#8 
-    enviar_comando        : #30
-    enviar_comando        : #30
-    enviar_comando        : #30
-    enviar_comando        : #30
-    enviar_comando        : #30
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_1m            : #16
-    retardo_1m            : #16
-    retardo_20u           : #62
-    retardo_20u           : #62
-    enviar_comando        : #30
-
-F: RAM_LCD                :#1 
-    enviar_comando        : #30
-    retardo_20u           : #62
-    _const1               : #16
-    enviar_literal        : #20
-    retardo_20u           : #62
-    retardo_20u           : #62
-    _const1               : #16
-    enviar_literal        : #20
-    retardo_20u           : #62
-    retardo_20u           : #62
-    _const1               : #16
-    enviar_literal        : #20
-    retardo_20u           : #62
-    retardo_20u           : #62
-    _const1               : #16
-    enviar_literal        : #20
-    retardo_20u           : #62
-    retardo_20u           : #62
-    _const1               : #16
-    enviar_literal        : #20
-    retardo_20u           : #62
-    retardo_20u           : #62
-    _const1               : #16
-    enviar_literal        : #20
-    retardo_20u           : #62
-    retardo_20u           : #62
-    _const1               : #16
-    enviar_literal        : #20
-    retardo_20u           : #62
-    retardo_20u           : #62
-    _const1               : #16
-    enviar_literal        : #20
-    retardo_20u           : #62
-    retardo_20u           : #62
-    enviar_comando        : #30
-
-F: medir                  :#3 
-
-F: _fmul24                :#4 
-
-F: _fdiv24                :#1 
-
-F: _fadd24                :#2 
-
-F: _fsub24                :#1 
-    _fadd24               : #2 
-
-F: _int24ToFloat24        :#2 
+F: _int24ToFloat24        :#4 
 
 F: _int32ToFloat24        :#0 
 
-F: _float24ToInt24        :#3 
+F: _float24ToInt24        :#6 
 
 F: _f24_LT_f24            :#0 
 
@@ -179,6 +28,243 @@ F: _f24_GT_f24            :#0
 
 F: _f24_LE_f24            :#0 
 
+F: _divU16_8              :#7 
+
+F: _divU16_16             :#3 
+
+F: _divS16_8              :#0 
+
+F: _divS16_16             :#0 
+
+F: _remU16_8              :#6 
+
+F: _remU16_16             :#3 
+
+F: _remS16_8              :#0 
+
+F: _remS16_16             :#0 
+
+F: log                    :#1 
+
+F: log10                  :#0 
+
+F: floorMaskTable24       :#2 
+
+F: floor24                :#2 
+
+F: exp10                  :#0 
+
+F: exp                    :#0 
+
+F: cosin24                :#2 
+
+F: cos                    :#0 
+
+F: sin                    :#0 
+
+F: sqrt                   :#1 
+    _fmul24               : #55
+    _fadd24               : #46
+    _fmul24               : #55
+    _fadd24               : #46
+    _fmul24               : #55
+    _fadd24               : #46
+    _fmul24               : #55
+    _fadd24               : #46
+    _fmul24               : #55
+    _fadd24               : #46
+    _fmul24               : #55
+    _fadd24               : #46
+    _fmul24               : #55
+    _fadd24               : #46
+    _fmul24               : #55
+    _fadd24               : #46
+    _fmul24               : #55
+
+F: retardo_20u            :#65
+
+F: retardo_1m             :#18
+
+F: retardo_50m            :#0 
+
+F: retardo_100m           :#0 
+
+F: retardo_500m           :#0 
+
+F: envia_codigo_inicial   :#4 
+    retardo_20u           : #65
+
+F: enviar_comando         :#36
+    retardo_1m            : #18
+    retardo_20u           : #65
+    retardo_20u           : #65
+    retardo_1m            : #18
+    retardo_1m            : #18
+    retardo_1m            : #18
+    retardo_20u           : #65
+    retardo_20u           : #65
+    retardo_1m            : #18
+    retardo_1m            : #18
+
+F: enviar_literal         :#15
+    retardo_20u           : #65
+    retardo_20u           : #65
+    retardo_20u           : #65
+    retardo_1m            : #18
+    retardo_1m            : #18
+    retardo_20u           : #65
+    retardo_20u           : #65
+    enviar_comando        : #36
+
+F: enviar_cifra           :#0 
+    retardo_20u           : #65
+    retardo_20u           : #65
+    retardo_20u           : #65
+    retardo_1m            : #18
+    retardo_1m            : #18
+    retardo_20u           : #65
+    retardo_20u           : #65
+    enviar_comando        : #36
+
+F: inicializar_lcd        :#1 
+    retardo_1m            : #18
+    envia_codigo_inicial  : #4 
+    retardo_1m            : #18
+    envia_codigo_inicial  : #4 
+    retardo_20u           : #65
+    envia_codigo_inicial  : #4 
+    retardo_20u           : #65
+    envia_codigo_inicial  : #4 
+    enviar_comando        : #36
+    enviar_comando        : #36
+    enviar_comando        : #36
+
+F: escribir_posicion      :#4 
+    enviar_comando        : #36
+    enviar_comando        : #36
+    enviar_comando        : #36
+    enviar_comando        : #36
+    enviar_comando        : #36
+
+F: borrar_linea           :#0 
+    enviar_comando        : #36
+    enviar_comando        : #36
+    enviar_comando        : #36
+    enviar_comando        : #36
+    enviar_literal        : #15
+    enviar_comando        : #36
+
+F: borrar_lcd             :#2 
+    enviar_comando        : #36
+
+F: Enviar_lcd             :#0 
+    enviar_comando        : #36
+    enviar_comando        : #36
+    enviar_comando        : #36
+    enviar_comando        : #36
+    enviar_comando        : #36
+    enviar_literal        : #15
+    enviar_literal        : #15
+    enviar_literal        : #15
+    enviar_literal        : #15
+    enviar_literal        : #15
+    enviar_literal        : #15
+    _divU16_16            : #3 
+    _remU16_16            : #3 
+    _divU16_8             : #7 
+    _remU16_8             : #6 
+    _divU16_8             : #7 
+    _remU16_8             : #6 
+    retardo_20u           : #65
+    retardo_20u           : #65
+    retardo_20u           : #65
+    retardo_1m            : #18
+    retardo_1m            : #18
+    retardo_20u           : #65
+    retardo_20u           : #65
+    enviar_comando        : #36
+
+F: Enviar_uns16           :#2 
+    enviar_comando        : #36
+    enviar_comando        : #36
+    enviar_comando        : #36
+    enviar_comando        : #36
+    enviar_comando        : #36
+    _divU16_16            : #3 
+    _remU16_16            : #3 
+    _divU16_16            : #3 
+    _remU16_16            : #3 
+    _divU16_8             : #7 
+    _remU16_8             : #6 
+    _divU16_8             : #7 
+    _remU16_8             : #6 
+    retardo_20u           : #65
+    retardo_20u           : #65
+    retardo_20u           : #65
+    retardo_1m            : #18
+    retardo_1m            : #18
+    retardo_20u           : #65
+    retardo_20u           : #65
+    enviar_comando        : #36
+
+F: Enviar_char            :#16
+    enviar_comando        : #36
+    enviar_comando        : #36
+    enviar_comando        : #36
+    enviar_comando        : #36
+    enviar_comando        : #36
+    _divU16_8             : #7 
+    _remU16_8             : #6 
+    _divU16_8             : #7 
+    _remU16_8             : #6 
+    retardo_20u           : #65
+    retardo_20u           : #65
+    retardo_20u           : #65
+    retardo_1m            : #18
+    retardo_1m            : #18
+    retardo_20u           : #65
+    retardo_20u           : #65
+    enviar_comando        : #36
+
+F: RAM_LCD                :#1 
+    enviar_comando        : #36
+    retardo_20u           : #65
+    _const1               : #10
+    enviar_literal        : #15
+    retardo_20u           : #65
+    retardo_20u           : #65
+    _const1               : #10
+    enviar_literal        : #15
+    retardo_20u           : #65
+    retardo_20u           : #65
+    _const1               : #10
+    enviar_literal        : #15
+    retardo_20u           : #65
+    retardo_20u           : #65
+    _const1               : #10
+    enviar_literal        : #15
+    retardo_20u           : #65
+    retardo_20u           : #65
+    _const1               : #10
+    enviar_literal        : #15
+    retardo_20u           : #65
+    retardo_20u           : #65
+    _const1               : #10
+    enviar_literal        : #15
+    retardo_20u           : #65
+    retardo_20u           : #65
+    _const1               : #10
+    enviar_literal        : #15
+    retardo_20u           : #65
+    retardo_20u           : #65
+    _const1               : #10
+    enviar_literal        : #15
+    retardo_20u           : #65
+    retardo_20u           : #65
+    enviar_comando        : #36
+
+F: medir                  :#5 
+
 F: main                   :#0 
     configuraPic          : #1 
     inicializar_lcd       : #1 
@@ -186,66 +272,67 @@ F: main                   :#0
     RAM_LCD               : #1 
     borrar_lcd            : #2 
     escribir_posicion     : #4 
-    _const1               : #16
-    enviar_literal        : #20
-    enviar_literal        : #20
-    _const1               : #16
-    _int24ToFloat24       : #2 
-    _fmul24               : #4 
-    _float24ToInt24       : #3 
+    _const1               : #10
+    _int24ToFloat24       : #4 
+    _fmul24               : #55
+    _float24ToInt24       : #6 
     escribir_posicion     : #4 
-    _const1               : #16
-    enviar_literal        : #20
     escribir_posicion     : #4 
-    _const1               : #16
-    enviar_literal        : #20
     escribir_posicion     : #4 
-    _const1               : #16
-    enviar_literal        : #20
-    medir                 : #3 
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_20u           : #62
-    _const1               : #16
-    _int24ToFloat24       : #2 
-    _fmul24               : #4 
-    _fdiv24               : #1 
-    _fadd24               : #2 
-    _fsub24               : #1 
-    _fmul24               : #4 
-    _float24ToInt24       : #3 
-    medir                 : #3 
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_20u           : #62
-    retardo_20u           : #62
-    _const1               : #16
-    medir                 : #3 
-    Enviar_uns16          : #8 
-    Enviar_uns16          : #8 
-    Enviar_uns16          : #8 
-    Enviar_uns16          : #8 
-    _fmul24               : #4 
-    _float24ToInt24       : #3 
-    Enviar_uns16          : #8 
-    Enviar_uns16          : #8 
-    Enviar_uns16          : #8 
-    Enviar_uns16          : #8 
+    medir                 : #5 
+    medir                 : #5 
+    retardo_20u           : #65
+    retardo_20u           : #65
+    retardo_20u           : #65
+    retardo_20u           : #65
+    retardo_20u           : #65
+    retardo_20u           : #65
+    retardo_20u           : #65
+    retardo_20u           : #65
+    _fmul24               : #55
+    _float24ToInt24       : #6 
+    medir                 : #5 
+    medir                 : #5 
+    retardo_20u           : #65
+    retardo_20u           : #65
+    retardo_20u           : #65
+    retardo_20u           : #65
+    retardo_20u           : #65
+    retardo_20u           : #65
+    retardo_20u           : #65
+    retardo_20u           : #65
+    _divU16_8             : #7 
+    _int24ToFloat24       : #4 
+    sqrt                  : #1 
+    _fmul24               : #55
+    _fdiv24               : #3 
+    _fsub24               : #4 
+    _fdiv24               : #3 
+    _fmul24               : #55
+    medir                 : #5 
+    Enviar_char           : #16
+    Enviar_char           : #16
+    Enviar_char           : #16
+    Enviar_char           : #16
+    Enviar_char           : #16
+    Enviar_char           : #16
+    Enviar_char           : #16
+    Enviar_char           : #16
+    Enviar_char           : #16
+    Enviar_char           : #16
+    Enviar_char           : #16
+    Enviar_char           : #16
+    Enviar_char           : #16
+    Enviar_char           : #16
+    Enviar_char           : #16
+    Enviar_char           : #16
+    _float24ToInt24       : #6 
+    Enviar_uns16          : #2 
+    Enviar_uns16          : #2 
 
 F: configuraPic           :#1 
 
-F: _const1                :#16
+F: _const1                :#10
 
 
  L1  highPriorityTimer_0
@@ -340,21 +427,13 @@ F: _const1                :#16
  L2      enviar_comando ..
  L1      enviar_comando [T-GOTO] ..
  L1    _const1
- L1    enviar_literal ..
- L1    enviar_literal ..
- L1    _const1
  L1    _int24ToFloat24
  L1    _fmul24
  L1    _float24ToInt24
  L1    escribir_posicion ..
- L1    _const1
- L1    enviar_literal ..
  L1    escribir_posicion ..
- L1    _const1
- L1    enviar_literal ..
  L1    escribir_posicion ..
- L1    _const1
- L1    enviar_literal ..
+ L1    medir
  L1    medir
  L1    retardo_20u
  L1    retardo_20u
@@ -364,34 +443,93 @@ F: _const1                :#16
  L1    retardo_20u
  L1    retardo_20u
  L1    retardo_20u
+ L1    _fmul24
+ L1    _float24ToInt24
+ L1    medir
+ L1    medir
  L1    retardo_20u
- L1    _const1
+ L1    retardo_20u
+ L1    retardo_20u
+ L1    retardo_20u
+ L1    retardo_20u
+ L1    retardo_20u
+ L1    retardo_20u
+ L1    retardo_20u
+ L1    _divU16_8
  L1    _int24ToFloat24
+ L1    sqrt
+ L2      _fmul24
+ L2      _fadd24
+ L2      _fmul24
+ L2      _fadd24
+ L2      _fmul24
+ L2      _fadd24
+ L2      _fmul24
+ L2      _fadd24
+ L2      _fmul24
+ L2      _fadd24
+ L2      _fmul24
+ L2      _fadd24
+ L2      _fmul24
+ L2      _fadd24
+ L2      _fmul24
+ L2      _fadd24
+ L2      _fmul24
  L1    _fmul24
  L1    _fdiv24
- L1    _fadd24
  L1    _fsub24
  L2      _fadd24
+ L1    _fdiv24
  L1    _fmul24
+ L1    medir
+ L1    Enviar_char
+ L2      enviar_comando ..
+ L2      enviar_comando ..
+ L2      enviar_comando ..
+ L2      enviar_comando ..
+ L2      enviar_comando ..
+ L2      _divU16_8
+ L2      _remU16_8
+ L2      _divU16_8
+ L2      _remU16_8
+ L2      retardo_20u
+ L2      retardo_20u
+ L2      retardo_20u
+ L2      retardo_1m
+ L2      retardo_1m
+ L2      retardo_20u
+ L2      retardo_20u
+ L2      enviar_comando ..
+ L1    Enviar_char ..
+ L1    Enviar_char ..
+ L1    Enviar_char ..
+ L1    Enviar_char ..
+ L1    Enviar_char ..
+ L1    Enviar_char ..
+ L1    Enviar_char ..
+ L1    Enviar_char ..
+ L1    Enviar_char ..
+ L1    Enviar_char ..
+ L1    Enviar_char ..
+ L1    Enviar_char ..
+ L1    Enviar_char ..
+ L1    Enviar_char ..
+ L1    Enviar_char ..
  L1    _float24ToInt24
- L1    medir
- L1    retardo_20u
- L1    retardo_20u
- L1    retardo_20u
- L1    retardo_20u
- L1    retardo_20u
- L1    retardo_20u
- L1    retardo_20u
- L1    retardo_20u
- L1    retardo_20u
- L1    _const1
- L1    medir
  L1    Enviar_uns16
  L2      enviar_comando ..
  L2      enviar_comando ..
  L2      enviar_comando ..
  L2      enviar_comando ..
  L2      enviar_comando ..
+ L2      _divU16_16
+ L2      _remU16_16
+ L2      _divU16_16
+ L2      _remU16_16
+ L2      _divU16_8
+ L2      _remU16_8
+ L2      _divU16_8
+ L2      _remU16_8
  L2      retardo_20u
  L2      retardo_20u
  L2      retardo_20u
@@ -400,13 +538,5 @@ F: _const1                :#16
  L2      retardo_20u
  L2      retardo_20u
  L2      enviar_comando ..
- L1    Enviar_uns16 ..
- L1    Enviar_uns16 ..
- L1    Enviar_uns16 ..
- L1    _fmul24
- L1    _float24ToInt24
- L1    Enviar_uns16 ..
- L1    Enviar_uns16 ..
- L1    Enviar_uns16 ..
  L1    Enviar_uns16 ..
 
