@@ -12,19 +12,19 @@ Size := number of bytes
 #AC  := number of direct accesses
 
  X  B  Address  Size  #AC   Name
- C  0  0x000      8  :  1:  Carac_3
- C  0  0x000      8  :  1:  Carac_4
- C  0  0x000      8  :  1:  Carac_5
- C  0  0x000     19  :  0:  mensaje1
  C  0  0x000      3  :  0:  mensaje2
+ C  0  0x000      5  :  0:  mensaje3
  C  0  0x000     26  :  2:  sen
- C  0  0x000      4  :  0:  mensaje4
- C  0  0x000      8  :  1:  Carac_1
+ C  0  0x000      8  :  1:  Carac_5
  C  0  0x000      8  :  1:  Carac_6
  C  0  0x000      8  :  1:  Carac_7
- C  0  0x000      8  :  1:  Carac_8
+ C  0  0x000     19  :  0:  mensaje1
  C  0  0x000      8  :  1:  Carac_2
- C  0  0x000      5  :  0:  mensaje3
+ C  0  0x000      8  :  1:  Carac_3
+ C  0  0x000      4  :  0:  mensaje4
+ C  0  0x000      8  :  1:  Carac_8
+ C  0  0x000      8  :  1:  Carac_4
+ C  0  0x000      8  :  1:  Carac_1
  L  0  0x060      1  :  2:  svrSTATUS
  L  0  0x061      1  :  2:  svrBSR
  L  0  0x062      1  :  2:  svrWREG
@@ -33,130 +33,132 @@ Size := number of bytes
  L  0  0x065      3  :  6:  sv_TBLPTR
  L  0  0x068      1  :  2:  sv_TABLAT
  L  0  0x069      1  :  2:  C3cnt
- L  0  0x069      1  :  2:  ci
  L  0  0x069      1  :  0:  C1cnt
+ L  0  0x069      1  :  2:  ci
  L  0  0x06A      2  :  4:  C4tmp
  L  0  0x06A      2  :  0:  C2tmp
  L  0  0x06C      1  :  4:  C5rem
  L  0  0x06D      1  :  8:  p
  L  0  0x06E      1  :  1:  h
  L  0  0x06F      1  : 26:  x
- L  0  0x070     16  : 16:  vac
+ L  0  0x070     16  : 12:  vac
  L  0  0x080      1  :  7:  ac
  L  0  0x081     16  :  0:  iac
  L  0  0x091      1  :  4:  ic
  L  0  0x092      1  :  7:  vbat
  L  0  0x093      1  :  6:  o
  L  0  0x094      1  :  5:  vuelta
- L  0  0x095      3  : 18:  raiz
- L  0  0x098      2  : 12:  Mac0
- L  0  0x09A      2  :  4:  Mac1
- L  0  0x09C.0    0  :  5:  lectura
- L  0  0x09D      1  : 12:  i_5
- L  0  0x09D      3  :  6:  banda
- L  0  0x09D      1  : 32:  i_10
- L  0  0x09D      1  :  5:  linea
- L  0  0x09E      1  :  5:  columna
- L  0  0x09E      1  :  9:  codigo
- L  0  0x09E      1  : 18:  dato
- L  0  0x09F      1  :  6:  i_3
- L  0  0x0A0      2  : 22:  bat
- L  0  0x0A2      2  :  5:  q
- L  0  0x0A2      2  :  4:  d_6
- L  0  0x0A2      1  :  6:  canal
- L  0  0x0A3      1  :  2:  bits
- L  0  0x0A4      3  :185:  arg1f24
- R  0  0x0A4      3  :  7:  rval_3
- L  0  0x0A4      2  : 11:  resultado
- R  0  0x0A4      3  :  1:  rval
- L  0  0x0A4      1  :  3:  linea_4
- L  0  0x0A4      1  :  0:  C8cnt
- L  0  0x0A4      1  :  0:  C6cnt
- L  0  0x0A4      1  : 17:  linea_5
- L  0  0x0A5      1  : 20:  columna_4
- L  0  0x0A5      1  :  6:  columna_3
- L  0  0x0A5      2  :  0:  C7tmp
- L  0  0x0A5      2  :  0:  C9tmp
- L  0  0x0A6      1  :  3:  dato_5
- L  0  0x0A6      2  : 12:  dato_4
- L  0  0x0A7      3  :110:  arg2f24
- L  0  0x0A7      1  :  0:  num_3
- L  0  0x0A8      2  : 12:  num_2
- L  0  0x0A8      1  :  4:  cent_3
- L  0  0x0A9      1  :  3:  dec_3
- L  0  0x0AA      1  :  6:  expo_2
- L  0  0x0AA      2  :  9:  u_milers_2
- L  0  0x0AA      1  :  2:  unid_3
- L  0  0x0AA      1  :  2:  sign_6
- L  0  0x0AA      2  : 13:  aarg_2
- L  0  0x0AA      1  :  4:  cexp
- L  0  0x0AB      1  :  4:  xtra_2
- L  0  0x0AB      1  :  8:  expo_4
- L  0  0x0AB      1  :  3:  resto1_3
- L  0  0x0AB      1  :  2:  savedFLAGS
- L  0  0x0AC      1  :  3:  sign_4
- L  0  0x0AC      1  :  6:  i_9
- L  0  0x0AC      1  :  4:  sign_2
- L  0  0x0AC      3  : 21:  d_5
- L  0  0x0AC      1  :  4:  xtra_4
- L  0  0x0AC      2  :  7:  cent_2
- L  0  0x0AD      1  :  3:  counter
- L  0  0x0AD      1  :  4:  xx_3
- L  0  0x0AE      1  :  0:  yy_3
- L  0  0x0AE      2  : 11:  d_milers
- L  0  0x0AF      1  : 24:  dat_3
- L  0  0x0AF      2  :  7:  aarg
- L  0  0x0AF      1  : 11:  xtra
- L  0  0x0B0      1  :  3:  dec_2
- L  0  0x0B0      1  :  0:  xy_3
- L  0  0x0B0      1  :  9:  temp
- L  0  0x0B1      1  :  8:  expo
- L  0  0x0B1      1  :  2:  sign
- L  0  0x0B1      1  :  2:  unid_2
- L  0  0x0B2      1  :  3:  resto1_2
- L  0  0x0B2      1  :  2:  sign_3
- L  0  0x0B2      1  :  5:  tmpL
- L  0  0x0B3      1  :  6:  i_8
- L  0  0x0B4      1  :  4:  xx_2
- L  0  0x0B5      1  :  0:  yy_2
- L  0  0x0B6      1  : 28:  dat_2
- L  0  0x0B7      1  :  0:  xy_2
- L  0  0x0B8      2  : 14:  arg1_5
- L  0  0x0B8      2  : 15:  arg1_2
- L  0  0x0B8      2  :  8:  arg1_6
- L  0  0x0B8      1  : 18:  comando
- L  0  0x0B8      2  : 27:  arg1
- L  0  0x0B9      1  :  2:  PDel0
- L  0  0x0B9      1  :  2:  PDel0_2
- L  0  0x0BA      2  :  9:  arg2_6
- L  0  0x0BA      1  :  2:  arg2
- L  0  0x0BA      2  :  9:  arg2_2
- L  0  0x0BA      1  :  2:  PDel1
- L  0  0x0BA      1  :  2:  arg2_5
- L  0  0x0BB      1  :  4:  rm
- L  0  0x0BB      1  :  5:  rm_5
- L  0  0x0BC      2  : 15:  rm_6
- L  0  0x0BC      1  :  2:  counter_2
- L  0  0x0BC      1  :  2:  counter_6
- L  0  0x0BC      2  :  8:  rm_2
- L  0  0x0BD      1  :  2:  tmp
- L  0  0x0BD      1  :  2:  tmp_2
- L  0  0x0BE      1  :  2:  counter_7
- L  0  0x0BE      1  :  2:  counter_3
- G  0  0x0BF.0    0  :  5:  bUdw
- G  0  0x0C0      2  : 26:  ancho_pwm
- G  0  0x0C2      2  :  5:  r
- G  0  0x0C4      3  : 12:  Vmax
- G  0  0x0C7      2  :  9:  SENO
- G  0  0x0C9      1  : 19:  T
- G  0  0x0CA      1  :  3:  i
- G  0  0x0CB      1  : 10:  estado
- G  0  0x0CC      1  :  3:  FpFlags
- R  0  0x0CC.1    0  :  4:  FpOverflow
- R  0  0x0CC.2    0  :  2:  FpUnderFlow
- R  0  0x0CC.3    0  :  1:  FpDiv0
- R  0  0x0CC.5    0  :  1:  FpDomainError
- R  0  0x0CC.6    0  :  6:  FpRounding
+ L  0  0x095      3  : 32:  raiz
+ L  0  0x098      3  :  0:  errorAcu
+ L  0  0x09B      2  : 12:  Mac0
+ L  0  0x09D      2  :  4:  Mac1
+ L  0  0x09F      2  :  5:  q
+ L  0  0x0A1      2  :  4:  a
+ L  0  0x0A3      3  : 15:  ProbaVmax
+ L  0  0x0A6.0    0  :  5:  lectura
+ L  0  0x0A7      1  :  5:  linea
+ L  0  0x0A7      3  :  6:  banda
+ L  0  0x0A7      1  : 12:  i_5
+ L  0  0x0A7      1  : 32:  i_10
+ L  0  0x0A8      1  : 18:  dato
+ L  0  0x0A8      1  :  9:  codigo
+ L  0  0x0A8      1  :  5:  columna
+ L  0  0x0A9      1  :  6:  i_3
+ L  0  0x0AA      2  : 22:  bat
+ L  0  0x0AC      2  :  4:  d_6
+ L  0  0x0AC      1  :  0:  C8cnt
+ L  0  0x0AC      2  :  4:  w
+ L  0  0x0AC      1  :  6:  canal
+ L  0  0x0AD      2  :  0:  C9tmp
+ L  0  0x0AD      1  :  2:  bits
+ L  0  0x0AE      2  :  4:  v
+ L  0  0x0AE      2  : 11:  resultado
+ L  0  0x0AE      1  :  0:  C6cnt
+ L  0  0x0AF      2  :  0:  C7tmp
+ L  0  0x0B0      3  :179:  arg1f24
+ L  0  0x0B0      1  : 14:  linea_5
+ R  0  0x0B0      3  :  1:  rval
+ L  0  0x0B0      1  :  6:  linea_4
+ R  0  0x0B0      3  : 15:  rval_3
+ L  0  0x0B1      1  : 17:  columna_4
+ L  0  0x0B1      1  :  9:  columna_3
+ L  0  0x0B2      2  : 18:  dato_4
+ L  0  0x0B2      1  :  3:  dato_5
+ L  0  0x0B3      3  : 97:  arg2f24
+ L  0  0x0B3      1  :  0:  num_3
+ L  0  0x0B4      2  : 12:  num_2
+ L  0  0x0B4      1  :  4:  cent_3
+ L  0  0x0B5      1  :  3:  dec_3
+ L  0  0x0B6      1  :  2:  unid_3
+ L  0  0x0B6      1  :  6:  expo_2
+ L  0  0x0B6      2  :  9:  u_milers_2
+ L  0  0x0B6      1  :  2:  sign_6
+ L  0  0x0B6      1  :  4:  cexp
+ L  0  0x0B7      1  :  4:  xtra_2
+ L  0  0x0B7      1  :  2:  savedFLAGS
+ L  0  0x0B7      1  :  3:  resto1_3
+ L  0  0x0B7      1  :  8:  expo_4
+ L  0  0x0B8      1  :  3:  sign_4
+ L  0  0x0B8      1  :  6:  i_9
+ L  0  0x0B8      2  :  7:  cent_2
+ L  0  0x0B8      1  :  4:  xtra_4
+ L  0  0x0B8      3  : 21:  d_5
+ L  0  0x0B9      1  :  4:  xx_3
+ L  0  0x0BA      1  :  0:  yy_3
+ L  0  0x0BA      2  : 11:  d_milers
+ L  0  0x0BB      1  : 24:  dat_3
+ L  0  0x0BB      1  : 11:  xtra
+ L  0  0x0BB      2  :  7:  aarg
+ L  0  0x0BC      1  :  9:  temp
+ L  0  0x0BC      1  :  0:  xy_3
+ L  0  0x0BC      1  :  3:  dec_2
+ L  0  0x0BD      1  :  8:  expo
+ L  0  0x0BD      1  :  2:  unid_2
+ L  0  0x0BD      1  :  2:  sign
+ L  0  0x0BE      1  :  5:  tmpL
+ L  0  0x0BE      1  :  2:  sign_3
+ L  0  0x0BE      1  :  3:  resto1_2
+ L  0  0x0BF      1  :  6:  i_8
+ L  0  0x0C0      1  :  4:  xx_2
+ L  0  0x0C1      1  :  0:  yy_2
+ L  0  0x0C2      1  : 28:  dat_2
+ L  0  0x0C3      1  :  0:  xy_2
+ L  0  0x0C4      2  : 14:  arg1_5
+ L  0  0x0C4      2  :  8:  arg1_6
+ L  0  0x0C4      2  : 27:  arg1
+ L  0  0x0C4      2  : 15:  arg1_2
+ L  0  0x0C4      1  : 18:  comando
+ L  0  0x0C5      1  :  2:  PDel0_2
+ L  0  0x0C5      1  :  2:  PDel0
+ L  0  0x0C6      1  :  2:  arg2
+ L  0  0x0C6      2  :  9:  arg2_2
+ L  0  0x0C6      1  :  2:  PDel1
+ L  0  0x0C6      2  :  9:  arg2_6
+ L  0  0x0C6      1  :  2:  arg2_5
+ L  0  0x0C7      1  :  4:  rm
+ L  0  0x0C7      1  :  5:  rm_5
+ L  0  0x0C8      2  :  8:  rm_2
+ L  0  0x0C8      1  :  2:  counter_2
+ L  0  0x0C8      2  : 15:  rm_6
+ L  0  0x0C8      1  :  2:  counter_6
+ L  0  0x0C9      1  :  2:  tmp_2
+ L  0  0x0C9      1  :  2:  tmp
+ L  0  0x0CA      1  :  2:  counter_7
+ L  0  0x0CA      1  :  2:  counter_3
+ G  0  0x0CB.0    0  :  5:  bUdw
+ G  0  0x0CC      2  : 26:  ancho_pwm
+ G  0  0x0CE      2  : 12:  r
+ G  0  0x0D0      3  : 15:  Vmax
+ G  0  0x0D3      2  :  9:  SENO
+ G  0  0x0D5      1  : 19:  T
+ G  0  0x0D6      1  :  3:  i
+ G  0  0x0D7      1  : 10:  estado
+ G  0  0x0D8      1  :  3:  FpFlags
+ R  0  0x0D8.1    0  :  3:  FpOverflow
+ R  0  0x0D8.2    0  :  1:  FpUnderFlow
+ R  0  0x0D8.3    0  :  0:  FpDiv0
+ R  0  0x0D8.5    0  :  1:  FpDomainError
+ R  0  0x0D8.6    0  :  5:  FpRounding
  P  -  0xF77      1  :  0:  SSPMSK
  P  -  0xF78      1  :  0:  SLRCON
  P  -  0xF78.0    0  :  0:  SLRA
@@ -190,89 +192,92 @@ Size := number of bytes
  P  -  0xF7C      1  :  0:  WPUB
  P  -  0xF7D      1  :  0:  IOCB
  P  -  0xF7E      1  :  1:  ANSEL
- L  -  0xF7F      2  :  0<> arg2_4
  L  -  0xF7F      2  :  0<> arg1_4
- L  -  0xF7F      2  : 12<> dato_3
+ R  -  0xF7F      3  :  0<> rval_2
+ L  -  0xF7F      1  :  0<> counter_9
+ L  -  0xF7F      1  :  0<> counter_5
+ L  -  0xF7F      1  :  0<> rm_3
  L  -  0xF7F      2  :  0<> arg1_8
- L  -  0xF7F      2  :  0<> arg2_8
- L  -  0xF7F      2  :  0<> rm_8
- L  -  0xF7F      2  :  0<> rm_4
- L  -  0xF7F      1  :  0<> sign_10
- L  -  0xF7F      3  :  0<> d_4
- L  -  0xF7F      1  :  0<> counter_4
  L  -  0xF7F      1  :  0<> savedFlags
  L  -  0xF7F      1  :  0<> xexp
  L  -  0xF7F      3  :  0<> d
  L  -  0xF7F      3  :  0<> c
  L  -  0xF7F      3  :  0<> e
- L  -  0xF7F      1  :  0<> rm_7
- L  -  0xF7F      1  :  0<> counter_8
+ L  -  0xF7F      1  :  0<> sign_2
+ L  -  0xF7F      2  :  0<> rm_4
  L  -  0xF7F      1  :  0<> sign_9
- L  -  0xF7F      2  :  0<> arg1_7
- L  -  0xF7F      1  :  0<> sign_7
+ L  -  0xF7F      1  :  0<> i_2
+ L  -  0xF7F      2  :  0<> aarg_2
  L  -  0xF7F      2  :  0<> ma
  L  -  0xF7F      1  :  0<> tmp_3
  L  -  0xF7F      1  :  0<> tmpa
  L  -  0xF7F      1  :  0<> arg1B7
  L  -  0xF7F      1  :  0<> sign_8
- L  -  0xF7F      1  :  2<> linea_2
- L  -  0xF7F      1  :  0<> arg2_7
- R  -  0xF7F      3  :  0<> rval_2
- L  -  0xF7F      1  :  4<> columna_2
- L  -  0xF7F      1  :  2<> PDel0_3
- L  -  0xF7F      1  :  2<> PDel1_2
- L  -  0xF7F      1  :  2<> PDel2
- L  -  0xF7F      1  :  2<> PDel0_4
+ L  -  0xF7F      2  :  0<> arg2_4
+ L  -  0xF7F      3  :  0<> c_2
+ P  -  0xF7F      1  :  0:  ANSELH
+ L  -  0xF7F      1  :  0<> counter
+ L  -  0xF7F      3  :  0<> d_4
+ L  -  0xF7F      1  :  0<> j
+ L  -  0xF7F      1  :  0<> savedFlags_4
  L  -  0xF7F      1  :  2<> PDel1_3
  L  -  0xF7F      1  :  2<> PDel2_2
- L  -  0xF7F      1  :  0<> counter_5
+ L  -  0xF7F      1  :  2<> PDel0_5
  L  -  0xF7F      1  :  2<> PDel1_4
  L  -  0xF7F      1  :  2<> PDel2_3
+ L  -  0xF7F      1  :  0<> sign_5
  L  -  0xF7F      4  :  0<> arg32
  L  -  0xF7F      1  :  0<> expo_3
- L  -  0xF7F      3  :  0<> e_2
- L  -  0xF7F      2  :  0<> arg1_3
- L  -  0xF7F      1  :  0<> counter_9
+ L  -  0xF7F      2  :  0<> arg2_8
+ L  -  0xF7F      2  :  0<> rm_8
  L  -  0xF7F      1  :  6<> i_4
+ L  -  0xF7F      1  :  0<> sign_10
  L  -  0xF7F      1  :  0<> flags
- L  -  0xF7F      1  :  0<> i_2
- L  -  0xF7F      1  :  0<> rm_3
- L  -  0xF7F      1  :  3<> xy
  L  -  0xF7F      1  :  0<> arg2_3
- L  -  0xF7F      2  :  6<> num
- L  -  0xF7F      2  : 11<> u_milers
- L  -  0xF7F      2  :  7<> cent
- L  -  0xF7F      1  :  3<> dec
+ L  -  0xF7F      1  :  2<> linea_2
+ L  -  0xF7F      1  :  0<> counter_4
+ L  -  0xF7F      1  :  0<> sign_7
+ L  -  0xF7F      1  :  4<> columna_2
+ L  -  0xF7F      2  : 12<> dato_3
+ L  -  0xF7F      1  :  2<> PDel2
+ L  -  0xF7F      1  :  2<> PDel0_4
  L  -  0xF7F      1  :  2<> unid
  L  -  0xF7F      1  :  3<> resto1
  L  -  0xF7F      1  :  6<> i_7
  L  -  0xF7F      1  : 13<> xx
  L  -  0xF7F      1  :  0<> yy
  L  -  0xF7F      1  : 29<> dat
- L  -  0xF7F      1  :  0<> cosinus
- L  -  0xF7F      3  :  0<> c_4
- L  -  0xF7F      3  :  0<> e_3
- L  -  0xF7F      1  :  0<> j
- P  -  0xF7F      1  :  0:  ANSELH
- L  -  0xF7F      1  :  2<> PDel0_5
- L  -  0xF7F      3  :  0<> c_2
+ L  -  0xF7F      1  :  3<> xy
+ L  -  0xF7F      2  :  6<> num
+ L  -  0xF7F      2  : 11<> u_milers
+ L  -  0xF7F      2  :  7<> cent
+ L  -  0xF7F      1  :  3<> dec
+ L  -  0xF7F      1  :  0<> csign
+ L  -  0xF7F      2  :  0<> arg1_7
  L  -  0xF7F      3  :  0<> d_2
  L  -  0xF7F      1  :  0<> xexp_2
  L  -  0xF7F      1  :  0<> savedFlags_2
- L  -  0xF7F      1  :  0<> csign
- L  -  0xF7F      1  :  0<> sign_5
+ L  -  0xF7F      3  :  0<> e_2
+ L  -  0xF7F      1  :  2<> PDel0_3
  L  -  0xF7F      1  : 19<> dato_2
  L  -  0xF7F      3  :  0<> c_3
  L  -  0xF7F      3  :  0<> d_3
  L  -  0xF7F      1  :  0<> xexp_3
  L  -  0xF7F      1  :  0<> savedFlags_3
- L  -  0xF7F      1  :  0<> savedFlags_4
+ L  -  0xF7F      3  :  0<> e_3
  L  -  0xF7F      1  :  3<> i_6
  L  -  0xF7F      1  :  1<> linea_3
+ L  -  0xF7F      1  :  0<> cosinus
+ L  -  0xF7F      3  :  0<> c_4
+ L  -  0xF7F      2  :  0<> arg1_3
+ L  -  0xF7F      1  :  0<> counter_8
+ L  -  0xF7F      1  :  2<> PDel1_2
+ L  -  0xF7F      1  :  0<> rm_7
+ L  -  0xF7F      1  :  0<> arg2_7
  L  -  0xF7F.0    0  :  3<> bd
- L  -  0xF7F.0    0  :  1<> xi
  L  -  0xF7F.0    0  :  2<> ndp
  L  -  0xF7F.0    0  :  2<> dp
+ L  -  0xF7F.0    0  :  1<> xi
  P  -  0xF80      1  :  0:  PORTA
  P  -  0xF81      1  :143:  PORTB
  R  -  0xF82      1  :  0<> xtra_3
@@ -527,33 +532,33 @@ Size := number of bytes
  P  -  0xFD6      1  :  0:  TMR0L
  P  -  0xFD7      1  :  0:  TMR0H
  P  -  0xFD8      1  :  2:  STATUS
- P  -  0xFD8.0    0  : 53:  Carry
+ P  -  0xFD8.0    0  : 46:  Carry
  P  -  0xFD8.1    0  :  0:  DC
- P  -  0xFD8.2    0  :118:  Zero_
+ P  -  0xFD8.2    0  :115:  Zero_
  P  -  0xFD8.3    0  :  0:  Overflow
  P  -  0xFD8.4    0  :  0:  Negative
- P  -  0xFD9      2  :  0:  FSR2
  P  -  0xFD9      1  :  0:  FSR2L
+ P  -  0xFD9      2  :  0:  FSR2
  P  -  0xFDA      1  :  0:  FSR2H
  P  -  0xFDB      1  :  0:  PLUSW2
  P  -  0xFDC      1  :  0:  PREINC2
  P  -  0xFDD      1  :  0:  POSTDEC2
  P  -  0xFDE      1  :  0:  POSTINC2
  P  -  0xFDF      1  :  0:  INDF2
- P  -  0xFE0      1  :  2:  BSR
  P  -  0xFE0      1  :  0:  BSRL
- P  -  0xFE1      2  :  0:  FSR1
+ P  -  0xFE0      1  :  2:  BSR
  P  -  0xFE1      1  :  0:  FSR1L
+ P  -  0xFE1      2  :  0:  FSR1
  P  -  0xFE2      1  :  0:  FSR1H
  P  -  0xFE3      1  :  0:  PLUSW1
  P  -  0xFE4      1  :  0:  PREINC1
  P  -  0xFE5      1  :  0:  POSTDEC1
  P  -  0xFE6      1  :  0:  POSTINC1
  P  -  0xFE7      1  :  0:  INDF1
- P  -  0xFE8      1  :  0:  WREG
     -  0xFE8      1  :  0:  W
- P  -  0xFE9      2  : 10:  FSR0
+ P  -  0xFE8      1  :  0:  WREG
  P  -  0xFE9      1  :  0:  FSR0L
+ P  -  0xFE9      2  : 10:  FSR0
  P  -  0xFEA      1  :  0:  FSR0H
  P  -  0xFEB      1  :  0:  PLUSW0
  P  -  0xFEC      1  :  0:  PREINC0
@@ -583,8 +588,8 @@ Size := number of bytes
  P  -  0xFF2.5    0  :  0:  TMR0IE
  P  -  0xFF2.6    0  :  0:  GIEL
  P  -  0xFF2.6    0  :  0:  PEIE
- P  -  0xFF2.7    0  :  0:  GIEH
  P  -  0xFF2.7    0  :  2:  GIE
+ P  -  0xFF2.7    0  :  0:  GIEH
  P  -  0xFF3      1  : 11:  PRODL
  P  -  0xFF4      1  :  9:  PRODH
  P  -  0xFF5      1  :  3:  TABLAT

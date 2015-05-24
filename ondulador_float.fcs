@@ -7,18 +7,18 @@ F: highPriorityTimer_0    :#0
 
 F: _fmul24                :#55
 
-F: _fdiv24                :#3 
+F: _fdiv24                :#1 
 
 F: _fadd24                :#46
 
-F: _fsub24                :#4 
+F: _fsub24                :#5 
     _fadd24               : #46
 
 F: _int24ToFloat24        :#4 
 
 F: _int32ToFloat24        :#0 
 
-F: _float24ToInt24        :#6 
+F: _float24ToInt24        :#10
 
 F: _f24_LT_f24            :#0 
 
@@ -184,7 +184,7 @@ F: Enviar_lcd             :#0
     retardo_20u           : #65
     enviar_comando        : #36
 
-F: Enviar_uns16           :#2 
+F: Enviar_uns16           :#5 
     enviar_comando        : #36
     enviar_comando        : #36
     enviar_comando        : #36
@@ -207,7 +207,7 @@ F: Enviar_uns16           :#2
     retardo_20u           : #65
     enviar_comando        : #36
 
-F: Enviar_char            :#16
+F: Enviar_char            :#13
     enviar_comando        : #36
     enviar_comando        : #36
     enviar_comando        : #36
@@ -275,10 +275,11 @@ F: main                   :#0
     _const1               : #10
     _int24ToFloat24       : #4 
     _fmul24               : #55
-    _float24ToInt24       : #6 
+    _float24ToInt24       : #10
     escribir_posicion     : #4 
     escribir_posicion     : #4 
     escribir_posicion     : #4 
+    _float24ToInt24       : #10
     medir                 : #5 
     medir                 : #5 
     retardo_20u           : #65
@@ -289,8 +290,7 @@ F: main                   :#0
     retardo_20u           : #65
     retardo_20u           : #65
     retardo_20u           : #65
-    _fmul24               : #55
-    _float24ToInt24       : #6 
+    _float24ToInt24       : #10
     medir                 : #5 
     medir                 : #5 
     retardo_20u           : #65
@@ -304,31 +304,34 @@ F: main                   :#0
     _divU16_8             : #7 
     _int24ToFloat24       : #4 
     sqrt                  : #1 
+    _float24ToInt24       : #10
+    _fsub24               : #5 
+    _fsub24               : #5 
+    _float24ToInt24       : #10
     _fmul24               : #55
-    _fdiv24               : #3 
-    _fsub24               : #4 
-    _fdiv24               : #3 
+    _fmul24               : #55
     _fmul24               : #55
     medir                 : #5 
-    Enviar_char           : #16
-    Enviar_char           : #16
-    Enviar_char           : #16
-    Enviar_char           : #16
-    Enviar_char           : #16
-    Enviar_char           : #16
-    Enviar_char           : #16
-    Enviar_char           : #16
-    Enviar_char           : #16
-    Enviar_char           : #16
-    Enviar_char           : #16
-    Enviar_char           : #16
-    Enviar_char           : #16
-    Enviar_char           : #16
-    Enviar_char           : #16
-    Enviar_char           : #16
-    _float24ToInt24       : #6 
-    Enviar_uns16          : #2 
-    Enviar_uns16          : #2 
+    _float24ToInt24       : #10
+    Enviar_uns16          : #5 
+    Enviar_uns16          : #5 
+    Enviar_char           : #13
+    Enviar_char           : #13
+    Enviar_char           : #13
+    Enviar_char           : #13
+    Enviar_char           : #13
+    Enviar_char           : #13
+    Enviar_char           : #13
+    Enviar_char           : #13
+    Enviar_char           : #13
+    Enviar_char           : #13
+    Enviar_char           : #13
+    Enviar_char           : #13
+    _float24ToInt24       : #10
+    Enviar_uns16          : #5 
+    Enviar_char           : #13
+    Enviar_uns16          : #5 
+    Enviar_uns16          : #5 
 
 F: configuraPic           :#1 
 
@@ -433,6 +436,7 @@ F: _const1                :#10
  L1    escribir_posicion ..
  L1    escribir_posicion ..
  L1    escribir_posicion ..
+ L1    _float24ToInt24
  L1    medir
  L1    medir
  L1    retardo_20u
@@ -443,7 +447,6 @@ F: _const1                :#10
  L1    retardo_20u
  L1    retardo_20u
  L1    retardo_20u
- L1    _fmul24
  L1    _float24ToInt24
  L1    medir
  L1    medir
@@ -475,13 +478,39 @@ F: _const1                :#10
  L2      _fmul24
  L2      _fadd24
  L2      _fmul24
- L1    _fmul24
- L1    _fdiv24
+ L1    _float24ToInt24
  L1    _fsub24
  L2      _fadd24
- L1    _fdiv24
+ L1    _fsub24 ..
+ L1    _float24ToInt24
+ L1    _fmul24
+ L1    _fmul24
  L1    _fmul24
  L1    medir
+ L1    _float24ToInt24
+ L1    Enviar_uns16
+ L2      enviar_comando ..
+ L2      enviar_comando ..
+ L2      enviar_comando ..
+ L2      enviar_comando ..
+ L2      enviar_comando ..
+ L2      _divU16_16
+ L2      _remU16_16
+ L2      _divU16_16
+ L2      _remU16_16
+ L2      _divU16_8
+ L2      _remU16_8
+ L2      _divU16_8
+ L2      _remU16_8
+ L2      retardo_20u
+ L2      retardo_20u
+ L2      retardo_20u
+ L2      retardo_1m
+ L2      retardo_1m
+ L2      retardo_20u
+ L2      retardo_20u
+ L2      enviar_comando ..
+ L1    Enviar_uns16 ..
  L1    Enviar_char
  L2      enviar_comando ..
  L2      enviar_comando ..
@@ -511,32 +540,9 @@ F: _const1                :#10
  L1    Enviar_char ..
  L1    Enviar_char ..
  L1    Enviar_char ..
- L1    Enviar_char ..
- L1    Enviar_char ..
- L1    Enviar_char ..
- L1    Enviar_char ..
  L1    _float24ToInt24
- L1    Enviar_uns16
- L2      enviar_comando ..
- L2      enviar_comando ..
- L2      enviar_comando ..
- L2      enviar_comando ..
- L2      enviar_comando ..
- L2      _divU16_16
- L2      _remU16_16
- L2      _divU16_16
- L2      _remU16_16
- L2      _divU16_8
- L2      _remU16_8
- L2      _divU16_8
- L2      _remU16_8
- L2      retardo_20u
- L2      retardo_20u
- L2      retardo_20u
- L2      retardo_1m
- L2      retardo_1m
- L2      retardo_20u
- L2      retardo_20u
- L2      enviar_comando ..
+ L1    Enviar_uns16 ..
+ L1    Enviar_char ..
+ L1    Enviar_uns16 ..
  L1    Enviar_uns16 ..
 

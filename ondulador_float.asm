@@ -1,7 +1,7 @@
 
 ; CC8E Version 1.4, Copyright (c) B Knudsen Data
 ; C compiler for the PIC18 microcontrollers
-; ************  19. May 2015  15:23  *************
+; ************  21. May 2015  17:38  *************
 
 	processor  PIC18F44K20
 	radix  DEC
@@ -56,13 +56,13 @@ ADFM        EQU   7
 TMR2IF      EQU   1
 TMR2IE      EQU   1
 bUdw        EQU   0
-ancho_pwm   EQU   0xC0
-r           EQU   0xC2
-Vmax        EQU   0xC4
-SENO        EQU   0xC7
-T           EQU   0xC9
-i           EQU   0xCA
-estado      EQU   0xCB
+ancho_pwm   EQU   0xCC
+r           EQU   0xCE
+Vmax        EQU   0xD0
+SENO        EQU   0xD3
+T           EQU   0xD5
+i           EQU   0xD6
+estado      EQU   0xD7
 svrSTATUS   EQU   0x60
 svrBSR      EQU   0x61
 svrWREG     EQU   0x62
@@ -73,56 +73,52 @@ sv_TABLAT   EQU   0x68
 C3cnt       EQU   0x69
 C4tmp       EQU   0x6A
 C5rem       EQU   0x6C
-FpFlags     EQU   0xCC
+FpFlags     EQU   0xD8
 FpOverflow  EQU   1
 FpUnderFlow EQU   2
-FpDiv0      EQU   3
 FpDomainError EQU   5
 FpRounding  EQU   6
-arg1f24     EQU   0xA4
-arg2f24     EQU   0xA7
-aarg        EQU   0xAF
-sign        EQU   0xB1
-tmpL        EQU   0xB2
-aarg_2      EQU   0xAA
-sign_2      EQU   0xAC
-counter     EQU   0xAD
-xtra        EQU   0xAF
-temp        EQU   0xB0
-expo        EQU   0xB1
-sign_3      EQU   0xB2
-expo_2      EQU   0xAA
-xtra_2      EQU   0xAB
-sign_4      EQU   0xAC
-rval        EQU   0xA4
-sign_6      EQU   0xAA
-expo_4      EQU   0xAB
-xtra_4      EQU   0xAC
-rval_3      EQU   0xA4
-arg1        EQU   0xB8
-arg2        EQU   0xBA
-rm          EQU   0xBB
-counter_2   EQU   0xBC
-tmp         EQU   0xBD
-arg1_2      EQU   0xB8
-arg2_2      EQU   0xBA
-rm_2        EQU   0xBC
-counter_3   EQU   0xBE
-arg1_5      EQU   0xB8
-arg2_5      EQU   0xBA
-rm_5        EQU   0xBB
-counter_6   EQU   0xBC
-tmp_2       EQU   0xBD
-arg1_6      EQU   0xB8
-arg2_6      EQU   0xBA
-rm_6        EQU   0xBC
-counter_7   EQU   0xBE
-cexp        EQU   0xAA
-savedFLAGS  EQU   0xAB
-d_5         EQU   0xAC
-PDel0       EQU   0xB9
-PDel0_2     EQU   0xB9
-PDel1       EQU   0xBA
+arg1f24     EQU   0xB0
+arg2f24     EQU   0xB3
+aarg        EQU   0xBB
+sign        EQU   0xBD
+tmpL        EQU   0xBE
+xtra        EQU   0xBB
+temp        EQU   0xBC
+expo        EQU   0xBD
+sign_3      EQU   0xBE
+expo_2      EQU   0xB6
+xtra_2      EQU   0xB7
+sign_4      EQU   0xB8
+rval        EQU   0xB0
+sign_6      EQU   0xB6
+expo_4      EQU   0xB7
+xtra_4      EQU   0xB8
+rval_3      EQU   0xB0
+arg1        EQU   0xC4
+arg2        EQU   0xC6
+rm          EQU   0xC7
+counter_2   EQU   0xC8
+tmp         EQU   0xC9
+arg1_2      EQU   0xC4
+arg2_2      EQU   0xC6
+rm_2        EQU   0xC8
+counter_3   EQU   0xCA
+arg1_5      EQU   0xC4
+arg2_5      EQU   0xC6
+rm_5        EQU   0xC7
+counter_6   EQU   0xC8
+tmp_2       EQU   0xC9
+arg1_6      EQU   0xC4
+arg2_6      EQU   0xC6
+rm_6        EQU   0xC8
+counter_7   EQU   0xCA
+cexp        EQU   0xB6
+savedFLAGS  EQU   0xB7
+d_5         EQU   0xB8
+PDel0       EQU   0xC5
+PDel0_2     EQU   0xC5
+PDel1       EQU   0xC6
 PDel0_3     EQU   0xF7F
 PDel1_2     EQU   0xF7F
 PDel2       EQU   0xF7F
@@ -132,15 +128,15 @@ PDel2_2     EQU   0xF7F
 PDel0_5     EQU   0xF7F
 PDel1_4     EQU   0xF7F
 PDel2_3     EQU   0xF7F
-codigo      EQU   0x9E
-comando     EQU   0xB8
-dato        EQU   0x9E
-i_3         EQU   0x9F
+codigo      EQU   0xA8
+comando     EQU   0xC4
+dato        EQU   0xA8
+i_3         EQU   0xA9
 dato_2      EQU   0xF7F
 i_4         EQU   0xF7F
-i_5         EQU   0x9D
-linea       EQU   0x9D
-columna     EQU   0x9E
+i_5         EQU   0xA7
+linea       EQU   0xA7
+columna     EQU   0xA8
 linea_2     EQU   0xF7F
 i_6         EQU   0xF7F
 linea_3     EQU   0xF7F
@@ -160,33 +156,33 @@ i_7         EQU   0xF7F
 xx          EQU   0xF7F
 dat         EQU   0xF7F
 xy          EQU   0xF7F
-linea_4     EQU   0xA4
-columna_3   EQU   0xA5
-dato_4      EQU   0xA6
-num_2       EQU   0xA8
-u_milers_2  EQU   0xAA
-cent_2      EQU   0xAC
-d_milers    EQU   0xAE
-dec_2       EQU   0xB0
-unid_2      EQU   0xB1
-resto1_2    EQU   0xB2
-i_8         EQU   0xB3
-xx_2        EQU   0xB4
-dat_2       EQU   0xB6
-linea_5     EQU   0xA4
-columna_4   EQU   0xA5
-dato_5      EQU   0xA6
-cent_3      EQU   0xA8
-dec_3       EQU   0xA9
-unid_3      EQU   0xAA
-resto1_3    EQU   0xAB
-i_9         EQU   0xAC
-xx_3        EQU   0xAD
-dat_3       EQU   0xAF
-i_10        EQU   0x9D
-canal       EQU   0xA2
-bits        EQU   0xA3
-resultado   EQU   0xA4
+linea_4     EQU   0xB0
+columna_3   EQU   0xB1
+dato_4      EQU   0xB2
+num_2       EQU   0xB4
+u_milers_2  EQU   0xB6
+cent_2      EQU   0xB8
+d_milers    EQU   0xBA
+dec_2       EQU   0xBC
+unid_2      EQU   0xBD
+resto1_2    EQU   0xBE
+i_8         EQU   0xBF
+xx_2        EQU   0xC0
+dat_2       EQU   0xC2
+linea_5     EQU   0xB0
+columna_4   EQU   0xB1
+dato_5      EQU   0xB2
+cent_3      EQU   0xB4
+dec_3       EQU   0xB5
+unid_3      EQU   0xB6
+resto1_3    EQU   0xB7
+i_9         EQU   0xB8
+xx_3        EQU   0xB9
+dat_3       EQU   0xBB
+i_10        EQU   0xA7
+canal       EQU   0xAC
+bits        EQU   0xAD
+resultado   EQU   0xAE
 p           EQU   0x6D
 h           EQU   0x6E
 x           EQU   0x6F
@@ -198,12 +194,16 @@ o           EQU   0x93
 vuelta      EQU   0x94
 lectura     EQU   0
 raiz        EQU   0x95
-Mac0        EQU   0x98
-Mac1        EQU   0x9A
-d_6         EQU   0xA2
-banda       EQU   0x9D
-bat         EQU   0xA0
-q           EQU   0xA2
+Mac0        EQU   0x9B
+Mac1        EQU   0x9D
+q           EQU   0x9F
+a           EQU   0xA1
+ProbaVmax   EQU   0xA3
+d_6         EQU   0xAC
+banda       EQU   0xA7
+bat         EQU   0xAA
+w           EQU   0xAC
+v           EQU   0xAE
 ci          EQU   0x69
 
 	GOTO main
@@ -262,8 +262,8 @@ ci          EQU   0x69
 			;#define BATT_LW		 6 
 			;#define BATT_CLEAR	 7
 			;//valores PID
-			;#define REF_AC			  31
-			;#define BANDA_PROPORCINAL 10 //10%
+			;#define REF_AC			  37
+			;#define BANDA_PROPORCIONAL 10 //50%
 			;
 			; //**************************************************************************************//
 			; //********************************  V A R I A B L E S  *********************************//
@@ -320,7 +320,7 @@ highPriorityTimer_0
 			;
 			;	if(TMR2IF) 
 	BTFSS 0xF9E,TMR2IF,0
-	BRA   m011
+	BRA   m013
 			;	{ 
 			;		T2CON = 0b.0.0011.1.01; TMR2IF =0; //TMR2ON =1; // PostScaler per 4
 	MOVLW 29
@@ -352,13 +352,13 @@ m002	MOVFF ancho_pwm+1,CCPR1L
 	BSF   CCP1CON,4,0
 			;				  
 			;		if(bUdw){ 
-	BTFSS 0xBF,bUdw,1
+	BTFSS 0xCB,bUdw,1
 	BRA   m004
 			;			if(T>=25)  bUdw=0;      
 	MOVLW 24
 	CPFSGT T,1
 	BRA   m003
-	BCF   0xBF,bUdw,1
+	BCF   0xCB,bUdw,1
 			;			else T++;
 	BRA   m004
 m003	MOVLB 0
@@ -366,7 +366,7 @@ m003	MOVLB 0
 			;		} 
 			;		if(!bUdw) T--;                       
 m004	MOVLB 0
-	BTFSS 0xBF,bUdw,1
+	BTFSS 0xCB,bUdw,1
 	DECF  T,1,1
 			;		if(T==0) {
 	MOVLB 0
@@ -404,7 +404,7 @@ m006	BTFSS 0xF9E,TMR2IF,0
 	BTG   LATD,0,0
 			;			bUdw=1;  
 	MOVLB 0
-	BSF   0xBF,bUdw,1
+	BSF   0xCB,bUdw,1
 			;			T=1;
 	MOVLW 1
 	MOVWF T,1
@@ -414,9 +414,21 @@ m006	BTFSS 0xF9E,TMR2IF,0
 	BRA   m007
 	CLRF  estado,1
 			;		}			  
-			;							
-			;		SENO = sen[T];
+			;		if(r>=60)r=60;		
 m007	MOVLB 0
+	MOVF  r+1,W,1
+	BTFSS 0xFD8,Zero_,0
+	BRA   m008
+	MOVLW 59
+	CPFSGT r,1
+	BRA   m009
+m008	MOVLW 60
+	MOVLB 0
+	MOVWF r,1
+	CLRF  r+1,1
+			;		//if(r<25)r=25;
+			;		SENO = sen[T];
+m009	MOVLB 0
 	MOVF  T,W,1
 	CALL  _const1
 	MOVLB 0
@@ -443,25 +455,25 @@ m007	MOVLB 0
 	CLRF  C5rem,1
 	MOVLW 16
 	MOVWF C3cnt,1
-m008	MOVLB 0
+m010	MOVLB 0
 	RLCF  C4tmp,1,1
 	RLCF  C4tmp+1,1,1
 	RLCF  C5rem,1,1
 	BTFSC 0xFD8,Carry,0
-	BRA   m009
+	BRA   m011
 	MOVLW 10
 	SUBWF C5rem,W,1
 	BTFSS 0xFD8,Carry,0
-	BRA   m010
-m009	MOVLW 10
+	BRA   m012
+m011	MOVLW 10
 	MOVLB 0
 	SUBWF C5rem,1,1
 	BSF   0xFD8,Carry,0
-m010	MOVLB 0
+m012	MOVLB 0
 	RLCF  ancho_pwm,1,1
 	RLCF  ancho_pwm+1,1,1
 	DECFSZ C3cnt,1,1
-	BRA   m008
+	BRA   m010
 			;		//Vmax=3.0;
 			;				  			  
 			;	} 
@@ -473,7 +485,7 @@ m010	MOVLB 0
 			;	//PCLATH = sv_PCLATH;
 			;	//PCLATU = sv_PCLATU;
 			;	PRODL = sv_PRODL;
-m011	MOVFF sv_PRODL,PRODL
+m013	MOVFF sv_PRODL,PRODL
 			;	PRODH = sv_PRODH;
 	MOVFF sv_PRODH,PRODH
 			;	TBLPTR = sv_TBLPTR;
@@ -630,7 +642,7 @@ _fmul24
 			;    if (Zero_)
 	BTFSC 0xFD8,Zero_,0
 			;        goto RES0;
-	BRA   m016
+	BRA   m018
 			;   #endif
 			;
 			;    arg1f24.high8 += W /* arg2f24.high8 */;
@@ -640,26 +652,26 @@ _fmul24
 	MOVLW 126
 			;    if (Carry)  {
 	BTFSS 0xFD8,Carry,0
-	BRA   m012
+	BRA   m014
 			;        arg1f24.high8 -= W;
 	SUBWF arg1f24+2,1,1
 			;        if (Carry)
 	BTFSS 0xFD8,Carry,0
-	BRA   m013
+	BRA   m015
 			;            goto OVERFLOW;
-	BRA   m017
+	BRA   m019
 			;    }
 			;    else  {
 			;        arg1f24.high8 -= W;
-m012	MOVLB 0
+m014	MOVLB 0
 	SUBWF arg1f24+2,1,1
 			;        if (!Carry)
 	BTFSS 0xFD8,Carry,0
 			;            goto UNDERFLOW;
-	BRA   m015
+	BRA   m017
 			;    }
 			;    aarg.low8 = arg1f24.low8;
-m013	MOVFF arg1f24,aarg
+m015	MOVFF arg1f24,aarg
 			;
 			;    aarg.15 = 1;
 	MOVLB 0
@@ -722,7 +734,7 @@ m013	MOVFF arg1f24,aarg
 			;
 			;    if (!arg1f24.15)  {
 	BTFSC arg1f24+1,7,1
-	BRA   m014
+	BRA   m016
 			;        tmpL = rl( tmpL);
 	RLCF  tmpL,1,1
 			;        arg1f24.low16 = rl( arg1f24.low16);
@@ -732,7 +744,7 @@ m013	MOVFF arg1f24,aarg
 	MOVF  arg1f24+2,1,1
 	BTFSC 0xFD8,Zero_,0
 			;            goto UNDERFLOW;
-	BRA   m015
+	BRA   m017
 			;        arg1f24.high8 -= 1;
 	MOVLB 0
 	DECF  arg1f24+2,1,1
@@ -770,19 +782,19 @@ m013	MOVFF arg1f24,aarg
 			;
 			;   #ifndef DISABLE_ROUNDING
 			;    if (FpRounding  &&  Carry)  {
-m014	MOVLB 0
-	BTFSS 0xCC,FpRounding,1
-	BRA   m019
+m016	MOVLB 0
+	BTFSS 0xD8,FpRounding,1
+	BRA   m021
 	BTFSS 0xFD8,Carry,0
-	BRA   m019
+	BRA   m021
 			;        arg1f24.low8 += 1;
 	INCFSZ arg1f24,1,1
 			;        if (!arg1f24.low8)  {
-	BRA   m019
+	BRA   m021
 			;            arg1f24.mid8 += 1;
 	INCFSZ arg1f24+1,1,1
 			;            if (!arg1f24.mid8)  {
-	BRA   m019
+	BRA   m021
 			;               #if __CoreSet__ >= 1700 && __CoreSet__ <= 1800
 			;                Carry = 1; // previous INCF changes Carry
 	BSF   0xFD8,Carry,0
@@ -795,9 +807,9 @@ m014	MOVLB 0
 			;                arg1f24.high8 += 1;
 	INCFSZ arg1f24+2,1,1
 			;                if (Zero_)
-	BRA   m019
+	BRA   m021
 			;                    goto OVERFLOW;
-	BRA   m017
+	BRA   m019
 			;            }
 			;        }
 			;    }
@@ -806,31 +818,31 @@ m014	MOVLB 0
 			;
 			;  UNDERFLOW:
 			;    FpUnderFlow = 1;
-m015	MOVLB 0
-	BSF   0xCC,FpUnderFlow,1
+m017	MOVLB 0
+	BSF   0xD8,FpUnderFlow,1
 			;  RES0:
 			;    arg1f24.high8 = 0;
-m016	MOVLB 0
+m018	MOVLB 0
 	CLRF  arg1f24+2,1
 			;    goto MANTISSA;
-	BRA   m018
+	BRA   m020
 			;
 			;  OVERFLOW:
 			;    FpOverflow = 1;
-m017	MOVLB 0
-	BSF   0xCC,FpOverflow,1
+m019	MOVLB 0
+	BSF   0xD8,FpOverflow,1
 			;    arg1f24.high8 = 0xFF;
 	SETF  arg1f24+2,1
 			;  MANTISSA:
 			;    arg1f24.low16 = 0x8000;
-m018	MOVLB 0
+m020	MOVLB 0
 	CLRF  arg1f24,1
 	MOVLW 128
 	MOVWF arg1f24+1,1
 			;
 			;  SET_SIGN:
 			;    if (!(sign & 0x80))
-m019	MOVLB 0
+m021	MOVLB 0
 	BTFSS sign,7,1
 			;        arg1f24.15 = 0;
 	BCF   arg1f24+1,7,1
@@ -847,142 +859,76 @@ m019	MOVLB 0
 _fdiv24
 			;    uns16 aarg;
 			;    W = arg1f24.mid8;
-	MOVLB 0
-	MOVF  arg1f24+1,W,1
 			;    aarg.high8 = W;
-	MOVWF aarg_2+1,1
 			;
 			;    // save sign
 			;    char sign = arg2f24.mid8 ^ W;  // before first overflow test
-	XORWF arg2f24+1,W,1
-	MOVWF sign_2,1
 			;
 			;   #if __CoreSet__ / 100 == 17
 			;    if (!arg2f24.high8)
 			;        goto Div0;
 			;   #else
 			;    W = arg2f24.high8;
-	MOVF  arg2f24+2,W,1
 			;    if (Zero_)
-	BTFSC 0xFD8,Zero_,0
 			;        goto Div0;
-	BRA   m030
 			;   #endif
 			;    if (!arg1f24.high8)
-	MOVLB 0
-	MOVF  arg1f24+2,1,1
-	BTFSC 0xFD8,Zero_,0
 			;        goto RES0;
-	BRA   m032
 			;
 			;    arg1f24.high8 -= arg2f24.high8;
-	MOVLB 0
-	MOVF  arg2f24+2,W,1
-	SUBWF arg1f24+2,1,1
 			;    W = FpBIAS;
-	MOVLW 127
 			;    if (!Carry)  {
-	BTFSC 0xFD8,Carry,0
-	BRA   m020
 			;        arg1f24.high8 += W;
-	ADDWF arg1f24+2,1,1
 			;        if (!Carry)
-	BTFSC 0xFD8,Carry,0
-	BRA   m021
 			;            goto UNDERFLOW;
-	BRA   m031
 			;    }
 			;    else  {
 			;        arg1f24.high8 += W;
-m020	MOVLB 0
-	ADDWF arg1f24+2,1,1
 			;        if (Carry)
-	BTFSC 0xFD8,Carry,0
 			;            goto OVERFLOW;
-	BRA   m033
 			;    }
 			;
 			;    aarg.low8 = arg1f24.low8;
-m021	MOVFF arg1f24,aarg_2
 			;    aarg.15 = 1;
-	MOVLB 0
-	BSF   aarg_2+1,7,1
 			;    arg2f24.15 = 1;
-	BSF   arg2f24+1,7,1
 			;
 			;    // division: shift & add
 			;    char counter = 16;
-	MOVLW 16
-	MOVWF counter,1
 			;    arg1f24.low16 = 0;  // speedup
-	CLRF  arg1f24,1
-	CLRF  arg1f24+1,1
 			;
 			;#if defined FP_OPTIM_SPEED || !defined FP_OPTIM_SIZE  // SPEED
 			;
 			;    goto START_ML;
-	BRA   m024
 			;
 			;  TEST_ZERO_L:
 			;    W = aarg.low8 - arg2f24.low8;
-m022	MOVLB 0
-	MOVF  arg2f24,W,1
-	SUBWF aarg_2,W,1
 			;    if (!Carry)
-	BTFSS 0xFD8,Carry,0
 			;        goto SHIFT_IN_CARRY;
-	BRA   m027
 			;    aarg.low8 = W;
-	MOVLB 0
-	MOVWF aarg_2,1
 			;    aarg.high8 = 0;
-	CLRF  aarg_2+1,1
 			;    goto SET_AND_SHIFT_IN_CARRY;
-	BRA   m026
 			;
 			;// MAIN LOOP
 			;    do  {
 			;      LOOP_ML:
 			;        if (!Carry)  {
-m023	BTFSC 0xFD8,Carry,0
-	BRA   m025
 			;           START_ML:
 			;            W = aarg.high8 - arg2f24.mid8;
-m024	MOVLB 0
-	MOVF  arg2f24+1,W,1
-	SUBWF aarg_2+1,W,1
 			;            if (Zero_)
-	BTFSC 0xFD8,Zero_,0
 			;                goto TEST_ZERO_L;
-	BRA   m022
 			;            if (!Carry)
-	BTFSS 0xFD8,Carry,0
 			;                goto SHIFT_IN_CARRY;
-	BRA   m027
 			;        }
 			;        aarg.low8 -= arg2f24.low8;
-m025	MOVLB 0
-	MOVF  arg2f24,W,1
-	SUBWF aarg_2,1,1
 			;        genSub( aarg.high8, arg2f24.mid8);
-	MOVF  arg2f24+1,W,1
-	SUBWFB aarg_2+1,1,1
 			;      SET_AND_SHIFT_IN_CARRY:
 			;        Carry = 1;
-m026	BSF   0xFD8,Carry,0
 			;      SHIFT_IN_CARRY:
 			;        arg1f24.low16 = rl( arg1f24.low16);
-m027	MOVLB 0
-	RLCF  arg1f24,1,1
-	RLCF  arg1f24+1,1,1
 			;        // Carry = 0;  // ok, speedup
 			;        aarg = rl( aarg);
-	RLCF  aarg_2,1,1
-	RLCF  aarg_2+1,1,1
 			;        counter = decsz(counter);
-	DECFSZ counter,1,1
 			;    } while (1);
-	BRA   m023
 			;
 			;
 			;
@@ -1014,68 +960,35 @@ m027	MOVLB 0
 			;#endif
 			;
 			;    if (!arg1f24.15)  {
-	BTFSC arg1f24+1,7,1
-	BRA   m028
 			;        if (!arg1f24.high8)
-	MOVF  arg1f24+2,1,1
-	BTFSC 0xFD8,Zero_,0
 			;            goto UNDERFLOW;
-	BRA   m031
 			;       #if __CoreSet__ >= 1700 && __CoreSet__ <= 1800
 			;        sign = rr( sign);   // Save Carry
-	MOVLB 0
-	RRCF  sign_2,1,1
 			;       #endif
 			;        arg1f24.high8 --;
-	DECF  arg1f24+2,1,1
 			;        counter ++;
-	INCF  counter,1,1
 			;       #if __CoreSet__ >= 1700 && __CoreSet__ <= 1800
 			;        sign = rl( sign);   // Restore Carry, changed by INCF/DECF
-	RLCF  sign_2,1,1
 			;       #endif
 			;        goto LOOP_ML;
-	BRA   m023
 			;    }
 			;
 			;   #ifndef DISABLE_ROUNDING
 			;    if (FpRounding)  {
-m028	MOVLB 0
-	BTFSS 0xCC,FpRounding,1
-	BRA   m036
 			;        if (Carry)
-	BTFSC 0xFD8,Carry,0
 			;            goto ADD_1;
-	BRA   m029
 			;        aarg.low8 -= arg2f24.low8;
-	MOVLB 0
-	MOVF  arg2f24,W,1
-	SUBWF aarg_2,1,1
 			;        genSub( aarg.high8, arg2f24.mid8);
-	MOVF  arg2f24+1,W,1
-	SUBWFB aarg_2+1,1,1
 			;        if (Carry)  {
-	BTFSS 0xFD8,Carry,0
-	BRA   m036
 			;          ADD_1:
 			;            arg1f24.low8 += 1;
-m029	MOVLB 0
-	INCFSZ arg1f24,1,1
 			;            if (!arg1f24.low8)  {
-	BRA   m036
 			;                arg1f24.mid8 ++;
-	INCFSZ arg1f24+1,1,1
 			;                if (!arg1f24.mid8)  {
-	BRA   m036
 			;                    arg1f24.low16 = rr( arg1f24.low16);
-	RRCF  arg1f24+1,1,1
-	RRCF  arg1f24,1,1
 			;                    arg1f24.high8 ++;
-	INCFSZ arg1f24+2,1,1
 			;                    if (!arg1f24.high8)
-	BRA   m036
 			;                        goto OVERFLOW;
-	BRA   m033
 			;                }
 			;            }
 			;        }
@@ -1085,47 +998,25 @@ m029	MOVLB 0
 			;
 			;  Div0:
 			;    FpDiv0 = 1;
-m030	MOVLB 0
-	BSF   0xCC,FpDiv0,1
 			;    goto SATURATE;
-	BRA   m034
 			;
 			;  UNDERFLOW:
 			;    FpUnderFlow = 1;
-m031	MOVLB 0
-	BSF   0xCC,FpUnderFlow,1
 			;  RES0:
 			;    arg1f24.high8 = 0;
-m032	MOVLB 0
-	CLRF  arg1f24+2,1
 			;    goto MANTISSA;
-	BRA   m035
 			;
 			;  OVERFLOW:
 			;    FpOverflow = 1;
-m033	MOVLB 0
-	BSF   0xCC,FpOverflow,1
 			;  SATURATE:
 			;    arg1f24.high8 = 0xFF;
-m034	MOVLB 0
-	SETF  arg1f24+2,1
 			;  MANTISSA:
 			;    arg1f24.low16 = 0x8000;
-m035	MOVLB 0
-	CLRF  arg1f24,1
-	MOVLW 128
-	MOVWF arg1f24+1,1
 			;
 			;  SET_SIGN:
 			;    if (!(sign & 0x80))
-m036	MOVLB 0
-	BTFSS sign_2,7,1
 			;        arg1f24.15 = 0;
-	BCF   arg1f24+1,7,1
 			;    return arg1f24;
-	MOVLB 0
-	MOVF  arg1f24,W,1
-	RETURN
 			;}
 			;
 			;
@@ -1140,7 +1031,7 @@ _fadd24
 	MOVWF expo,1
 			;    if (!Carry)  {
 	BTFSC 0xFD8,Carry,0
-	BRA   m037
+	BRA   m022
 			;        expo = -expo;
 	NEGF  expo,1
 			;        temp = arg1f24.high8;
@@ -1163,18 +1054,18 @@ _fadd24
 	MOVFF temp,arg2f24
 			;    }
 			;    if (expo > sizeof(arg1f24)*8-7)
-m037	MOVLW 17
+m022	MOVLW 17
 	MOVLB 0
 	CPFSGT expo,1
-	BRA   m038
+	BRA   m023
 			;        goto _RETURN_MF;
-	BRA   m056
+	BRA   m041
 			;    if (!arg2f24.high8)
-m038	MOVLB 0
+m023	MOVLB 0
 	MOVF  arg2f24+2,1,1
 	BTFSC 0xFD8,Zero_,0
 			;        goto _RETURN_MF;   // result is arg1f24
-	BRA   m056
+	BRA   m041
 			;
 			;    xtra = 0;
 	MOVLB 0
@@ -1194,14 +1085,14 @@ m038	MOVLB 0
 			;
 			;    while (1)  {
 			;        W = 8;
-m039	MOVLW 8
+m024	MOVLW 8
 			;        expo -= W;
 	MOVLB 0
 	SUBWF expo,1,1
 			;        if (!Carry)
 	BTFSS 0xFD8,Carry,0
 			;            break;
-	BRA   m040
+	BRA   m025
 			;        xtra = arg2f24.low8;
 	MOVFF arg2f24,xtra
 			;        arg2f24.low8 = arg2f24.mid8;
@@ -1210,16 +1101,16 @@ m039	MOVLW 8
 	MOVLB 0
 	CLRF  arg2f24+1,1
 			;    }
-	BRA   m039
+	BRA   m024
 			;    expo += W;
-m040	MOVLB 0
+m025	MOVLB 0
 	ADDWF expo,1,1
 			;    if (expo)  {
 	BTFSC 0xFD8,Zero_,0
-	BRA   m042
+	BRA   m027
 			;        do  {
 			;            Carry = 0;
-m041	BCF   0xFD8,Carry,0
+m026	BCF   0xFD8,Carry,0
 			;            arg2f24.low16 = rr( arg2f24.low16);
 	MOVLB 0
 	RRCF  arg2f24+1,1,1
@@ -1228,14 +1119,14 @@ m041	BCF   0xFD8,Carry,0
 	RRCF  xtra,1,1
 			;        } while (--expo > 0);
 	DECFSZ expo,1,1
-	BRA   m041
+	BRA   m026
 			;    }
 			;
 			;
 			;    if (sign & 0x80)  {
-m042	MOVLB 0
+m027	MOVLB 0
 	BTFSS sign_3,7,1
-	BRA   m048
+	BRA   m033
 			;        // SUBTRACT
 			;        arg1f24.low8 -= arg2f24.low8;
 	MOVF  arg2f24,W,1
@@ -1245,7 +1136,7 @@ m042	MOVLB 0
 	SUBWFB arg1f24+1,1,1
 			;        if (!Carry)  {  // arg2f24 > arg1f24
 	BTFSC 0xFD8,Carry,0
-	BRA   m043
+	BRA   m028
 			;            arg1f24.low16 = -arg1f24.low16;
 	BSF   0xFD8,Carry,0
 	MOVLW 0
@@ -1258,11 +1149,11 @@ m042	MOVLB 0
 	XORWF temp,1,1
 			;        }
 			;        xtra = -xtra;
-m043	MOVLB 0
+m028	MOVLB 0
 	NEGF  xtra,1
 			;        if (xtra)
 	BTFSC 0xFD8,Zero_,0
-	BRA   m044
+	BRA   m029
 			;            arg1f24.low16 --;
 	DECF  arg1f24,1,1
 	MOVLW 0
@@ -1270,14 +1161,14 @@ m043	MOVLB 0
 			;        // adjust result left
 			;       #define counter expo
 			;        counter = 3;
-m044	MOVLW 3
+m029	MOVLW 3
 	MOVLB 0
 	MOVWF expo,1
 			;        while (!arg1f24.mid8)  {
-m045	MOVLB 0
+m030	MOVLB 0
 	MOVF  arg1f24+1,1,1
 	BTFSS 0xFD8,Zero_,0
-	BRA   m046
+	BRA   m031
 			;            arg1f24.mid8 = arg1f24.low8;
 	MOVFF arg1f24,arg1f24+1
 			;            arg1f24.low8 = xtra;
@@ -1290,19 +1181,19 @@ m045	MOVLB 0
 			;            if (!Carry)
 	BTFSS 0xFD8,Carry,0
 			;                goto RES0;
-	BRA   m052
+	BRA   m037
 			;            if (--counter == 0)  // max 2 iterations
 	MOVLB 0
 	DECFSZ expo,1,1
-	BRA   m045
+	BRA   m030
 			;                goto RES0;
-	BRA   m052
+	BRA   m037
 			;        }
 			;       #undef counter
 			;        while (!arg1f24.15)  {
-m046	MOVLB 0
+m031	MOVLB 0
 	BTFSC arg1f24+1,7,1
-	BRA   m047
+	BRA   m032
 			;            Carry = 0;
 	BCF   0xFD8,Carry,0
 			;            xtra = rl( xtra);
@@ -1313,28 +1204,28 @@ m046	MOVLB 0
 			;            arg1f24.high8 --;
 	DECFSZ arg1f24+2,1,1
 			;            if (!arg1f24.high8)
-	BRA   m046
+	BRA   m031
 			;                goto RES0;   // UNDERFLOW?
-	BRA   m052
+	BRA   m037
 			;        }
 			;       #ifndef DISABLE_ROUNDING
 			;        if (FpRounding  &&  (xtra & 0x80))  {
-m047	MOVLB 0
-	BTFSS 0xCC,FpRounding,1
-	BRA   m055
+m032	MOVLB 0
+	BTFSS 0xD8,FpRounding,1
+	BRA   m040
 	BTFSS xtra,7,1
-	BRA   m055
+	BRA   m040
 			;            xtra = 0; // disable recursion
 	CLRF  xtra,1
 			;            goto INCREMENT;
-	BRA   m051
+	BRA   m036
 			;        }
 			;       #endif
 			;    }
 			;    else  {
 			;        // ADD arg1f24 and arg2f24
 			;        arg1f24.low8 += arg2f24.low8;
-m048	MOVLB 0
+m033	MOVLB 0
 	MOVF  arg2f24,W,1
 	ADDWF arg1f24,1,1
 			;        genAdd( arg1f24.mid8, arg2f24.mid8);
@@ -1342,10 +1233,10 @@ m048	MOVLB 0
 	ADDWFC arg1f24+1,1,1
 			;        if (Carry)  {
 	BTFSS 0xFD8,Carry,0
-	BRA   m050
+	BRA   m035
 			;          ADJUST_RIGHT:
 			;            arg1f24.low16 = rr( arg1f24.low16);
-m049	MOVLB 0
+m034	MOVLB 0
 	RRCF  arg1f24+1,1,1
 	RRCF  arg1f24,1,1
 			;            xtra = rr( xtra);
@@ -1354,31 +1245,31 @@ m049	MOVLB 0
 	INFSNZ arg1f24+2,1,1
 			;            if (!arg1f24.high8)
 			;                goto OVERFLOW;
-	BRA   m053
+	BRA   m038
 			;        }
 			;       #ifndef DISABLE_ROUNDING
 			;        if (FpRounding  &&  (xtra & 0x80))  {
-m050	MOVLB 0
-	BTFSS 0xCC,FpRounding,1
-	BRA   m055
+m035	MOVLB 0
+	BTFSS 0xD8,FpRounding,1
+	BRA   m040
 	BTFSS xtra,7,1
-	BRA   m055
+	BRA   m040
 			;          INCREMENT:
 			;            arg1f24.low8 += 1;
-m051	MOVLB 0
+m036	MOVLB 0
 	INCFSZ arg1f24,1,1
 			;            if (!arg1f24.low8)  {
-	BRA   m055
+	BRA   m040
 			;                arg1f24.mid8 += 1;
 	INCFSZ arg1f24+1,1,1
 			;                if (!arg1f24.mid8)  {
-	BRA   m055
+	BRA   m040
 			;                    Carry = 1; // prepare for shift
 	BSF   0xFD8,Carry,0
 			;                    arg1f24.0 = 0;  // disable recursion
 	BCF   arg1f24,0,1
 			;                    goto ADJUST_RIGHT;
-	BRA   m049
+	BRA   m034
 			;                }
 			;            }
 			;        }
@@ -1390,34 +1281,34 @@ m051	MOVLB 0
 			;//    FpUnderFlow = 1;
 			;  RES0:
 			;    arg1f24.high8 = 0;
-m052	MOVLB 0
+m037	MOVLB 0
 	CLRF  arg1f24+2,1
 			;    goto MANTISSA;
-	BRA   m054
+	BRA   m039
 			;
 			;  OVERFLOW:
 			;    FpOverflow = 1;
-m053	MOVLB 0
-	BSF   0xCC,FpOverflow,1
+m038	MOVLB 0
+	BSF   0xD8,FpOverflow,1
 			;    arg1f24.high8 = 0xFF;
 	SETF  arg1f24+2,1
 			;  MANTISSA:
 			;    arg1f24.low16 = 0x8000;
-m054	MOVLB 0
+m039	MOVLB 0
 	CLRF  arg1f24,1
 	MOVLW 128
 	MOVWF arg1f24+1,1
 			;
 			;  SET_SIGN:
 			;    if (!(temp & 0x80))
-m055	MOVLB 0
+m040	MOVLB 0
 	BTFSS temp,7,1
 			;        arg1f24.15 = 0;
 	BCF   arg1f24+1,7,1
 			;
 			;  _RETURN_MF:
 			;    return arg1f24;
-m056	MOVLB 0
+m041	MOVLB 0
 	MOVF  arg1f24,W,1
 	RETURN
 			;}
@@ -1459,7 +1350,7 @@ _int24ToFloat24
 	CLRF  sign_4,1
 			;    if (arg1f24 < 0)  {
 	BTFSS arg1f24+2,7,1
-	BRA   m057
+	BRA   m042
 			;        arg1f24 = -arg1f24;
 	BSF   0xFD8,Carry,0
 	MOVLW 0
@@ -1472,10 +1363,10 @@ _int24ToFloat24
 	BSF   sign_4,7,1
 			;    }
 			;    if (arg1f24.high8)  {
-m057	MOVLB 0
+m042	MOVLB 0
 	MOVF  arg1f24+2,1,1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m058
+	BRA   m043
 			;        expo += 8;
 	MOVLW 8
 	ADDWF expo_2,1,1
@@ -1487,11 +1378,11 @@ m057	MOVLB 0
 	MOVFF arg1f24+2,arg1f24+1
 			;    }
 			;    else if (!arg1f24.mid8)  {
-	BRA   m060
-m058	MOVLB 0
+	BRA   m045
+m043	MOVLB 0
 	MOVF  arg1f24+1,1,1
 	BTFSS 0xFD8,Zero_,0
-	BRA   m060
+	BRA   m045
 			;        expo -= 8;
 	MOVLW 8
 	SUBWF expo_2,1,1
@@ -1500,7 +1391,7 @@ m058	MOVLB 0
 			;        if (!W)
 	BTFSC 0xFD8,Zero_,0
 			;            goto _RETURN_MF;
-	BRA   m062
+	BRA   m047
 			;        arg1f24.mid8 = W;
 	MOVLB 0
 	MOVWF arg1f24+1,1
@@ -1510,10 +1401,10 @@ m058	MOVLB 0
 			;
 			;    // arg1f24.mid8 != 0
 			;    goto TEST_ARG1_B15;
-	BRA   m060
+	BRA   m045
 			;    do  {
 			;        xtra = rl( xtra);
-m059	MOVLB 0
+m044	MOVLB 0
 	RLCF  xtra_2,1,1
 			;        arg1f24.low16 = rl( arg1f24.low16);
 	RLCF  arg1f24,1,1
@@ -1522,24 +1413,24 @@ m059	MOVLB 0
 	DECF  expo_2,1,1
 			;      TEST_ARG1_B15:
 			;    } while (!arg1f24.15);
-m060	MOVLB 0
+m045	MOVLB 0
 	BTFSS arg1f24+1,7,1
-	BRA   m059
+	BRA   m044
 			;
 			;   #ifndef DISABLE_ROUNDING
 			;    if (FpRounding && (xtra & 0x80))  {
-	BTFSS 0xCC,FpRounding,1
-	BRA   m061
+	BTFSS 0xD8,FpRounding,1
+	BRA   m046
 	BTFSS xtra_2,7,1
-	BRA   m061
+	BRA   m046
 			;        arg1f24.low8 += 1;
 	INCFSZ arg1f24,1,1
 			;        if (!arg1f24.low8)  {
-	BRA   m061
+	BRA   m046
 			;            arg1f24.mid8 += 1;
 	INCFSZ arg1f24+1,1,1
 			;            if (!arg1f24.mid8)  {
-	BRA   m061
+	BRA   m046
 			;                Carry = 1;
 	BSF   0xFD8,Carry,0
 			;                arg1f24.low16 = rr( arg1f24.low16);
@@ -1553,7 +1444,7 @@ m060	MOVLB 0
 			;   #endif
 			;
 			;    arg1f24.high8 = expo;
-m061	MOVFF expo_2,arg1f24+2
+m046	MOVFF expo_2,arg1f24+2
 			;    if (!(sign & 0x80))
 	MOVLB 0
 	BTFSS sign_4,7,1
@@ -1564,7 +1455,7 @@ m061	MOVFF expo_2,arg1f24+2
 			;    float24 rval @ arg1f24;
 			;    rval.low24 = arg1f24.low24;
 			;    return rval;
-m062	MOVLB 0
+m047	MOVLB 0
 	MOVF  rval,W,1
 	RETURN
 			;}
@@ -1655,7 +1546,7 @@ _float24ToInt24
 			;    if (!Carry)
 	BTFSS 0xFD8,Carry,0
 			;        goto RES0;
-	BRA   m068
+	BRA   m053
 			;    arg1f24.15 = 1;
 	MOVLB 0
 	BSF   arg1f24+1,7,1
@@ -1681,7 +1572,7 @@ _float24ToInt24
 	MOVWF expo_4,1
 			;    if (!Carry)  {  // (c)
 	BTFSC 0xFD8,Carry,0
-	BRA   m063
+	BRA   m048
 			;   #endif
 			;        expo += 8;
 	MOVLW 8
@@ -1689,7 +1580,7 @@ _float24ToInt24
 			;        if (!Carry)
 	BTFSS 0xFD8,Carry,0
 			;            goto OVERFLOW;
-	BRA   m067
+	BRA   m052
 			;        arg1f24.high8 = arg1f24.mid8;
 	MOVFF arg1f24+1,arg1f24+2
 			;        arg1f24.mid8 = arg1f24.low8;
@@ -1699,15 +1590,15 @@ _float24ToInt24
 	CLRF  arg1f24,1
 			;    }
 			;    else  {  // (a) (b)
-	BRA   m064
+	BRA   m049
 			;        // expo = 0 .. 16
 			;        W = expo - 8;
-m063	MOVLW 8
+m048	MOVLW 8
 	MOVLB 0
 	SUBWF expo_4,W,1
 			;        if (Carry)  {  // (a)
 	BTFSS 0xFD8,Carry,0
-	BRA   m064
+	BRA   m049
 			;            expo = W;
 	MOVWF expo_4,1
 			;           #ifndef DISABLE_ROUNDING
@@ -1721,13 +1612,13 @@ m063	MOVLW 8
 			;        }
 			;    }
 			;    if (expo)  {
-m064	MOVLB 0
+m049	MOVLB 0
 	MOVF  expo_4,1,1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m066
+	BRA   m051
 			;        do  {
 			;            Carry = 0;
-m065	BCF   0xFD8,Carry,0
+m050	BCF   0xFD8,Carry,0
 			;            arg1f24.high8 = rr( arg1f24.high8);
 	MOVLB 0
 	RRCF  arg1f24+2,1,1
@@ -1740,26 +1631,26 @@ m065	BCF   0xFD8,Carry,0
 			;           #endif
 			;        } while (--expo);
 	DECFSZ expo_4,1,1
-	BRA   m065
+	BRA   m050
 			;    }
 			;    if (arg1f24.23)  {
-m066	MOVLB 0
+m051	MOVLB 0
 	BTFSS arg1f24+2,7,1
-	BRA   m070
+	BRA   m055
 			;       OVERFLOW:
 			;        FpOverflow = 1;
-m067	MOVLB 0
-	BSF   0xCC,FpOverflow,1
+m052	MOVLB 0
+	BSF   0xD8,FpOverflow,1
 			;        W = 0xFF;
 	MOVLW 255
 			;        goto ASSIGNW;
-	BRA   m069
+	BRA   m054
 			;       RES0:
 			;        W = 0;
-m068	MOVLW 0
+m053	MOVLW 0
 			;       ASSIGNW:
 			;        arg1f24.low8 = W;
-m069	MOVLB 0
+m054	MOVLB 0
 	MOVWF arg1f24,1
 			;        arg1f24.mid8 = W;
 	MOVWF arg1f24+1,1
@@ -1769,14 +1660,14 @@ m069	MOVLB 0
 	BCF   arg1f24+2,7,1
 			;    }
 			;    else  {
-	BRA   m072
+	BRA   m057
 			;       #ifndef DISABLE_ROUNDING
 			;        if (FpRounding && (xtra & 0x80))  {
-m070	MOVLB 0
-	BTFSS 0xCC,FpRounding,1
-	BRA   m071
+m055	MOVLB 0
+	BTFSS 0xD8,FpRounding,1
+	BRA   m056
 	BTFSS xtra_4,7,1
-	BRA   m071
+	BRA   m056
 			;            arg1f24.low8 += 1;
 	INFSNZ arg1f24,1,1
 			;            if (!arg1f24.low8)
@@ -1785,9 +1676,9 @@ m070	MOVLB 0
 			;        }
 			;       #endif
 			;        if (sign & 0x80)
-m071	MOVLB 0
+m056	MOVLB 0
 	BTFSS sign_6,7,1
-	BRA   m072
+	BRA   m057
 			;            arg1f24.low24 = -arg1f24.low24;
 	BSF   0xFD8,Carry,0
 	MOVLW 0
@@ -1800,7 +1691,7 @@ m071	MOVLB 0
 			;    int24 rval @ arg1f24;
 			;    rval = arg1f24.low24;
 			;    return rval;
-m072	MOVLB 0
+m057	MOVLB 0
 	MOVF  rval_3,W,1
 	RETURN
 			;}
@@ -2037,10 +1928,10 @@ _divU16_8
 	MOVLW 17
 	MOVWF counter_2,1
 			;    goto ENTRY_ML;
-	BRA   m074
+	BRA   m059
 			;    do  {
 			;        rm = rl( rm);
-m073	MOVLB 0
+m058	MOVLB 0
 	RLCF  rm,1,1
 			;        uns8 tmp = rl( tmp);
 	RLCF  tmp,1,1
@@ -2053,19 +1944,19 @@ m073	MOVLB 0
 	BSF   0xFD8,Carry,0
 			;        if (Carry)
 	BTFSS 0xFD8,Carry,0
-	BRA   m074
+	BRA   m059
 			;            rm = W;
 	MOVLB 0
 	MOVWF rm,1
 			;       ENTRY_ML:
 			;        arg1 = rl( arg1);
-m074	MOVLB 0
+m059	MOVLB 0
 	RLCF  arg1,1,1
 	RLCF  arg1+1,1,1
 			;        counter = decsz(counter);
 	DECFSZ counter_2,1,1
 			;    } while (1);
-	BRA   m073
+	BRA   m058
 			;    return arg1;
 	MOVF  arg1,W,1
 	RETURN
@@ -2083,10 +1974,10 @@ _divU16_16
 	MOVLW 17
 	MOVWF counter_3,1
 			;    goto ENTRY_ML;
-	BRA   m076
+	BRA   m061
 			;    do  {
 			;        rm = rl( rm);
-m075	MOVLB 0
+m060	MOVLB 0
 	RLCF  rm_2,1,1
 	RLCF  rm_2+1,1,1
 			;        W = rm.low8 - arg2.low8;
@@ -2098,7 +1989,7 @@ m075	MOVLB 0
 			;        if (!Carry)
 	BTFSS 0xFD8,Carry,0
 			;            goto ENTRY_ML;
-	BRA   m076
+	BRA   m061
 			;        rm.high8 = W;
 	MOVLB 0
 	MOVWF rm_2+1,1
@@ -2109,13 +2000,13 @@ m075	MOVLB 0
 	BSF   0xFD8,Carry,0
 			;       ENTRY_ML:
 			;        arg1 = rl( arg1);
-m076	MOVLB 0
+m061	MOVLB 0
 	RLCF  arg1_2,1,1
 	RLCF  arg1_2+1,1,1
 			;        counter = decsz(counter);
 	DECFSZ counter_3,1,1
 			;    } while (1);
-	BRA   m075
+	BRA   m060
 			;    return arg1;
 	MOVF  arg1_2,W,1
 	RETURN
@@ -2200,7 +2091,7 @@ _remU16_8
 	MOVWF counter_6,1
 			;    do  {
 			;        arg1 = rl( arg1);
-m077	MOVLB 0
+m062	MOVLB 0
 	RLCF  arg1_5,1,1
 	RLCF  arg1_5+1,1,1
 			;        rm = rl( rm);
@@ -2216,15 +2107,15 @@ m077	MOVLB 0
 	BSF   0xFD8,Carry,0
 			;        if (Carry)
 	BTFSS 0xFD8,Carry,0
-	BRA   m078
+	BRA   m063
 			;            rm = W;
 	MOVLB 0
 	MOVWF rm_5,1
 			;        counter = decsz(counter);
-m078	MOVLB 0
+m063	MOVLB 0
 	DECFSZ counter_6,1,1
 			;    } while (1);
-	BRA   m077
+	BRA   m062
 			;    return rm;
 	MOVF  rm_5,W,1
 	RETURN
@@ -2243,7 +2134,7 @@ _remU16_16
 	MOVWF counter_7,1
 			;    do  {
 			;        arg1 = rl( arg1);
-m079	MOVLB 0
+m064	MOVLB 0
 	RLCF  arg1_6,1,1
 	RLCF  arg1_6+1,1,1
 			;        rm = rl( rm);
@@ -2258,7 +2149,7 @@ m079	MOVLB 0
 			;        if (!Carry)
 	BTFSS 0xFD8,Carry,0
 			;            goto NOSUB;
-	BRA   m080
+	BRA   m065
 			;        rm.high8 = W;
 	MOVLB 0
 	MOVWF rm_6+1,1
@@ -2267,10 +2158,10 @@ m079	MOVLB 0
 	SUBWF rm_6,1,1
 			;      NOSUB:
 			;        counter = decsz(counter);
-m080	MOVLB 0
+m065	MOVLB 0
 	DECFSZ counter_7,1,1
 			;    } while (1);
-	BRA   m079
+	BRA   m064
 			;    return rm;
 	MOVF  rm_6,W,1
 	RETURN
@@ -3034,13 +2925,13 @@ sqrt
 	MOVLB 0
 	BTFSC arg1f24+1,7,1
 			;        goto _DOMERR;
-	BRA   m084
+	BRA   m069
 			;    if (!arg1f24.high8)          // return if argument zero
 	MOVLB 0
 	MOVF  arg1f24+2,1,1
 	BTFSC 0xFD8,Zero_,0
 			;        goto _RETURN_MF;
-	BRA   m085
+	BRA   m070
 			;
 			;    char cexp = arg1f24.high8;    // save exponent
 	MOVFF arg1f24+2,cexp
@@ -3060,7 +2951,7 @@ sqrt
 			;
 			;    if (arg1f24.mid8 & 0x40)  {
 	BTFSS arg1f24+1,6,1
-	BRA   m081
+	BRA   m066
 			;        // POL24  SQRT24H,4,0
 			;        arg1f24 *= -5.6351436252E-3;  // SQRT24H4
 	MOVLW 167
@@ -3123,10 +3014,10 @@ sqrt
 	RCALL _fadd24
 			;    }
 			;    else  {
-	BRA   m082
+	BRA   m067
 			;        // POL24  SQRT24L,4,0
 			;        arg1f24 *= -1.8702682470E-2;  // SQRT24L4
-m081	MOVLW 54
+m066	MOVLW 54
 	MOVLB 0
 	MOVWF arg2f24,1
 	MOVLW 153
@@ -3188,9 +3079,9 @@ m081	MOVLW 54
 			;    }
 			;
 			;    if (!(cexp & 0x1))      // is cexp even or odd?
-m082	MOVLB 0
+m067	MOVLB 0
 	BTFSC cexp,0,1
-	BRA   m083
+	BRA   m068
 			;        arg1f24 *= 1.41421356237;  // sqrt(2)
 	MOVLW 5
 	MOVWF arg2f24,1
@@ -3202,7 +3093,7 @@ m082	MOVLB 0
 			;
 			;    // divide exponent by two
 			;    cexp += 127;
-m083	MOVLW 127
+m068	MOVLW 127
 	MOVLB 0
 	ADDWF cexp,1,1
 			;    arg1f24.high8 = rr( cexp);
@@ -3211,21 +3102,21 @@ m083	MOVLW 127
 			;
 			;    if (!(savedFLAGS & 0x40))
 	BTFSC savedFLAGS,6,1
-	BRA   m085
+	BRA   m070
 			;        FpFlags &= ~0x40;
 	BCF   FpFlags,6,1
 			;
 			;    goto _RETURN_MF;
-	BRA   m085
+	BRA   m070
 			;
 			;  _DOMERR:
 			;    FpDomainError = 1;   //  domain error
-m084	MOVLB 0
-	BSF   0xCC,FpDomainError,1
+m069	MOVLB 0
+	BSF   0xD8,FpDomainError,1
 			;
 			;  _RETURN_MF:
 			;    return arg1f24;
-m085	MOVLB 0
+m070	MOVLB 0
 	MOVF  arg1f24,W,1
 	RETURN
 
@@ -3241,15 +3132,15 @@ retardo_20u
 			;		        movwf     PDel0     ; 1 |
 	MOVWF PDel0,1
 			;		PLoop0  clrwdt              ; 1 clear watchdog
-m086	CLRWDT
+m071	CLRWDT
 			;		        decfsz    PDel0, 1  ; 1 + (1) es el tiempo 0  ?
 	DECFSZ PDel0,1,1
 			;		        goto      PLoop0    ; 2 no, loop
-	GOTO  m086
+	GOTO  m071
 			;		PDelL1  goto PDelL2         ; 2 ciclos delay
-	GOTO  m087
+	GOTO  m072
 			;		PDelL2  clrwdt              ; 1 ciclo delay
-m087	CLRWDT
+m072	CLRWDT
 			;		        return              ; 2+2 Fin.
 	RETURN
 			;		;-------------------------------------------------------------
@@ -3266,28 +3157,28 @@ retardo_1m
 			;	        movwf     PDel0     ; 1 |
 	MOVWF PDel0_2,1
 			;	PLoop1  movlw     .177      ; 1 set numero de repeticion  (A)
-m088	MOVLW 177
+m073	MOVLW 177
 			;	        movwf     PDel1     ; 1 |
 	MOVWF PDel1,1
 			;	PLoop2  clrwdt              ; 1 clear watchdog
-m089	CLRWDT
+m074	CLRWDT
 			;	PDelL1  goto PDelL2         ; 2 ciclos delay
-	GOTO  m090
+	GOTO  m075
 			;	PDelL2  
 			;	        decfsz    PDel1, 1  ; 1 + (1) es el tiempo 0  ? (A)
-m090	DECFSZ PDel1,1,1
+m075	DECFSZ PDel1,1,1
 			;	        goto      PLoop2    ; 2 no, loop
-	GOTO  m089
+	GOTO  m074
 			;	        decfsz    PDel0,  1 ; 1 + (1) es el tiempo 0  ? (B)
 	DECFSZ PDel0_2,1,1
 			;	        goto      PLoop1    ; 2 no, loop
-	GOTO  m088
+	GOTO  m073
 			;	PDelL3  goto PDelL4         ; 2 ciclos delay
-	GOTO  m091
+	GOTO  m076
 			;	PDelL4  goto PDelL5         ; 2 ciclos delay
-m091	GOTO  m092
+m076	GOTO  m077
 			;	PDelL5  clrwdt              ; 1 ciclo delay
-m092	CLRWDT
+m077	CLRWDT
 			;	        return              ; 2+2 Fin.
 	RETURN
 			;	;-------------------------------------------------------------
@@ -3303,31 +3194,31 @@ retardo_50m
 			;	        movwf     PDel0     ; 1 |
 	MOVWF PDel0_3,0
 			;	PLoop0  movlw     .55       ; 1 set numero de repeticion  (B)
-m093	MOVLW 55
+m078	MOVLW 55
 			;	        movwf     PDel1     ; 1 |
 	MOVWF PDel1_2,0
 			;	PLoop1  movlw     .201      ; 1 set numero de repeticion  (A)
-m094	MOVLW 201
+m079	MOVLW 201
 			;	        movwf     PDel2     ; 1 |
 	MOVWF PDel2,0
 			;	PLoop2  clrwdt              ; 1 clear watchdog
-m095	CLRWDT
+m080	CLRWDT
 			;	        decfsz    PDel2, 1  ; 1 + (1) es el tiempo 0  ? (A)
 	DECFSZ PDel2,1,0
 			;	        goto      PLoop2    ; 2 no, loop
-	GOTO  m095
+	GOTO  m080
 			;	        decfsz    PDel1,  1 ; 1 + (1) es el tiempo 0  ? (B)
 	DECFSZ PDel1_2,1,0
 			;	        goto      PLoop1    ; 2 no, loop
-	GOTO  m094
+	GOTO  m079
 			;	        decfsz    PDel0,  1 ; 1 + (1) es el tiempo 0  ? (C)
 	DECFSZ PDel0_3,1,0
 			;	        goto      PLoop0    ; 2 no, loop
-	GOTO  m093
+	GOTO  m078
 			;	PDelL1  goto PDelL2         ; 2 ciclos delay
-	GOTO  m096
+	GOTO  m081
 			;	PDelL2  clrwdt              ; 1 ciclo delay
-m096	CLRWDT
+m081	CLRWDT
 			;	        return              ; 2+2 Fin.
 	RETURN
 			;	;-------------------------------------------------------------
@@ -3343,29 +3234,29 @@ retardo_100m
 			;	        movwf     PDel0     ; 1 |
 	MOVWF PDel0_4,0
 			;	PLoop0  movlw     .59       ; 1 set numero de repeticion  (B)
-m097	MOVLW 59
+m082	MOVLW 59
 			;	        movwf     PDel1     ; 1 |
 	MOVWF PDel1_3,0
 			;	PLoop1  movlw     .235      ; 1 set numero de repeticion  (A)
-m098	MOVLW 235
+m083	MOVLW 235
 			;	        movwf     PDel2     ; 1 |
 	MOVWF PDel2_2,0
 			;	PLoop2  clrwdt              ; 1 clear watchdog
-m099	CLRWDT
+m084	CLRWDT
 			;	        clrwdt              ; 1 ciclo delay
 	CLRWDT
 			;	        decfsz    PDel2, 1  ; 1 + (1) es el tiempo 0  ? (A)
 	DECFSZ PDel2_2,1,0
 			;	        goto      PLoop2    ; 2 no, loop
-	GOTO  m099
+	GOTO  m084
 			;	        decfsz    PDel1,  1 ; 1 + (1) es el tiempo 0  ? (B)
 	DECFSZ PDel1_3,1,0
 			;	        goto      PLoop1    ; 2 no, loop
-	GOTO  m098
+	GOTO  m083
 			;	        decfsz    PDel0,  1 ; 1 + (1) es el tiempo 0  ? (C)
 	DECFSZ PDel0_4,1,0
 			;	        goto      PLoop0    ; 2 no, loop
-	GOTO  m097
+	GOTO  m082
 			;	        return              ; 2+2 Fin.
 	RETURN
 			;	;-------------------------------------------------------------
@@ -3381,31 +3272,31 @@ retardo_500m
 			;	        movwf     PDel0     ; 1 |
 	MOVWF PDel0_5,0
 			;	PLoop0  movlw     .188      ; 1 set numero de repeticion  (B)
-m100	MOVLW 188
+m085	MOVLW 188
 			;	        movwf     PDel1     ; 1 |
 	MOVWF PDel1_4,0
 			;	PLoop1  movlw     .196      ; 1 set numero de repeticion  (A)
-m101	MOVLW 196
+m086	MOVLW 196
 			;	        movwf     PDel2     ; 1 |
 	MOVWF PDel2_3,0
 			;	PLoop2  clrwdt              ; 1 clear watchdog
-m102	CLRWDT
+m087	CLRWDT
 			;	        decfsz    PDel2, 1  ; 1 + (1) es el tiempo 0  ? (A)
 	DECFSZ PDel2_3,1,0
 			;	        goto      PLoop2    ; 2 no, loop
-	GOTO  m102
+	GOTO  m087
 			;	        decfsz    PDel1,  1 ; 1 + (1) es el tiempo 0  ? (B)
 	DECFSZ PDel1_4,1,0
 			;	        goto      PLoop1    ; 2 no, loop
-	GOTO  m101
+	GOTO  m086
 			;	        decfsz    PDel0,  1 ; 1 + (1) es el tiempo 0  ? (C)
 	DECFSZ PDel0_5,1,0
 			;	        goto      PLoop0    ; 2 no, loop
-	GOTO  m100
+	GOTO  m085
 			;	PDelL1  goto PDelL2         ; 2 ciclos delay
-	GOTO  m103
+	GOTO  m088
 			;	PDelL2  clrwdt              ; 1 ciclo delay
-m103	CLRWDT
+m088	CLRWDT
 			;	        return              ; 2+2 Fin.
 	RETURN
 			;	;-------------------------------------------------------------
@@ -3609,16 +3500,16 @@ enviar_literal
 	MOVLW 1
 	MOVLB 0
 	MOVWF i_3,1
-m104	MOVLW 7
+m089	MOVLW 7
 	MOVLB 0
 	CPFSLT i_3,1
-	BRA   m105
+	BRA   m090
 	RCALL retardo_20u
 	MOVLB 0
 	INCF  i_3,1,1
-	BRA   m104
+	BRA   m089
 			;	dato = swap (dato);
-m105	MOVLB 0
+m090	MOVLB 0
 	SWAPF dato,1,1
 			;	PORTB.3 = dato.4;nop();
 	BTFSS dato,4,1
@@ -3660,16 +3551,16 @@ m105	MOVLB 0
 	MOVLW 1
 	MOVLB 0
 	MOVWF i_3,1
-m106	MOVLW 7
+m091	MOVLW 7
 	MOVLB 0
 	CPFSLT i_3,1
-	BRA   m107
+	BRA   m092
 	RCALL retardo_20u
 	MOVLB 0
 	INCF  i_3,1,1
-	BRA   m106
+	BRA   m091
 			;	enviar_comando (0b.0000.1100);					// Pantalla encendida, sin cursor.	
-m107	MOVLW 12
+m092	MOVLW 12
 	BRA   enviar_comando
 			;	return;
 			;}   
@@ -3723,14 +3614,14 @@ enviar_cifra
 			;	for (i = 1; i <= 6; i++) retardo_20u ();
 	MOVLW 1
 	MOVWF i_4,0
-m108	MOVLW 7
+m093	MOVLW 7
 	CPFSLT i_4,0
-	BRA   m109
+	BRA   m094
 	RCALL retardo_20u
 	INCF  i_4,1,0
-	BRA   m108
+	BRA   m093
 			;	dato = swap (dato);
-m109	SWAPF dato_2,1,0
+m094	SWAPF dato_2,1,0
 			;	PORTB.3 = dato.4;
 	BTFSS dato_2,4,0
 	BCF   PORTB,3,0
@@ -3772,14 +3663,14 @@ m109	SWAPF dato_2,1,0
 			;	for (i = 1; i<= 6; i++) retardo_20u ();
 	MOVLW 1
 	MOVWF i_4,0
-m110	MOVLW 7
+m095	MOVLW 7
 	CPFSLT i_4,0
-	BRA   m111
+	BRA   m096
 	RCALL retardo_20u
 	INCF  i_4,1,0
-	BRA   m110
+	BRA   m095
 			;	enviar_comando (0b.0000.1100);					// Pantalla encendida, sin cursor.
-m111	MOVLW 12
+m096	MOVLW 12
 	BRA   enviar_comando
 			;	return;
 			;} 
@@ -3794,61 +3685,61 @@ inicializar_lcd
 	MOVLW 1
 	MOVLB 0
 	MOVWF i_5,1
-m112	MOVLW 21
+m097	MOVLW 21
 	MOVLB 0
 	CPFSLT i_5,1
-	BRA   m113
+	BRA   m098
 	RCALL retardo_1m
 	MOVLB 0
 	INCF  i_5,1,1
-	BRA   m112
+	BRA   m097
 			;	envia_codigo_inicial (0b.00.11.0000);
-m113	MOVLW 48
+m098	MOVLW 48
 	RCALL envia_codigo_inicial
 			;	for (i = 1; i < 6; i++) retardo_1m ();
 	MOVLW 1
 	MOVLB 0
 	MOVWF i_5,1
-m114	MOVLW 6
+m099	MOVLW 6
 	MOVLB 0
 	CPFSLT i_5,1
-	BRA   m115
+	BRA   m100
 	RCALL retardo_1m
 	MOVLB 0
 	INCF  i_5,1,1
-	BRA   m114
+	BRA   m099
 			;    envia_codigo_inicial (0b.00.11.0000);	
-m115	MOVLW 48
+m100	MOVLW 48
 	RCALL envia_codigo_inicial
 			;	for (i = 1; i< 11; i++) retardo_20u ();
 	MOVLW 1
 	MOVLB 0
 	MOVWF i_5,1
-m116	MOVLW 11
+m101	MOVLW 11
 	MOVLB 0
 	CPFSLT i_5,1
-	BRA   m117
+	BRA   m102
 	RCALL retardo_20u
 	MOVLB 0
 	INCF  i_5,1,1
-	BRA   m116
+	BRA   m101
 			;    envia_codigo_inicial (0b.00.11.0000);
-m117	MOVLW 48
+m102	MOVLW 48
 	RCALL envia_codigo_inicial
 			;	for (i = 1; i < 11; i++) retardo_20u ();
 	MOVLW 1
 	MOVLB 0
 	MOVWF i_5,1
-m118	MOVLW 11
+m103	MOVLW 11
 	MOVLB 0
 	CPFSLT i_5,1
-	BRA   m119
+	BRA   m104
 	RCALL retardo_20u
 	MOVLB 0
 	INCF  i_5,1,1
-	BRA   m118
+	BRA   m103
 			;	envia_codigo_inicial (0b.00.10.0000);			// A 4 bits.
-m119	MOVLW 32
+m104	MOVLW 32
 	RCALL envia_codigo_inicial
 			;	enviar_comando (0b.0010.1000);					// A 4 bits, doble línea, caracteres 5x7.
 	MOVLW 40
@@ -3872,53 +3763,53 @@ escribir_posicion
 	MOVF  linea,W,1
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m120
+	BRA   m105
 	XORLW 3
 	BTFSC 0xFD8,Zero_,0
-	BRA   m121
+	BRA   m106
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m122
+	BRA   m107
 	XORLW 7
 	BTFSC 0xFD8,Zero_,0
-	BRA   m123
-	BRA   m124
+	BRA   m108
+	BRA   m109
 			;		{
 			;			case 1:
 			;				enviar_comando (127 + columna); 	// Inicio primera linea.
-m120	MOVLW 127
+m105	MOVLW 127
 	MOVLB 0
 	ADDWF columna,W,1
 	RCALL enviar_comando
 			;			break;
-	BRA   m124
+	BRA   m109
 			;						
 			;			case 2:
 			;				enviar_comando (191 + columna); 	// Inicio segunda línea.
-m121	MOVLW 191
+m106	MOVLW 191
 	MOVLB 0
 	ADDWF columna,W,1
 	RCALL enviar_comando
 			;			break;			
-	BRA   m124
+	BRA   m109
 			;
 			;			case 3:
 			;				enviar_comando (147 + columna);		// Inicio tercera línea (cursor en posición 20 de la primera línea).
-m122	MOVLW 147
+m107	MOVLW 147
 	MOVLB 0
 	ADDWF columna,W,1
 	RCALL enviar_comando
 			;			break;				
-	BRA   m124
+	BRA   m109
 			;			
 			;			case 4:
 			;				enviar_comando (211 + columna); 	// Inicio cuarta línea (cursor en posición 20 de la segunda línea).
-m123	MOVLW 211
+m108	MOVLW 211
 	MOVLB 0
 	ADDWF columna,W,1
 	RCALL enviar_comando
 			;			break;
-	BRA   m124
+	BRA   m109
 			;			enviar_comando (0b.0000.1100);			// Pantalla encendida, sin cursor.
 	MOVLW 12
 	BRA   enviar_comando
@@ -3926,7 +3817,7 @@ m123	MOVLW 211
 			;	
 			;	
 			;}
-m124	RETURN
+m109	RETURN
 			;
 			;void borrar_linea (char linea)
 			;{
@@ -3938,57 +3829,57 @@ borrar_linea
 	MOVF  linea_2,W,0
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m125
+	BRA   m110
 	XORLW 3
 	BTFSC 0xFD8,Zero_,0
-	BRA   m126
+	BRA   m111
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m127
+	BRA   m112
 	XORLW 7
 	BTFSC 0xFD8,Zero_,0
-	BRA   m128
-	BRA   m129
+	BRA   m113
+	BRA   m114
 			;		{
 			;			case 1:
 			;				enviar_comando (128); 				// Inicio primera linea.
-m125	MOVLW 128
+m110	MOVLW 128
 	RCALL enviar_comando
 			;			break;
-	BRA   m129
+	BRA   m114
 			;						
 			;			case 2:
 			;				enviar_comando (192); 				// Inicio segunda línea.
-m126	MOVLW 192
+m111	MOVLW 192
 	RCALL enviar_comando
 			;			break;			
-	BRA   m129
+	BRA   m114
 			;
 			;			case 3:
 			;				enviar_comando (148); 				// Inicio tercera línea (cursor en posición 20 de la primera línea).
-m127	MOVLW 148
+m112	MOVLW 148
 	RCALL enviar_comando
 			;			break;				
-	BRA   m129
+	BRA   m114
 			;			
 			;			case 4:
 			;				enviar_comando (212); 				// Inicio cuarta línea (cursor en posición 20 de la segunda línea).
-m128	MOVLW 212
+m113	MOVLW 212
 	RCALL enviar_comando
 			;			break;
 			;		}
 			;	for (i = 1; i < 21; i++) enviar_literal (' '); 	// Envio 20 carácteres en blanco y posiciono en la siguiente línea.
-m129	MOVLW 1
+m114	MOVLW 1
 	MOVWF i_6,0
-m130	MOVLW 21
+m115	MOVLW 21
 	CPFSLT i_6,0
-	BRA   m131
+	BRA   m116
 	MOVLW 32
 	RCALL enviar_literal
 	INCF  i_6,1,0
-	BRA   m130
+	BRA   m115
 			;	enviar_comando (0b.0000.1100);					// Pantalla encendida, sin cursor.	
-m131	MOVLW 12
+m116	MOVLW 12
 	BRA   enviar_comando
 			;}
 			;
@@ -4022,49 +3913,49 @@ Enviar_lcd
 	MOVF  linea_3,W,0
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m132
+	BRA   m117
 	XORLW 3
 	BTFSC 0xFD8,Zero_,0
-	BRA   m133
+	BRA   m118
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m134
+	BRA   m119
 	XORLW 7
 	BTFSC 0xFD8,Zero_,0
-	BRA   m135
-	BRA   m136
+	BRA   m120
+	BRA   m121
 			;		{
 			;			case 1:	enviar_comando (127 + columna); 	// inicio primera linea.
-m132	MOVLW 127
+m117	MOVLW 127
 	ADDWF columna_2,W,0
 	RCALL enviar_comando
 			;			break;	
-	BRA   m136
+	BRA   m121
 			;			case 2:	enviar_comando (191 + columna); 	// inicio segunda línea.
-m133	MOVLW 191
+m118	MOVLW 191
 	ADDWF columna_2,W,0
 	RCALL enviar_comando
 			;			break;			
-	BRA   m136
+	BRA   m121
 			;			case 3:	enviar_comando (147 + columna); 	// inicio tercera línea (cursor en posición 20 de la primera línea).
-m134	MOVLW 147
+m119	MOVLW 147
 	ADDWF columna_2,W,0
 	RCALL enviar_comando
 			;			break;				
-	BRA   m136
+	BRA   m121
 			;			case 4:	enviar_comando (211 + columna); 	// inicio cuarta línea (cursor en posición 20 de la segunda línea).
-m135	MOVLW 211
+m120	MOVLW 211
 	ADDWF columna_2,W,0
 	RCALL enviar_comando
 			;			break;	
-	BRA   m136
+	BRA   m121
 			;			enviar_comando (0b.0000.1100);			// pantalla encendida, sin cursor
 	MOVLW 12
 	RCALL enviar_comando
 			;		}				
 			;		if (!xi)
-m136	BTFSC 0xF7F,xi,0
-	BRA   m137
+m121	BTFSC 0xF7F,xi,0
+	BRA   m122
 			;		{
 			;			xy = 2;
 	MOVLW 2
@@ -4078,20 +3969,20 @@ m136	BTFSC 0xF7F,xi,0
 	MOVLW 3
 	SUBWFB dato_3+1,W,0
 	BTFSS 0xFD8,Carry,0
-	BRA   m139
+	BRA   m124
 	MOVLW 62
 	RCALL enviar_literal
 	MOVLW 69
 	RCALL enviar_literal
 	MOVLW 114
 	RCALL enviar_literal
-	BRA   m159
+	BRA   m144
 			;		    else goto sa;
 			;		}
 			;		else
 			;		{
 			;			xy = 1;
-m137	MOVLW 1
+m122	MOVLW 1
 	MOVWF xy,0
 			;			if (dato > 9999) { enviar_literal ('>');enviar_literal ('E');enviar_literal ('r'); goto so; }
 	MOVLW 16
@@ -4099,18 +3990,18 @@ m137	MOVLW 1
 	MOVLW 39
 	SUBWFB dato_3+1,W,0
 	BTFSS 0xFD8,Carry,0
-	BRA   m138
+	BRA   m123
 	MOVLW 62
 	RCALL enviar_literal
 	MOVLW 69
 	RCALL enviar_literal
 	MOVLW 114
 	RCALL enviar_literal
-	BRA   m159
+	BRA   m144
 			;		}
 			;			// Separo per 4 xifres
 			;			num = dato; // per 4 xifres
-m138	MOVFF dato_3,num
+m123	MOVFF dato_3,num
 	MOVFF dato_3+1,num+1
 			;			u_milers = num / 1000;
 	MOVFF num,arg1_2
@@ -4136,7 +4027,7 @@ m138	MOVFF dato_3,num
 	MOVFF rm_6+1,dato_3+1
 			;			// Separo per 3 xifres
 			;sa:			cent   = dato   / 100;   	
-m139	MOVFF dato_3,arg1
+m124	MOVFF dato_3,arg1
 	MOVFF dato_3+1,arg1+1
 	MOVLW 100
 	RCALL _divU16_8
@@ -4165,136 +4056,136 @@ m139	MOVFF dato_3,arg1
 			;		// Envio
 			;		for (xx = xy; xx < 7; xx++)
 	MOVFF xy,xx
-m140	MOVLW 7
+m125	MOVLW 7
 	CPFSLT xx,0
-	BRA   m159
+	BRA   m144
 			;		{
 			;			clrwdt () ;
 	CLRWDT
 			;			if (xx == 1) 
 	DECFSZ xx,W,0
-	BRA   m142
+	BRA   m127
 			;			{
 			;				if ((u_milers==0)&&(!bd)) dat = ' '; // bd =0 --> espai
 	MOVF  u_milers,W,0
 	IORWF u_milers+1,W,0
 	BTFSS 0xFD8,Zero_,0
-	BRA   m141
+	BRA   m126
 	BTFSC 0xF7F,bd,0
-	BRA   m141
+	BRA   m126
 	MOVLW 32
 	MOVWF dat,0
 			;				else dat = u_milers;
-	BRA   m142
-m141	MOVFF u_milers,dat
+	BRA   m127
+m126	MOVFF u_milers,dat
 			;			}
 			;			if (xx == 2) 
-m142	MOVLW 2
+m127	MOVLW 2
 	CPFSEQ xx,0
-	BRA   m144
+	BRA   m129
 			;			{
 			;				if ((u_milers==0)&&(cent==0)&&(!bd)) dat = ' '; // bd =0 --> espai
 	MOVF  u_milers,W,0
 	IORWF u_milers+1,W,0
 	BTFSS 0xFD8,Zero_,0
-	BRA   m143
+	BRA   m128
 	MOVF  cent,W,0
 	IORWF cent+1,W,0
 	BTFSS 0xFD8,Zero_,0
-	BRA   m143
+	BRA   m128
 	BTFSC 0xF7F,bd,0
-	BRA   m143
+	BRA   m128
 	MOVLW 32
 	MOVWF dat,0
 			;				else dat = cent;
-	BRA   m144
-m143	MOVFF cent,dat
+	BRA   m129
+m128	MOVFF cent,dat
 			;			}
 			;			if (xx == 3) 
-m144	MOVLW 3
+m129	MOVLW 3
 	CPFSEQ xx,0
-	BRA   m147
+	BRA   m132
 			;			{
 			;				if(ndp) { if (dp==0) dat = '.';
 	BTFSS 0xF7F,ndp,0
-	BRA   m146
+	BRA   m131
 	BTFSC 0xF7F,dp,0
-	BRA   m145
+	BRA   m130
 	MOVLW 46
 	MOVWF dat,0
 			;				          else xx++;  
-	BRA   m147
-m145	INCF  xx,1,0
+	BRA   m132
+m130	INCF  xx,1,0
 			;				        }
 			;				else xx++;		
-	BRA   m147
-m146	INCF  xx,1,0
+	BRA   m132
+m131	INCF  xx,1,0
 			;			}
 			;			if (xx == 4)
-m147	MOVLW 4
+m132	MOVLW 4
 	CPFSEQ xx,0
-	BRA   m149
+	BRA   m134
 			;			{
 			;				if ((u_milers==0)&&(cent==0)&&(dec==0)&&(!bd)) dat = ' ';
 	MOVF  u_milers,W,0
 	IORWF u_milers+1,W,0
 	BTFSS 0xFD8,Zero_,0
-	BRA   m148
+	BRA   m133
 	MOVF  cent,W,0
 	IORWF cent+1,W,0
 	BTFSS 0xFD8,Zero_,0
-	BRA   m148
+	BRA   m133
 	MOVF  dec,W,0
 	BTFSS 0xFD8,Zero_,0
-	BRA   m148
+	BRA   m133
 	BTFSC 0xF7F,bd,0
-	BRA   m148
+	BRA   m133
 	MOVLW 32
 	MOVWF dat,0
 			;				else dat = dec ;
-	BRA   m149
-m148	MOVFF dec,dat
+	BRA   m134
+m133	MOVFF dec,dat
 			;			}
 			;			if (xx == 5)
-m149	MOVLW 5
+m134	MOVLW 5
 	CPFSEQ xx,0
-	BRA   m152
+	BRA   m137
 			;			{
 			;				if(!ndp) { if (dp==0) dat = '.';	
 	BTFSC 0xF7F,ndp,0
-	BRA   m151
+	BRA   m136
 	BTFSC 0xF7F,dp,0
-	BRA   m150
+	BRA   m135
 	MOVLW 46
 	MOVWF dat,0
 			;				           else xx++;
-	BRA   m152
-m150	INCF  xx,1,0
+	BRA   m137
+m135	INCF  xx,1,0
 			;						 }
 			;				else xx++;		 
-	BRA   m152
-m151	INCF  xx,1,0
+	BRA   m137
+m136	INCF  xx,1,0
 			;			}
 			;			if (xx == 6) dat = unid;
-m152	MOVLW 6
+m137	MOVLW 6
 	CPFSEQ xx,0
-	BRA   m153
+	BRA   m138
 	MOVFF unid,dat
 			;						
 			;			if ((dat!='.')&&(dat!=' ')) dat = dat + 0x30;
-m153	MOVF  dat,W,0
+m138	MOVF  dat,W,0
 	XORLW 46
 	BTFSC 0xFD8,Zero_,0
-	BRA   m154
+	BRA   m139
 	MOVF  dat,W,0
 	XORLW 32
 	BTFSC 0xFD8,Zero_,0
-	BRA   m154
+	BRA   m139
 	MOVLW 48
 	ADDWF dat,1,0
 			;
 			;			PORTB.3 = dat.4;nop();
-m154	BTFSS dat,4,0
+m139	BTFSS dat,4,0
 	BCF   PORTB,3,0
 	BTFSC dat,4,0
 	BSF   PORTB,3,0
@@ -4330,14 +4221,14 @@ m154	BTFSS dat,4,0
 			;			for (i = 1; i <= 6; i++) retardo_20u ();
 	MOVLW 1
 	MOVWF i_7,0
-m155	MOVLW 7
+m140	MOVLW 7
 	CPFSLT i_7,0
-	BRA   m156
+	BRA   m141
 	RCALL retardo_20u
 	INCF  i_7,1,0
-	BRA   m155
+	BRA   m140
 			;			dat = swap (dat);
-m156	SWAPF dat,1,0
+m141	SWAPF dat,1,0
 			;			PORTB.3 = dat.4;nop();
 	BTFSS dat,4,0
 	BCF   PORTB,3,0
@@ -4376,21 +4267,21 @@ m156	SWAPF dat,1,0
 			;			for (i = 1; i<= 6; i++) retardo_20u ();
 	MOVLW 1
 	MOVWF i_7,0
-m157	MOVLW 7
+m142	MOVLW 7
 	CPFSLT i_7,0
-	BRA   m158
+	BRA   m143
 	RCALL retardo_20u
 	INCF  i_7,1,0
-	BRA   m157
+	BRA   m142
 			;			enviar_comando (0b.0000.1100);					// Pantalla encendida, sin cursor.			
-m158	MOVLW 12
+m143	MOVLW 12
 	RCALL enviar_comando
 			;		}
 	INCF  xx,1,0
-	BRA   m140
+	BRA   m125
 			;so:	//DESCON_LCD ();
 			;	return;
-m159	RETURN
+m144	RETURN
 			;}
 			;
 			;void Enviar_uns16(char linea,char columna,uns16 dato){
@@ -4405,46 +4296,46 @@ Enviar_uns16
 	MOVF  linea_4,W,1
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m160
+	BRA   m145
 	XORLW 3
 	BTFSC 0xFD8,Zero_,0
-	BRA   m161
+	BRA   m146
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m162
+	BRA   m147
 	XORLW 7
 	BTFSC 0xFD8,Zero_,0
-	BRA   m163
-	BRA   m164
+	BRA   m148
+	BRA   m149
 			;		{
 			;			case 1:	enviar_comando (127 + columna); 	// inicio primera linea.
-m160	MOVLW 127
+m145	MOVLW 127
 	MOVLB 0
 	ADDWF columna_3,W,1
 	RCALL enviar_comando
 			;			break;	
-	BRA   m164
+	BRA   m149
 			;			case 2:	enviar_comando (191 + columna); 	// inicio segunda línea.
-m161	MOVLW 191
+m146	MOVLW 191
 	MOVLB 0
 	ADDWF columna_3,W,1
 	RCALL enviar_comando
 			;			break;			
-	BRA   m164
+	BRA   m149
 			;			case 3:	enviar_comando (147 + columna); 	// inicio tercera línea (cursor en posición 20 de la primera línea).
-m162	MOVLW 147
+m147	MOVLW 147
 	MOVLB 0
 	ADDWF columna_3,W,1
 	RCALL enviar_comando
 			;			break;				
-	BRA   m164
+	BRA   m149
 			;			case 4:	enviar_comando (211 + columna); 	// inicio cuarta línea (cursor en posición 20 de la segunda línea).
-m163	MOVLW 211
+m148	MOVLW 211
 	MOVLB 0
 	ADDWF columna_3,W,1
 	RCALL enviar_comando
 			;			break;	
-	BRA   m164
+	BRA   m149
 			;			enviar_comando (0b.0000.1100);			// pantalla encendida, sin cursor
 	MOVLW 12
 	RCALL enviar_comando
@@ -4452,7 +4343,7 @@ m163	MOVLW 211
 			;	
 			;			
 			;			num = dato; 
-m164	MOVFF dato_4,num_2
+m149	MOVFF dato_4,num_2
 	MOVFF dato_4+1,num_2+1
 			;			d_milers =num/10000;
 	MOVFF num_2,arg1_2
@@ -4530,122 +4421,122 @@ m164	MOVFF dato_4,num_2
 			;		// Envio
 			;		for (xx=0 ; xx < 5; xx++)
 	CLRF  xx_2,1
-m165	MOVLW 5
+m150	MOVLW 5
 	MOVLB 0
 	CPFSLT xx_2,1
-	BRA   m181
+	BRA   m166
 			;		{
 			;			switch(xx){
 	MOVF  xx_2,W,1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m166
+	BRA   m151
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m168
+	BRA   m153
 	XORLW 3
 	BTFSC 0xFD8,Zero_,0
-	BRA   m170
+	BRA   m155
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m172
+	BRA   m157
 	XORLW 7
 	BTFSC 0xFD8,Zero_,0
-	BRA   m174
-	BRA   m175
+	BRA   m159
+	BRA   m160
 			;				case 0:
 			;					if (d_milers==0) dat = ' '; 
-m166	MOVLB 0
+m151	MOVLB 0
 	MOVF  d_milers,W,1
 	IORWF d_milers+1,W,1
 	BTFSS 0xFD8,Zero_,0
-	BRA   m167
+	BRA   m152
 	MOVLW 32
 	MOVWF dat_2,1
 			;					else dat = d_milers;
-	BRA   m175
-m167	MOVFF d_milers,dat_2
+	BRA   m160
+m152	MOVFF d_milers,dat_2
 			;					break;
-	BRA   m175
+	BRA   m160
 			;				case 1:
 			;					if ((u_milers==0)&&(d_milers==0)) dat = ' ';
-m168	MOVLB 0
+m153	MOVLB 0
 	MOVF  u_milers_2,W,1
 	IORWF u_milers_2+1,W,1
 	BTFSS 0xFD8,Zero_,0
-	BRA   m169
+	BRA   m154
 	MOVF  d_milers,W,1
 	IORWF d_milers+1,W,1
 	BTFSS 0xFD8,Zero_,0
-	BRA   m169
+	BRA   m154
 	MOVLW 32
 	MOVWF dat_2,1
 			;					else dat = u_milers;
-	BRA   m175
-m169	MOVFF u_milers_2,dat_2
+	BRA   m160
+m154	MOVFF u_milers_2,dat_2
 			;					break;
-	BRA   m175
+	BRA   m160
 			;				case 2:
 			;					if ((d_milers==0)&&(u_milers==0)&&(cent==0)) dat = ' '; 
-m170	MOVLB 0
+m155	MOVLB 0
 	MOVF  d_milers,W,1
 	IORWF d_milers+1,W,1
 	BTFSS 0xFD8,Zero_,0
-	BRA   m171
+	BRA   m156
 	MOVF  u_milers_2,W,1
 	IORWF u_milers_2+1,W,1
 	BTFSS 0xFD8,Zero_,0
-	BRA   m171
+	BRA   m156
 	MOVF  cent_2,W,1
 	IORWF cent_2+1,W,1
 	BTFSS 0xFD8,Zero_,0
-	BRA   m171
+	BRA   m156
 	MOVLW 32
 	MOVWF dat_2,1
 			;					else dat = cent;
-	BRA   m175
-m171	MOVFF cent_2,dat_2
+	BRA   m160
+m156	MOVFF cent_2,dat_2
 			;					break;
-	BRA   m175
+	BRA   m160
 			;				case 3:
 			;					if ((u_milers==0)&&(cent==0)&&(dec==0)&&(d_milers==0)) dat = ' ';
-m172	MOVLB 0
+m157	MOVLB 0
 	MOVF  u_milers_2,W,1
 	IORWF u_milers_2+1,W,1
 	BTFSS 0xFD8,Zero_,0
-	BRA   m173
+	BRA   m158
 	MOVF  cent_2,W,1
 	IORWF cent_2+1,W,1
 	BTFSS 0xFD8,Zero_,0
-	BRA   m173
+	BRA   m158
 	MOVF  dec_2,1,1
 	BTFSS 0xFD8,Zero_,0
-	BRA   m173
+	BRA   m158
 	MOVF  d_milers,W,1
 	IORWF d_milers+1,W,1
 	BTFSS 0xFD8,Zero_,0
-	BRA   m173
+	BRA   m158
 	MOVLW 32
 	MOVWF dat_2,1
 			;					else dat = dec ;
-	BRA   m175
-m173	MOVFF dec_2,dat_2
+	BRA   m160
+m158	MOVFF dec_2,dat_2
 			;					break;
-	BRA   m175
+	BRA   m160
 			;				case 4:
 			;					dat = unid;
-m174	MOVFF unid_2,dat_2
+m159	MOVFF unid_2,dat_2
 			;					break;
 			;			}		
 			;			if (dat!=' ') dat = dat + 0x30;
-m175	MOVLB 0
+m160	MOVLB 0
 	MOVF  dat_2,W,1
 	XORLW 32
 	BTFSC 0xFD8,Zero_,0
-	BRA   m176
+	BRA   m161
 	MOVLW 48
 	ADDWF dat_2,1,1
 			;			PORTB.3 = dat.4;nop();
-m176	MOVLB 0
+m161	MOVLB 0
 	BTFSS dat_2,4,1
 	BCF   PORTB,3,0
 	BTFSC dat_2,4,1
@@ -4683,16 +4574,16 @@ m176	MOVLB 0
 	MOVLW 1
 	MOVLB 0
 	MOVWF i_8,1
-m177	MOVLW 7
+m162	MOVLW 7
 	MOVLB 0
 	CPFSLT i_8,1
-	BRA   m178
+	BRA   m163
 	CALL  retardo_20u
 	MOVLB 0
 	INCF  i_8,1,1
-	BRA   m177
+	BRA   m162
 			;			dat = swap (dat);
-m178	MOVLB 0
+m163	MOVLB 0
 	SWAPF dat_2,1,1
 			;			PORTB.3 = dat.4;nop();
 	BTFSS dat_2,4,1
@@ -4733,24 +4624,24 @@ m178	MOVLB 0
 	MOVLW 1
 	MOVLB 0
 	MOVWF i_8,1
-m179	MOVLW 7
+m164	MOVLW 7
 	MOVLB 0
 	CPFSLT i_8,1
-	BRA   m180
+	BRA   m165
 	CALL  retardo_20u
 	MOVLB 0
 	INCF  i_8,1,1
-	BRA   m179
+	BRA   m164
 			;			enviar_comando (0b.0000.1100);					// Pantalla encendida, sin cursor.			
-m180	MOVLW 12
+m165	MOVLW 12
 	RCALL enviar_comando
 			;		}
 	MOVLB 0
 	INCF  xx_2,1,1
-	BRA   m165
+	BRA   m150
 			;
 			;	return;
-m181	RETURN
+m166	RETURN
 			;
 			;}
 			;
@@ -4769,53 +4660,53 @@ Enviar_char
 	MOVF  linea_5,W,1
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m182
+	BRA   m167
 	XORLW 3
 	BTFSC 0xFD8,Zero_,0
-	BRA   m183
+	BRA   m168
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m184
+	BRA   m169
 	XORLW 7
 	BTFSC 0xFD8,Zero_,0
-	BRA   m185
-	BRA   m186
+	BRA   m170
+	BRA   m171
 			;		{
 			;			case 1:	enviar_comando (127 + columna); 	// inicio primera linea.
-m182	MOVLW 127
+m167	MOVLW 127
 	MOVLB 0
 	ADDWF columna_4,W,1
 	RCALL enviar_comando
 			;			break;	
-	BRA   m186
+	BRA   m171
 			;			case 2:	enviar_comando (191 + columna); 	// inicio segunda línea.
-m183	MOVLW 191
+m168	MOVLW 191
 	MOVLB 0
 	ADDWF columna_4,W,1
 	RCALL enviar_comando
 			;			break;			
-	BRA   m186
+	BRA   m171
 			;			case 3:	enviar_comando (147 + columna); 	// inicio tercera línea (cursor en posición 20 de la primera línea).
-m184	MOVLW 147
+m169	MOVLW 147
 	MOVLB 0
 	ADDWF columna_4,W,1
 	RCALL enviar_comando
 			;			break;				
-	BRA   m186
+	BRA   m171
 			;			case 4:	enviar_comando (211 + columna); 	// inicio cuarta línea (cursor en posición 20 de la segunda línea).
-m185	MOVLW 211
+m170	MOVLW 211
 	MOVLB 0
 	ADDWF columna_4,W,1
 	RCALL enviar_comando
 			;			break;	
-	BRA   m186
+	BRA   m171
 			;			enviar_comando (0b.0000.1100);			// pantalla encendida, sin cursor
 	MOVLW 12
 	RCALL enviar_comando
 			;		}				
 			;
 			;			cent   = dato   / 100;   	
-m186	MOVFF dato_5,arg1
+m171	MOVFF dato_5,arg1
 	MOVLB 0
 	CLRF  arg1+1,1
 	MOVLW 100
@@ -4846,66 +4737,66 @@ m186	MOVFF dato_5,arg1
 			;		// Envio
 			;		for (xx=0 ; xx < 3; xx++)
 	CLRF  xx_3,1
-m187	MOVLW 3
+m172	MOVLW 3
 	MOVLB 0
 	CPFSLT xx_3,1
-	BRA   m199
+	BRA   m184
 			;		{
 			;			switch(xx){
 	MOVF  xx_3,W,1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m188
+	BRA   m173
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m190
+	BRA   m175
 	XORLW 3
 	BTFSC 0xFD8,Zero_,0
-	BRA   m192
-	BRA   m193
+	BRA   m177
+	BRA   m178
 			;				case 0:
 			;					if (cent==0) dat = ' '; 
-m188	MOVLB 0
+m173	MOVLB 0
 	MOVF  cent_3,1,1
 	BTFSS 0xFD8,Zero_,0
-	BRA   m189
+	BRA   m174
 	MOVLW 32
 	MOVWF dat_3,1
 			;					else dat = cent;
-	BRA   m193
-m189	MOVFF cent_3,dat_3
+	BRA   m178
+m174	MOVFF cent_3,dat_3
 			;					break;
-	BRA   m193
+	BRA   m178
 			;				case 1:
 			;					if ((cent==0)&&(dec==0)) dat = ' ';
-m190	MOVLB 0
+m175	MOVLB 0
 	MOVF  cent_3,1,1
 	BTFSS 0xFD8,Zero_,0
-	BRA   m191
+	BRA   m176
 	MOVF  dec_3,1,1
 	BTFSS 0xFD8,Zero_,0
-	BRA   m191
+	BRA   m176
 	MOVLW 32
 	MOVWF dat_3,1
 			;					else dat = dec ;
-	BRA   m193
-m191	MOVFF dec_3,dat_3
+	BRA   m178
+m176	MOVFF dec_3,dat_3
 			;					break;
-	BRA   m193
+	BRA   m178
 			;				case 2 :
 			;					dat = unid;
-m192	MOVFF unid_3,dat_3
+m177	MOVFF unid_3,dat_3
 			;					break;
 			;			}		
 			;			if (dat!=' ') dat = dat + 0x30;
-m193	MOVLB 0
+m178	MOVLB 0
 	MOVF  dat_3,W,1
 	XORLW 32
 	BTFSC 0xFD8,Zero_,0
-	BRA   m194
+	BRA   m179
 	MOVLW 48
 	ADDWF dat_3,1,1
 			;			PORTB.3 = dat.4;nop();
-m194	MOVLB 0
+m179	MOVLB 0
 	BTFSS dat_3,4,1
 	BCF   PORTB,3,0
 	BTFSC dat_3,4,1
@@ -4943,16 +4834,16 @@ m194	MOVLB 0
 	MOVLW 1
 	MOVLB 0
 	MOVWF i_9,1
-m195	MOVLW 7
+m180	MOVLW 7
 	MOVLB 0
 	CPFSLT i_9,1
-	BRA   m196
+	BRA   m181
 	CALL  retardo_20u
 	MOVLB 0
 	INCF  i_9,1,1
-	BRA   m195
+	BRA   m180
 			;			dat = swap (dat);
-m196	MOVLB 0
+m181	MOVLB 0
 	SWAPF dat_3,1,1
 			;			PORTB.3 = dat.4;nop();
 	BTFSS dat_3,4,1
@@ -4993,24 +4884,24 @@ m196	MOVLB 0
 	MOVLW 1
 	MOVLB 0
 	MOVWF i_9,1
-m197	MOVLW 7
+m182	MOVLW 7
 	MOVLB 0
 	CPFSLT i_9,1
-	BRA   m198
+	BRA   m183
 	CALL  retardo_20u
 	MOVLB 0
 	INCF  i_9,1,1
-	BRA   m197
+	BRA   m182
 			;			enviar_comando (0b.0000.1100);					// Pantalla encendida, sin cursor.			
-m198	MOVLW 12
+m183	MOVLW 12
 	CALL  enviar_comando
 			;		}
 	MOVLB 0
 	INCF  xx_3,1,1
-	BRA   m187
+	BRA   m172
 			;
 			;	return;
-m199	RETURN
+m184	RETURN
 			;
 			;}
 			;
@@ -5050,10 +4941,10 @@ RAM_LCD
 			;	for(i=0;i<=7;i++) { enviar_literal (Carac_1[i]); retardo_20u (); retardo_20u ();}
 	MOVLB 0
 	CLRF  i_10,1
-m200	MOVLW 8
+m185	MOVLW 8
 	MOVLB 0
 	CPFSLT i_10,1
-	BRA   m201
+	BRA   m186
 	MOVLW 26
 	ADDWF i_10,W,1
 	CALL  _const1
@@ -5062,14 +4953,14 @@ m200	MOVLW 8
 	CALL  retardo_20u
 	MOVLB 0
 	INCF  i_10,1,1
-	BRA   m200
+	BRA   m185
 			;	for(i=0;i<=7;i++) { enviar_literal (Carac_2[i]); retardo_20u (); retardo_20u ();}
-m201	MOVLB 0
+m186	MOVLB 0
 	CLRF  i_10,1
-m202	MOVLW 8
+m187	MOVLW 8
 	MOVLB 0
 	CPFSLT i_10,1
-	BRA   m203
+	BRA   m188
 	MOVLW 34
 	ADDWF i_10,W,1
 	CALL  _const1
@@ -5078,14 +4969,14 @@ m202	MOVLW 8
 	CALL  retardo_20u
 	MOVLB 0
 	INCF  i_10,1,1
-	BRA   m202
+	BRA   m187
 			;	for(i=0;i<=7;i++) { enviar_literal (Carac_3[i]); retardo_20u (); retardo_20u ();}
-m203	MOVLB 0
+m188	MOVLB 0
 	CLRF  i_10,1
-m204	MOVLW 8
+m189	MOVLW 8
 	MOVLB 0
 	CPFSLT i_10,1
-	BRA   m205
+	BRA   m190
 	MOVLW 42
 	ADDWF i_10,W,1
 	CALL  _const1
@@ -5094,14 +4985,14 @@ m204	MOVLW 8
 	CALL  retardo_20u
 	MOVLB 0
 	INCF  i_10,1,1
-	BRA   m204
+	BRA   m189
 			;	for(i=0;i<=7;i++) { enviar_literal (Carac_4[i]); retardo_20u (); retardo_20u ();}
-m205	MOVLB 0
+m190	MOVLB 0
 	CLRF  i_10,1
-m206	MOVLW 8
+m191	MOVLW 8
 	MOVLB 0
 	CPFSLT i_10,1
-	BRA   m207
+	BRA   m192
 	MOVLW 50
 	ADDWF i_10,W,1
 	CALL  _const1
@@ -5110,14 +5001,14 @@ m206	MOVLW 8
 	CALL  retardo_20u
 	MOVLB 0
 	INCF  i_10,1,1
-	BRA   m206
+	BRA   m191
 			;	for(i=0;i<=7;i++) { enviar_literal (Carac_5[i]); retardo_20u (); retardo_20u ();}
-m207	MOVLB 0
+m192	MOVLB 0
 	CLRF  i_10,1
-m208	MOVLW 8
+m193	MOVLW 8
 	MOVLB 0
 	CPFSLT i_10,1
-	BRA   m209
+	BRA   m194
 	MOVLW 58
 	ADDWF i_10,W,1
 	CALL  _const1
@@ -5126,14 +5017,14 @@ m208	MOVLW 8
 	CALL  retardo_20u
 	MOVLB 0
 	INCF  i_10,1,1
-	BRA   m208
+	BRA   m193
 			;	for(i=0;i<=7;i++) { enviar_literal (Carac_6[i]); retardo_20u (); retardo_20u ();}
-m209	MOVLB 0
+m194	MOVLB 0
 	CLRF  i_10,1
-m210	MOVLW 8
+m195	MOVLW 8
 	MOVLB 0
 	CPFSLT i_10,1
-	BRA   m211
+	BRA   m196
 	MOVLW 66
 	ADDWF i_10,W,1
 	CALL  _const1
@@ -5142,14 +5033,14 @@ m210	MOVLW 8
 	CALL  retardo_20u
 	MOVLB 0
 	INCF  i_10,1,1
-	BRA   m210
+	BRA   m195
 			;	for(i=0;i<=7;i++) { enviar_literal (Carac_7[i]); retardo_20u (); retardo_20u ();}
-m211	MOVLB 0
+m196	MOVLB 0
 	CLRF  i_10,1
-m212	MOVLW 8
+m197	MOVLW 8
 	MOVLB 0
 	CPFSLT i_10,1
-	BRA   m213
+	BRA   m198
 	MOVLW 74
 	ADDWF i_10,W,1
 	CALL  _const1
@@ -5158,14 +5049,14 @@ m212	MOVLW 8
 	CALL  retardo_20u
 	MOVLB 0
 	INCF  i_10,1,1
-	BRA   m212
+	BRA   m197
 			;	for(i=0;i<=7;i++) { enviar_literal (Carac_8[i]); retardo_20u (); retardo_20u ();}	
-m213	MOVLB 0
+m198	MOVLB 0
 	CLRF  i_10,1
-m214	MOVLW 8
+m199	MOVLW 8
 	MOVLB 0
 	CPFSLT i_10,1
-	BRA   m215
+	BRA   m200
 	MOVLW 82
 	ADDWF i_10,W,1
 	CALL  _const1
@@ -5174,9 +5065,9 @@ m214	MOVLW 8
 	CALL  retardo_20u
 	MOVLB 0
 	INCF  i_10,1,1
-	BRA   m214
+	BRA   m199
 			;	enviar_comando (0b.0000.0010);
-m215	MOVLW 2
+m200	MOVLW 2
 	GOTO  enviar_comando
 			;	
 			;	return;
@@ -5200,132 +5091,132 @@ medir
 			;	switch (canal)
 	MOVF  canal,W,1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m216
+	BRA   m201
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m217
+	BRA   m202
 	XORLW 3
 	BTFSC 0xFD8,Zero_,0
-	BRA   m218
+	BRA   m203
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m219
+	BRA   m204
 	XORLW 7
 	BTFSC 0xFD8,Zero_,0
-	BRA   m220
+	BRA   m205
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m221
+	BRA   m206
 	XORLW 3
 	BTFSC 0xFD8,Zero_,0
-	BRA   m222
+	BRA   m207
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m223
+	BRA   m208
 	XORLW 15
 	BTFSC 0xFD8,Zero_,0
-	BRA   m224
+	BRA   m209
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m225
+	BRA   m210
 	XORLW 3
 	BTFSC 0xFD8,Zero_,0
-	BRA   m226
+	BRA   m211
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m227
+	BRA   m212
 	XORLW 7
 	BTFSC 0xFD8,Zero_,0
-	BRA   m228
+	BRA   m213
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m229
-	BRA   m230
+	BRA   m214
+	BRA   m215
 			;	{
 			;		//del 0 al 4, estÃ¡n en el PORTA
 			;		case 0: 	ADCON0 = 0b.00.0000.01;		break;
-m216	MOVLW 1
+m201	MOVLW 1
 	MOVWF ADCON0,0
-	BRA   m231
+	BRA   m216
 			;		case 1:		ADCON0 = 0b.00.0001.01;		break;
-m217	MOVLW 5
+m202	MOVLW 5
 	MOVWF ADCON0,0
-	BRA   m231
+	BRA   m216
 			;		case 2:		ADCON0 = 0b.00.0010.01;		break;
-m218	MOVLW 9
+m203	MOVLW 9
 	MOVWF ADCON0,0
-	BRA   m231
+	BRA   m216
 			;		case 3:		ADCON0 = 0b.00.0011.01;		break;
-m219	MOVLW 13
+m204	MOVLW 13
 	MOVWF ADCON0,0
-	BRA   m231
+	BRA   m216
 			;		case 4:		ADCON0 = 0b.00.0100.01;		break;
-m220	MOVLW 17
+m205	MOVLW 17
 	MOVWF ADCON0,0
-	BRA   m231
+	BRA   m216
 			;		case 5:		ADCON0 = 0b.00.0101.01;		break;
-m221	MOVLW 21
+m206	MOVLW 21
 	MOVWF ADCON0,0
-	BRA   m231
+	BRA   m216
 			;		case 6:		ADCON0 = 0b.00.0110.01;		break;
-m222	MOVLW 25
+m207	MOVLW 25
 	MOVWF ADCON0,0
-	BRA   m231
+	BRA   m216
 			;		case 7:		ADCON0 = 0b.00.0111.01;		break;
-m223	MOVLW 29
+m208	MOVLW 29
 	MOVWF ADCON0,0
-	BRA   m231
+	BRA   m216
 			;		case 8:		ADCON0 = 0b.00.1000.01;		break;
-m224	MOVLW 33
+m209	MOVLW 33
 	MOVWF ADCON0,0
-	BRA   m231
+	BRA   m216
 			;		case 9:		ADCON0 = 0b.00.1001.01;		break;
-m225	MOVLW 37
+m210	MOVLW 37
 	MOVWF ADCON0,0
-	BRA   m231
+	BRA   m216
 			;		case 10:	ADCON0 = 0b.00.1010.01;		break;
-m226	MOVLW 41
+m211	MOVLW 41
 	MOVWF ADCON0,0
-	BRA   m231
+	BRA   m216
 			;		case 11:	ADCON0 = 0b.00.1011.01;		break;
-m227	MOVLW 45
+m212	MOVLW 45
 	MOVWF ADCON0,0
-	BRA   m231
+	BRA   m216
 			;		case 12:	ADCON0 = 0b.00.1100.01;		break;
-m228	MOVLW 49
+m213	MOVLW 49
 	MOVWF ADCON0,0
-	BRA   m231
+	BRA   m216
 			;		case 13:	ADCON0 = 0b.00.1101.01;		break;
-m229	MOVLW 53
+m214	MOVLW 53
 	MOVWF ADCON0,0
-	BRA   m231
+	BRA   m216
 			;		default:	ADCON0 = 0b.00.0000.01;
-m230	MOVLW 1
+m215	MOVLW 1
 	MOVWF ADCON0,0
 			;	}
 			;	if (bits == 8){ADFM=0;GO = 1;  while(GO);resultado = ADRESH;}
-m231	MOVLW 8
+m216	MOVLW 8
 	MOVLB 0
 	CPFSEQ bits,1
-	BRA   m233
+	BRA   m218
 	BCF   0xFC0,ADFM,0
 	BSF   0xFC2,GO,0
-m232	BTFSC 0xFC2,GO,0
-	BRA   m232
+m217	BTFSC 0xFC2,GO,0
+	BRA   m217
 	MOVFF ADRESH,resultado
 	MOVLB 0
 	CLRF  resultado+1,1
 			;	else 		  {ADFM=1;GO = 1;  while(GO);resultado.low8 = ADRESL;resultado.high8 = ADRESH;}
-	BRA   m235
-m233	BSF   0xFC0,ADFM,0
+	BRA   m220
+m218	BSF   0xFC0,ADFM,0
 	BSF   0xFC2,GO,0
-m234	BTFSC 0xFC2,GO,0
-	BRA   m234
+m219	BTFSC 0xFC2,GO,0
+	BRA   m219
 	MOVFF ADRESL,resultado
 	MOVFF ADRESH,resultado+1
 			;   	
 			;   	return resultado;
-m235	MOVLB 0
+m220	MOVLB 0
 	MOVF  resultado,W,1
 	RETURN
 
@@ -5433,20 +5324,20 @@ main
 	CLRF  ancho_pwm,1
 	CLRF  ancho_pwm+1,1
 			;	bUdw=1;	// ComenÃ§o carregant 0
-	BSF   0xBF,bUdw,1
+	BSF   0xCB,bUdw,1
 			;	for (p = 1; p <= 6; p ++)  ancho_pwm = rl (ancho_pwm);
 	MOVLW 1
 	MOVWF p,1
-m236	MOVLW 7
+m221	MOVLW 7
 	MOVLB 0
 	CPFSLT p,1
-	BRA   m237
+	BRA   m222
 	RLCF  ancho_pwm,1,1
 	RLCF  ancho_pwm+1,1,1
 	INCF  p,1,1
-	BRA   m236
+	BRA   m221
 			;	CCPR1L = ancho_pwm.high8;
-m237	MOVFF ancho_pwm+1,CCPR1L
+m222	MOVFF ancho_pwm+1,CCPR1L
 			;	CCP1CON.5 = ancho_pwm.7;
 	MOVLB 0
 	BTFSS ancho_pwm,7,1
@@ -5496,9 +5387,11 @@ m237	MOVFF ancho_pwm+1,CCPR1L
 	CLRF  o,1
 	CLRF  vuelta,1
 			;	bit lectura=0;
-	BCF   0x9C,lectura,1
-			;	float raiz;
+	BCF   0xA6,lectura,1
+			;	float raiz,errorAcu;
 			;	uns16 Mac0,Mac1;
+			;	uns16 q,a;//debug
+			;	float ProbaVmax;
 			;	
 			;	escribir_posicion (2, 1);
 	MOVLW 2
@@ -5534,80 +5427,87 @@ m237	MOVFF ancho_pwm+1,CCPR1L
 			;	while (1)       					
 			;	{
 			;		switch(estado){
-m238	MOVLB 0
+m223	MOVLB 0
 	MOVF  estado,W,1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m239
+	BRA   m224
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m254
+	BRA   m239
 	XORLW 3
 	BTFSC 0xFD8,Zero_,0
-	BRA   m257
+	BRA   m245
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m258
+	BRA   m246
 	XORLW 7
 	BTFSC 0xFD8,Zero_,0
-	BRA   m267
-	BRA   m238
+	BRA   m255
+	BRA   m223
 			;			case LECTURA_VAC:
 			;				x=0;
-m239	MOVLB 0
+m224	MOVLB 0
 	CLRF  x,1
 			;				if(!lectura){
-	BTFSC 0x9C,lectura,1
-	BRA   m246
-			;					while(LATD.0==1){   //vmax en LEO_VAC 18V 22k serie 8k2
-m240	BTFSS LATD,0,0
-	BRA   m246
+	BTFSC 0xA6,lectura,1
+	BRA   m231
+			;					while(LATD.0==1){   
+m225	BTFSS LATD,0,0
+	BRA   m231
+			;						r= Vmax;
+	MOVFF Vmax,arg1f24
+	MOVFF Vmax+1,arg1f24+1
+	MOVFF Vmax+2,arg1f24+2
+	CALL  _float24ToInt24
+	MOVFF rval_3,r
+	MOVFF rval_3+1,r+1
 			;						if (((T == 5)&&((x==0)||(x==7))) || ((T == 10 )&&((x==1)||(x==6))) || ((T == 15)&&((x==2)||(x==5)))||((T ==20)&&((x==3)||(x==4)))) {
 	MOVLW 5
 	MOVLB 0
 	CPFSEQ T,1
-	BRA   m241
+	BRA   m226
 	MOVF  x,1,1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m244
+	BRA   m229
 	MOVF  x,W,1
 	XORLW 7
 	BTFSC 0xFD8,Zero_,0
-	BRA   m244
-m241	MOVLW 10
+	BRA   m229
+m226	MOVLW 10
 	MOVLB 0
 	CPFSEQ T,1
-	BRA   m242
+	BRA   m227
 	DCFSNZ x,W,1
-	BRA   m244
+	BRA   m229
 	MOVF  x,W,1
 	XORLW 6
 	BTFSC 0xFD8,Zero_,0
-	BRA   m244
-m242	MOVLW 15
+	BRA   m229
+m227	MOVLW 15
 	MOVLB 0
 	CPFSEQ T,1
-	BRA   m243
+	BRA   m228
 	MOVF  x,W,1
 	XORLW 2
 	BTFSC 0xFD8,Zero_,0
-	BRA   m244
+	BRA   m229
 	MOVF  x,W,1
 	XORLW 5
 	BTFSC 0xFD8,Zero_,0
-	BRA   m244
-m243	MOVLW 20
+	BRA   m229
+m228	MOVLW 20
 	MOVLB 0
 	CPFSEQ T,1
-	BRA   m245
+	BRA   m230
 	MOVF  x,W,1
 	XORLW 3
 	BTFSC 0xFD8,Zero_,0
-	BRA   m244
+	BRA   m229
 	MOVLW 4
 	CPFSEQ x,1
-	BRA   m245
+	BRA   m230
 			;						PORTC.3=1;
-m244	BSF   PORTC,3,0
+m229	BSF   PORTC,3,0
 			;						ac=medir(LEO_VAC,8);
 	MOVLB 0
 	CLRF  canal,1
@@ -5643,10 +5543,10 @@ m244	BSF   PORTC,3,0
 			;						if ((T==20&&x==4)) {
 	MOVLW 20
 	CPFSEQ T,1
-	BRA   m245
+	BRA   m230
 	MOVLW 4
 	CPFSEQ x,1
-	BRA   m245
+	BRA   m230
 			;							retardo_20u();retardo_20u();retardo_20u();retardo_20u();
 	CALL  retardo_20u
 	CALL  retardo_20u
@@ -5659,81 +5559,75 @@ m244	BSF   PORTC,3,0
 	CALL  retardo_20u
 			;						}	
 			;						lectura=1;	
-m245	MOVLB 0
-	BSF   0x9C,lectura,1
+m230	MOVLB 0
+	BSF   0xA6,lectura,1
 			;					}
-	BRA   m240
+	BRA   m225
 			;				}
 			;				if(lectura){
-m246	MOVLB 0
-	BTFSS 0x9C,lectura,1
-	BRA   m253
-			;					r= Vmax*10; // ponemos aqui para hacerlo efectivo al paso por cero,se intentÃ³ en la interrupcion pero daba problemas el compilador
+m231	MOVLB 0
+	BTFSS 0xA6,lectura,1
+	BRA   m238
+			;					r= Vmax; // ponemos aqui para hacerlo efectivo al paso por cero,se intentÃ³ en la interrupcion pero daba problemas el compilador
 	MOVFF Vmax,arg1f24
 	MOVFF Vmax+1,arg1f24+1
 	MOVFF Vmax+2,arg1f24+2
-	CLRF  arg2f24,1
-	MOVLW 32
-	MOVWF arg2f24+1,1
-	MOVLW 130
-	MOVWF arg2f24+2,1
-	CALL  _fmul24
 	CALL  _float24ToInt24
 	MOVFF rval_3,r
 	MOVFF rval_3+1,r+1
 			;					while(LATD.0==0){
-m247	BTFSC LATD,0,0
-	BRA   m253
+m232	BTFSC LATD,0,0
+	BRA   m238
 			;						if  (((T == 5)&&((x==8)||(x==15))) || ((T == 10 )&&((x==9)||(x==14))) || ((T == 15)&&((x==10)||(x==13)))||((T ==20)&&((x==11)||(x==12)))) {
 	MOVLW 5
 	MOVLB 0
 	CPFSEQ T,1
-	BRA   m248
+	BRA   m233
 	MOVF  x,W,1
 	XORLW 8
 	BTFSC 0xFD8,Zero_,0
-	BRA   m251
+	BRA   m236
 	MOVF  x,W,1
 	XORLW 15
 	BTFSC 0xFD8,Zero_,0
-	BRA   m251
-m248	MOVLW 10
+	BRA   m236
+m233	MOVLW 10
 	MOVLB 0
 	CPFSEQ T,1
-	BRA   m249
+	BRA   m234
 	MOVF  x,W,1
 	XORLW 9
 	BTFSC 0xFD8,Zero_,0
-	BRA   m251
+	BRA   m236
 	MOVF  x,W,1
 	XORLW 14
 	BTFSC 0xFD8,Zero_,0
-	BRA   m251
-m249	MOVLW 15
+	BRA   m236
+m234	MOVLW 15
 	MOVLB 0
 	CPFSEQ T,1
-	BRA   m250
+	BRA   m235
 	MOVF  x,W,1
 	XORLW 10
 	BTFSC 0xFD8,Zero_,0
-	BRA   m251
+	BRA   m236
 	MOVF  x,W,1
 	XORLW 13
 	BTFSC 0xFD8,Zero_,0
-	BRA   m251
-m250	MOVLW 20
+	BRA   m236
+m235	MOVLW 20
 	MOVLB 0
 	CPFSEQ T,1
-	BRA   m252
+	BRA   m237
 	MOVF  x,W,1
 	XORLW 11
 	BTFSC 0xFD8,Zero_,0
-	BRA   m251
+	BRA   m236
 	MOVLW 12
 	CPFSEQ x,1
-	BRA   m252
+	BRA   m237
 			;						PORTC.3=1;
-m251	BSF   PORTC,3,0
+m236	BSF   PORTC,3,0
 			;						ac=medir(LEO_VAC,8);
 	MOVLB 0
 	CLRF  canal,1
@@ -5769,10 +5663,10 @@ m251	BSF   PORTC,3,0
 			;						if ((T==20&&x==12)) {
 	MOVLW 20
 	CPFSEQ T,1
-	BRA   m252
+	BRA   m237
 	MOVLW 12
 	CPFSEQ x,1
-	BRA   m252
+	BRA   m237
 			;							retardo_20u();retardo_20u();retardo_20u();retardo_20u();
 	CALL  retardo_20u
 	CALL  retardo_20u
@@ -5785,35 +5679,35 @@ m251	BSF   PORTC,3,0
 	CALL  retardo_20u
 			;						}			
 			;						lectura=0;
-m252	MOVLB 0
-	BCF   0x9C,lectura,1
+m237	MOVLB 0
+	BCF   0xA6,lectura,1
 			;					}
-	BRA   m247
+	BRA   m232
 			;				}
 			;				estado = CALCULOS_VAC;
-m253	MOVLW 1
+m238	MOVLW 1
 	MOVLB 0
 	MOVWF estado,1
 			;				if(x<=15) estado = LECTURA_VAC;
 	MOVLW 16
 	CPFSLT x,1
-	BRA   m238
+	BRA   m223
 	CLRF  estado,1
 			;			break;
-	BRA   m238
+	BRA   m223
 			;
 			;			case CALCULOS_VAC:
 			;
 			;				Mac0=0;
-m254	MOVLB 0
+m239	MOVLB 0
 	CLRF  Mac0,1
 	CLRF  Mac0+1,1
 			;				for(p=0;p<16;p++){
 	CLRF  p,1
-m255	MOVLW 16
+m240	MOVLW 16
 	MOVLB 0
 	CPFSLT p,1
-	BRA   m256
+	BRA   m241
 			;					ac=vac[p];
 	CLRF  FSR0+1,0
 	MOVLW 112
@@ -5832,9 +5726,9 @@ m255	MOVLW 16
 	ADDWFC Mac0+1,1,1
 			;				}
 	INCF  p,1,1
-	BRA   m255
+	BRA   m240
 			;				Mac1=Mac0;
-m256	MOVFF Mac0,Mac1
+m241	MOVFF Mac0,Mac1
 	MOVFF Mac0+1,Mac1+1
 			;				Mac0/=p;
 	MOVFF Mac0,arg1
@@ -5854,59 +5748,130 @@ m256	MOVFF Mac0,Mac1
 	MOVFF arg1f24,raiz
 	MOVFF arg1f24+1,raiz+1
 	MOVFF arg1f24+2,raiz+2
-			;				float banda=(BANDA_PROPORCINAL*raiz)/6.0;
+			;				q = (uns16)raiz*10;
+	MOVFF raiz,arg1f24
+	MOVFF raiz+1,arg1f24+1
+	MOVFF raiz+2,arg1f24+2
+	CALL  _float24ToInt24
+	MOVLW 10
 	MOVLB 0
+	MULWF rval_3,1
+	MOVFF PRODL,q
+	MOVFF PRODH,q+1
+	MOVLW 10
+	MULWF rval_3+1,1
+	MOVF  PRODL,W,0
+	ADDWF q+1,1,1
+			;				float banda=51.6; //a 230 aqui tengo 53
+	MOVLW 102
+	MOVWF banda,1
+	MOVLW 78
+	MOVWF banda+1,1
+	MOVLW 132
+	MOVWF banda+2,1
+			;				if(raiz<=REF_AC)raiz=REF_AC-raiz;
+	BTFSC raiz+1,7,1
+	BRA   m242
+	MOVLW 1
+	SUBWF raiz,W,1
+	MOVLW 20
+	SUBWFB raiz+1,W,1
+	MOVLW 132
+	SUBWFB raiz+2,W,1
+	BTFSC 0xFD8,Carry,0
+	BRA   m243
+m242	MOVLB 0
 	CLRF  arg1f24,1
-	MOVLW 32
+	MOVLW 20
 	MOVWF arg1f24+1,1
-	MOVLW 130
+	MOVLW 132
 	MOVWF arg1f24+2,1
 	MOVFF raiz,arg2f24
 	MOVFF raiz+1,arg2f24+1
 	MOVFF raiz+2,arg2f24+2
-	CALL  _fmul24
-	MOVLB 0
-	CLRF  arg2f24,1
-	MOVLW 64
-	MOVWF arg2f24+1,1
-	MOVLW 129
-	MOVWF arg2f24+2,1
-	CALL  _fdiv24
-	MOVFF arg1f24,banda
-	MOVFF arg1f24+1,banda+1
-	MOVFF arg1f24+2,banda+2
-			;				raiz-=REF_AC;
+	CALL  _fsub24
+	MOVFF arg1f24,raiz
+	MOVFF arg1f24+1,raiz+1
+	MOVFF arg1f24+2,raiz+2
+			;				else if(raiz>REF_AC)raiz=raiz-REF_AC;
+	BRA   m244
+m243	MOVLB 0
+	BTFSC raiz+1,7,1
+	BRA   m244
+	MOVLW 1
+	SUBWF raiz,W,1
+	MOVLW 20
+	SUBWFB raiz+1,W,1
+	MOVLW 132
+	SUBWFB raiz+2,W,1
+	BTFSS 0xFD8,Carry,0
+	BRA   m244
 	MOVFF raiz,arg1f24
 	MOVFF raiz+1,arg1f24+1
 	MOVFF raiz+2,arg1f24+2
-	MOVLB 0
 	CLRF  arg2f24,1
-	MOVLW 120
+	MOVLW 20
 	MOVWF arg2f24+1,1
-	MOVLW 131
+	MOVLW 132
 	MOVWF arg2f24+2,1
 	CALL  _fsub24
 	MOVFF arg1f24,raiz
 	MOVFF arg1f24+1,raiz+1
 	MOVFF arg1f24+2,raiz+2
-			;				Vmax=(raiz/banda)*6.0;
+			;
+			;				
+			;				a=(uns16)raiz; 		//la resta estÃ¡ mas o menos bien
+m244	MOVFF raiz,arg1f24
+	MOVFF raiz+1,arg1f24+1
+	MOVFF raiz+2,arg1f24+2
+	CALL  _float24ToInt24
+	MOVFF rval_3,a
+	MOVFF rval_3+1,a+1
+			;				//if(raiz<=37.0){					
+			;					//ProbaVmax=(raiz/banda)*10.0;
+			;					ProbaVmax=raiz*0.3*100.0;
 	MOVFF raiz,arg1f24
 	MOVFF raiz+1,arg1f24+1
 	MOVFF raiz+2,arg1f24+2
-	MOVFF banda,arg2f24
-	MOVFF banda+1,arg2f24+1
-	MOVFF banda+2,arg2f24+2
-	CALL  _fdiv24
+	MOVLW 154
 	MOVLB 0
-	CLRF  arg2f24,1
-	MOVLW 64
+	MOVWF arg2f24,1
+	MOVLW 25
 	MOVWF arg2f24+1,1
-	MOVLW 129
+	MOVLW 125
 	MOVWF arg2f24+2,1
 	CALL  _fmul24
-	MOVFF arg1f24,Vmax
-	MOVFF arg1f24+1,Vmax+1
-	MOVFF arg1f24+2,Vmax+2
+	MOVLB 0
+	CLRF  arg2f24,1
+	MOVLW 72
+	MOVWF arg2f24+1,1
+	MOVLW 133
+	MOVWF arg2f24+2,1
+	CALL  _fmul24
+	MOVFF arg1f24,ProbaVmax
+	MOVFF arg1f24+1,ProbaVmax+1
+	MOVFF arg1f24+2,ProbaVmax+2
+			;					ProbaVmax*=0.6;
+	MOVFF ProbaVmax,arg1f24
+	MOVFF ProbaVmax+1,arg1f24+1
+	MOVFF ProbaVmax+2,arg1f24+2
+	MOVLW 154
+	MOVLB 0
+	MOVWF arg2f24,1
+	MOVLW 25
+	MOVWF arg2f24+1,1
+	MOVLW 126
+	MOVWF arg2f24+2,1
+	CALL  _fmul24
+	MOVFF arg1f24,ProbaVmax
+	MOVFF arg1f24+1,ProbaVmax+1
+	MOVFF arg1f24+2,ProbaVmax+2
+			;
+			;					Vmax=ProbaVmax;
+	MOVFF ProbaVmax,Vmax
+	MOVFF ProbaVmax+1,Vmax+1
+	MOVFF ProbaVmax+2,Vmax+2
+			;				//}
 			;				
 			;				estado = ENVIO_LCD;// cambiar a CALCULOS_IAC para la version final!!!!
 	MOVLW 4
@@ -5914,20 +5879,20 @@ m256	MOVFF Mac0,Mac1
 	MOVWF estado,1
 			;			
 			;				break;
-	BRA   m238
+	BRA   m223
 			;
 			;			case CALCULOS_IAC:
 			;			
 			;				estado = LECTURAS_VARIAS;
-m257	MOVLW 3
+m245	MOVLW 3
 	MOVLB 0
 	MOVWF estado,1
 			;			break;
-	BRA   m238
+	BRA   m223
 			;																///11,5v-->700
 			;			case LECTURAS_VARIAS:								///11,8v-->728
 			;				uns16 bat = medir(LEO_BAT,10);				 	///12,0v-->730
-m258	MOVLW 1
+m246	MOVLW 1
 	MOVLB 0
 	MOVWF canal,1
 	MOVLW 10
@@ -5941,210 +5906,211 @@ m258	MOVLW 1
 	MOVLW 3
 	SUBWFB bat+1,W,1
 	BTFSS 0xFD8,Carry,0
-	BRA   m259
+	BRA   m247
 	MOVLW 1
 	MOVWF vbat,1
 			;				else if((bat>762&&bat<775))	vbat=BATT_75;		///12,5v-->774
-	BRA   m266
-m259	MOVLW 251
+	BRA   m254
+m247	MOVLW 251
 	MOVLB 0
 	SUBWF bat,W,1
 	MOVLW 2
 	SUBWFB bat+1,W,1
 	BTFSS 0xFD8,Carry,0
-	BRA   m260
+	BRA   m248
 	MOVLW 7
 	SUBWF bat,W,1
 	MOVLW 3
 	SUBWFB bat+1,W,1
 	BTFSC 0xFD8,Carry,0
-	BRA   m260
+	BRA   m248
 	MOVLW 2
 	MOVWF vbat,1
 			;				else if((bat>742&&bat<760)) vbat=BATT_50;		///12,8v-->794
-	BRA   m266
-m260	MOVLW 231
+	BRA   m254
+m248	MOVLW 231
 	MOVLB 0
 	SUBWF bat,W,1
 	MOVLW 2
 	SUBWFB bat+1,W,1
 	BTFSS 0xFD8,Carry,0
-	BRA   m261
+	BRA   m249
 	MOVLW 248
 	SUBWF bat,W,1
 	MOVLW 2
 	SUBWFB bat+1,W,1
 	BTFSC 0xFD8,Carry,0
-	BRA   m261
+	BRA   m249
 	MOVLW 3
 	MOVWF vbat,1
 			;				else if((bat>722&&bat<740)) vbat=BATT_25;		///13,0v-->804
-	BRA   m266
-m261	MOVLW 211
+	BRA   m254
+m249	MOVLW 211
 	MOVLB 0
 	SUBWF bat,W,1
 	MOVLW 2
 	SUBWFB bat+1,W,1
 	BTFSS 0xFD8,Carry,0
-	BRA   m262
+	BRA   m250
 	MOVLW 228
 	SUBWF bat,W,1
 	MOVLW 2
 	SUBWFB bat+1,W,1
 	BTFSC 0xFD8,Carry,0
-	BRA   m262
+	BRA   m250
 	MOVLW 4
 	MOVWF vbat,1
 			;				else if((bat>710&&bat<720)) vbat=BATT_10;		///13,5v-->837
-	BRA   m266
-m262	MOVLW 199
+	BRA   m254
+m250	MOVLW 199
 	MOVLB 0
 	SUBWF bat,W,1
 	MOVLW 2
 	SUBWFB bat+1,W,1
 	BTFSS 0xFD8,Carry,0
-	BRA   m263
+	BRA   m251
 	MOVLW 208
 	SUBWF bat,W,1
 	MOVLW 2
 	SUBWFB bat+1,W,1
 	BTFSC 0xFD8,Carry,0
-	BRA   m263
+	BRA   m251
 	MOVLW 5
 	MOVWF vbat,1
 			;				else if(bat<=708){								///14,0v-->872
-	BRA   m266
-m263	MOVLW 197
+	BRA   m254
+m251	MOVLW 197
 	MOVLB 0
 	SUBWF bat,W,1
 	MOVLW 2
 	SUBWFB bat+1,W,1
 	BTFSC 0xFD8,Carry,0
-	BRA   m266
+	BRA   m254
 			;					o++;										///14,5v-->895
 	INCF  o,1,1
 			;					if(o<=5)vbat=BATT_LW;						///15,0v-->946
 	MOVLW 6
 	CPFSLT o,1
-	BRA   m264
+	BRA   m252
 	MOVLW 6
 	MOVWF vbat,1
 			;					if(o>6)vbat=BATT_CLEAR;
-m264	MOVLW 6
+m252	MOVLW 6
 	MOVLB 0
 	CPFSGT o,1
-	BRA   m265
+	BRA   m253
 	MOVLW 7
 	MOVWF vbat,1
 			;					if(o==10)o=0;
-m265	MOVLW 10
+m253	MOVLW 10
 	MOVLB 0
 	CPFSEQ o,1
-	BRA   m266
+	BRA   m254
 	CLRF  o,1
 			;				} 			
 			;				estado= ENVIO_LCD;
-m266	MOVLW 4
+m254	MOVLW 4
 	MOVLB 0
 	MOVWF estado,1
 			;			break;
-	BRA   m238
+	BRA   m223
 			;
 			;			case ENVIO_LCD:
 			;				//puesto asÃ­ para tener mÃ¡s velocidad en el bucle principal!!
 			;				switch (vuelta){
-m267	MOVLB 0
+m255	MOVLB 0
 	MOVF  vuelta,W,1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m268
+	BRA   m256
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m269
+	BRA   m257
 	XORLW 3
-	BTFSC 0xFD8,Zero_,0
-	BRA   m270
-	XORLW 1
-	BTFSC 0xFD8,Zero_,0
-	BRA   m271
-	XORLW 7
-	BTFSC 0xFD8,Zero_,0
-	BRA   m272
-	XORLW 1
 	BTFSC 0xFD8,Zero_,0
 	BRA   m273
-	XORLW 3
-	BTFSC 0xFD8,Zero_,0
-	BRA   m274
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m275
-	XORLW 15
-	BTFSC 0xFD8,Zero_,0
-	BRA   m276
-	XORLW 1
-	BTFSC 0xFD8,Zero_,0
-	BRA   m277
-	XORLW 3
-	BTFSC 0xFD8,Zero_,0
-	BRA   m278
-	XORLW 1
-	BTFSC 0xFD8,Zero_,0
-	BRA   m279
+	BRA   m258
 	XORLW 7
 	BTFSC 0xFD8,Zero_,0
-	BRA   m280
+	BRA   m259
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m281
+	BRA   m260
 	XORLW 3
 	BTFSC 0xFD8,Zero_,0
-	BRA   m282
+	BRA   m261
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m283
+	BRA   m262
+	XORLW 15
+	BTFSC 0xFD8,Zero_,0
+	BRA   m263
+	XORLW 1
+	BTFSC 0xFD8,Zero_,0
+	BRA   m264
+	XORLW 3
+	BTFSC 0xFD8,Zero_,0
+	BRA   m265
+	XORLW 1
+	BTFSC 0xFD8,Zero_,0
+	BRA   m266
+	XORLW 7
+	BTFSC 0xFD8,Zero_,0
+	BRA   m267
+	XORLW 1
+	BTFSC 0xFD8,Zero_,0
+	BRA   m268
+	XORLW 3
+	BTFSC 0xFD8,Zero_,0
+	BRA   m269
+	XORLW 1
+	BTFSC 0xFD8,Zero_,0
+	BRA   m270
 	XORLW 31
 	BTFSC 0xFD8,Zero_,0
-	BRA   m284
+	BRA   m271
 	XORLW 1
 	BTFSC 0xFD8,Zero_,0
-	BRA   m285
-	BRA   m286
+	BRA   m272
+	BRA   m273
 			;					case 0:
-			;						Enviar_char(2,1,vac[0]);
-m268	MOVLW 2
+			;						uns16 w =(uns16)banda;
+m256	MOVFF banda,arg1f24
+	MOVFF banda+1,arg1f24+1
+	MOVFF banda+2,arg1f24+2
+	CALL  _float24ToInt24
+	MOVFF rval_3,w
+	MOVFF rval_3+1,w+1
+			;						Enviar_uns16(2,1,w);
+	MOVLW 2
 	MOVLB 0
-	MOVWF linea_5,1
+	MOVWF linea_4,1
 	MOVLW 1
-	MOVWF columna_4,1
-	MOVF  vac,W,1
-	CALL  Enviar_char
+	MOVWF columna_3,1
+	MOVFF w,dato_4
+	MOVFF w+1,dato_4+1
+	CALL  Enviar_uns16
 			;					break;
-	BRA   m286
+	BRA   m273
 			;					case 1:
-			;						Enviar_char(2,5,vac[1]);
-m269	MOVLW 2
+			;						Enviar_uns16(2,7,a);
+m257	MOVLW 2
 	MOVLB 0
-	MOVWF linea_5,1
-	MOVLW 5
-	MOVWF columna_4,1
-	MOVF  vac+1,W,1
-	CALL  Enviar_char
+	MOVWF linea_4,1
+	MOVLW 7
+	MOVWF columna_3,1
+	MOVFF a,dato_4
+	MOVFF a+1,dato_4+1
+	CALL  Enviar_uns16
 			;					break;
-	BRA   m286
+	BRA   m273
 			;					case 2:
-			;						Enviar_char(2,9,vac[2]);
-m270	MOVLW 2
-	MOVLB 0
-	MOVWF linea_5,1
-	MOVLW 9
-	MOVWF columna_4,1
-	MOVF  vac+2,W,1
-	CALL  Enviar_char
+			;
 			;					break;
-	BRA   m286
 			;					case 3:
 			;						Enviar_char(2,13,vac[3]);
-m271	MOVLW 2
+m258	MOVLW 2
 	MOVLB 0
 	MOVWF linea_5,1
 	MOVLW 13
@@ -6152,10 +6118,10 @@ m271	MOVLW 2
 	MOVF  vac+3,W,1
 	CALL  Enviar_char
 			;					break;
-	BRA   m286
+	BRA   m273
 			;					case 4:
 			;						Enviar_char(2,17,vac[4]);
-m272	MOVLW 2
+m259	MOVLW 2
 	MOVLB 0
 	MOVWF linea_5,1
 	MOVLW 17
@@ -6163,10 +6129,10 @@ m272	MOVLW 2
 	MOVF  vac+4,W,1
 	CALL  Enviar_char
 			;					break;
-	BRA   m286
+	BRA   m273
 			;					case 5:
 			;						Enviar_char(3,1,vac[5]);
-m273	MOVLW 3
+m260	MOVLW 3
 	MOVLB 0
 	MOVWF linea_5,1
 	MOVLW 1
@@ -6174,10 +6140,10 @@ m273	MOVLW 3
 	MOVF  vac+5,W,1
 	CALL  Enviar_char
 			;					break;
-	BRA   m286
+	BRA   m273
 			;					case 6:
 			;						Enviar_char(3,5,vac[6]);
-m274	MOVLW 3
+m261	MOVLW 3
 	MOVLB 0
 	MOVWF linea_5,1
 	MOVLW 5
@@ -6185,10 +6151,10 @@ m274	MOVLW 3
 	MOVF  vac+6,W,1
 	CALL  Enviar_char
 			;					break;
-	BRA   m286
+	BRA   m273
 			;					case 7:
 			;						Enviar_char(3,9,vac[7]);
-m275	MOVLW 3
+m262	MOVLW 3
 	MOVLB 0
 	MOVWF linea_5,1
 	MOVLW 9
@@ -6196,10 +6162,10 @@ m275	MOVLW 3
 	MOVF  vac+7,W,1
 	CALL  Enviar_char
 			;					break;
-	BRA   m286
+	BRA   m273
 			;					case 8:
 			;						Enviar_char(3,13,vac[8]);
-m276	MOVLW 3
+m263	MOVLW 3
 	MOVLB 0
 	MOVWF linea_5,1
 	MOVLW 13
@@ -6207,10 +6173,10 @@ m276	MOVLW 3
 	MOVF  vac+8,W,1
 	CALL  Enviar_char
 			;					break;
-	BRA   m286
+	BRA   m273
 			;					case 9:
 			;						Enviar_char(3,17,vac[9]);
-m277	MOVLW 3
+m264	MOVLW 3
 	MOVLB 0
 	MOVWF linea_5,1
 	MOVLW 17
@@ -6218,10 +6184,10 @@ m277	MOVLW 3
 	MOVF  vac+9,W,1
 	CALL  Enviar_char
 			;					break;
-	BRA   m286
+	BRA   m273
 			;					case 10:
 			;						Enviar_char(4,1,vac[10]);
-m278	MOVLW 4
+m265	MOVLW 4
 	MOVLB 0
 	MOVWF linea_5,1
 	MOVLW 1
@@ -6229,10 +6195,10 @@ m278	MOVLW 4
 	MOVF  vac+10,W,1
 	CALL  Enviar_char
 			;					break;
-	BRA   m286
+	BRA   m273
 			;					case 11:
 			;						Enviar_char(4,5,vac[11]);
-m279	MOVLW 4
+m266	MOVLW 4
 	MOVLB 0
 	MOVWF linea_5,1
 	MOVLW 5
@@ -6240,10 +6206,10 @@ m279	MOVLW 4
 	MOVF  vac+11,W,1
 	CALL  Enviar_char
 			;					break;
-	BRA   m286
+	BRA   m273
 			;					case 12:
 			;						Enviar_char(4,9,vac[12]);
-m280	MOVLW 4
+m267	MOVLW 4
 	MOVLB 0
 	MOVWF linea_5,1
 	MOVLW 9
@@ -6251,10 +6217,10 @@ m280	MOVLW 4
 	MOVF  vac+12,W,1
 	CALL  Enviar_char
 			;					break;
-	BRA   m286
+	BRA   m273
 			;					case 13:
 			;						Enviar_char(4,13,vac[13]);
-m281	MOVLW 4
+m268	MOVLW 4
 	MOVLB 0
 	MOVWF linea_5,1
 	MOVLW 13
@@ -6262,10 +6228,10 @@ m281	MOVLW 4
 	MOVF  vac+13,W,1
 	CALL  Enviar_char
 			;					break;
-	BRA   m286
+	BRA   m273
 			;					case 14:
 			;						Enviar_char(4,17,vac[14]);
-m282	MOVLW 4
+m269	MOVLW 4
 	MOVLB 0
 	MOVWF linea_5,1
 	MOVLW 17
@@ -6273,49 +6239,53 @@ m282	MOVLW 4
 	MOVF  vac+14,W,1
 	CALL  Enviar_char
 			;					break;
-	BRA   m286
+	BRA   m273
 			;					case 15:
-			;						Enviar_char(1,1,vac[15]);
-m283	MOVLW 1
+			;						uns16  v= (uns16)ProbaVmax;
+m270	MOVFF ProbaVmax,arg1f24
+	MOVFF ProbaVmax+1,arg1f24+1
+	MOVFF ProbaVmax+2,arg1f24+2
+	CALL  _float24ToInt24
+	MOVFF rval_3,v
+	MOVFF rval_3+1,v+1
+			;						Enviar_uns16(1,1,v);
+	MOVLW 1
+	MOVLB 0
+	MOVWF linea_4,1
+	MOVLW 1
+	MOVWF columna_3,1
+	MOVFF v,dato_4
+	MOVFF v+1,dato_4+1
+	CALL  Enviar_uns16
+			;						Enviar_char(1,12,r);
+	MOVLW 1
 	MOVLB 0
 	MOVWF linea_5,1
-	MOVLW 1
+	MOVLW 12
 	MOVWF columna_4,1
-	MOVF  vac+15,W,1
+	MOVF  r,W,1
 	CALL  Enviar_char
 			;					break;
-	BRA   m286
+	BRA   m273
 			;					case 16:
-			;						uns16 q = (uns16)raiz*10;
-m284	MOVFF raiz,arg1f24
-	MOVFF raiz+1,arg1f24+1
-	MOVFF raiz+2,arg1f24+2
-	CALL  _float24ToInt24
-	MOVLW 10
+			;						 
+			;						Enviar_uns16(1,16, q);
+m271	MOVLW 1
 	MOVLB 0
-	MULWF rval_3,1
-	MOVFF PRODL,q
-	MOVFF PRODH,q+1
-	MOVLW 10
-	MULWF rval_3+1,1
-	MOVF  PRODL,W,0
-	ADDWF q+1,1,1
-			;						Enviar_uns16(1,15, q);
-	MOVLW 1
 	MOVWF linea_4,1
-	MOVLW 15
+	MOVLW 16
 	MOVWF columna_3,1
 	MOVFF q,dato_4
 	MOVFF q+1,dato_4+1
 	CALL  Enviar_uns16
 			;					break;
-	BRA   m286
+	BRA   m273
 			;					case 17:
-			;						Enviar_uns16(1,5,Mac1);
-m285	MOVLW 1
+			;						Enviar_uns16(1,7,Mac1);
+m272	MOVLW 1
 	MOVLB 0
 	MOVWF linea_4,1
-	MOVLW 5
+	MOVLW 7
 	MOVWF columna_3,1
 	MOVFF Mac1,dato_4
 	MOVFF Mac1+1,dato_4+1
@@ -6323,18 +6293,18 @@ m285	MOVLW 1
 			;					break;
 			;				}
 			;				vuelta++;
-m286	MOVLB 0
+m273	MOVLB 0
 	INCF  vuelta,1,1
 			;				if(vuelta==18)vuelta=0;
 	MOVLW 18
 	CPFSEQ vuelta,1
-	BRA   m287
+	BRA   m274
 	CLRF  vuelta,1
 			;				estado = LECTURA_VAC;
-m287	MOVLB 0
+m274	MOVLB 0
 	CLRF  estado,1
 			;			break;
-	BRA   m238
+	BRA   m223
 			;
 			;		}
 			;	}	
@@ -6404,7 +6374,7 @@ _const1
 	MOVLB 0
 	MOVWF ci,1
 	MOVF  ci,W,1
-	ADDLW 248
+	ADDLW 220
 	MOVWF TBLPTR,0
 	MOVLW 26
 	CLRF  TBLPTR+1,0
@@ -6464,40 +6434,39 @@ _const1
 
 ; *** KEY INFO ***
 
-; 0x000008  151 word(s)  1 % : highPriorityTimer_0
-; 0x001AE0   57 word(s)  0 % : _const1
-; 0x000136  100 word(s)  1 % : _fmul24
-; 0x0001FE  122 word(s)  1 % : _fdiv24
-; 0x0002F2  167 word(s)  2 % : _fadd24
-; 0x000440    7 word(s)  0 % : _fsub24
-; 0x00044E   69 word(s)  0 % : _int24ToFloat24
-; 0x0004D8   85 word(s)  1 % : _float24ToInt24
-; 0x000582   24 word(s)  0 % : _divU16_8
-; 0x0005B2   27 word(s)  0 % : _divU16_16
-; 0x0005E8   23 word(s)  0 % : _remU16_8
-; 0x000616   25 word(s)  0 % : _remU16_16
-; 0x000648  169 word(s)  2 % : sqrt
-; 0x00079A   10 word(s)  0 % : retardo_20u
-; 0x0007AE   19 word(s)  0 % : retardo_1m
-; 0x0007D4   20 word(s)  0 % : retardo_50m
-; 0x0007FC   18 word(s)  0 % : retardo_100m
-; 0x000820   20 word(s)  0 % : retardo_500m
-; 0x000848   28 word(s)  0 % : envia_codigo_inicial
-; 0x000880   59 word(s)  0 % : enviar_comando
-; 0x0008F6   79 word(s)  0 % : enviar_literal
-; 0x000994   72 word(s)  0 % : enviar_cifra
-; 0x000A24   59 word(s)  0 % : inicializar_lcd
-; 0x000A9A   39 word(s)  0 % : escribir_posicion
-; 0x000AE8   37 word(s)  0 % : borrar_linea
-; 0x000B32    2 word(s)  0 % : borrar_lcd
-; 0x000B36  301 word(s)  3 % : Enviar_lcd
-; 0x000D90  320 word(s)  3 % : Enviar_uns16
-; 0x001010  209 word(s)  2 % : Enviar_char
-; 0x0011B2  160 word(s)  1 % : RAM_LCD
-; 0x0012F2  113 word(s)  1 % : medir
-; 0x001AAC   26 word(s)  0 % : configuraPic
-; 0x0013D4  876 word(s) 10 % : main
+; 0x000008  162 word(s)  1 % : highPriorityTimer_0
+; 0x001AC4   57 word(s)  0 % : _const1
+; 0x00014C  100 word(s)  1 % : _fmul24
+; 0x000214  167 word(s)  2 % : _fadd24
+; 0x000362    7 word(s)  0 % : _fsub24
+; 0x000370   69 word(s)  0 % : _int24ToFloat24
+; 0x0003FA   85 word(s)  1 % : _float24ToInt24
+; 0x0004A4   24 word(s)  0 % : _divU16_8
+; 0x0004D4   27 word(s)  0 % : _divU16_16
+; 0x00050A   23 word(s)  0 % : _remU16_8
+; 0x000538   25 word(s)  0 % : _remU16_16
+; 0x00056A  169 word(s)  2 % : sqrt
+; 0x0006BC   10 word(s)  0 % : retardo_20u
+; 0x0006D0   19 word(s)  0 % : retardo_1m
+; 0x0006F6   20 word(s)  0 % : retardo_50m
+; 0x00071E   18 word(s)  0 % : retardo_100m
+; 0x000742   20 word(s)  0 % : retardo_500m
+; 0x00076A   28 word(s)  0 % : envia_codigo_inicial
+; 0x0007A2   59 word(s)  0 % : enviar_comando
+; 0x000818   79 word(s)  0 % : enviar_literal
+; 0x0008B6   72 word(s)  0 % : enviar_cifra
+; 0x000946   59 word(s)  0 % : inicializar_lcd
+; 0x0009BC   39 word(s)  0 % : escribir_posicion
+; 0x000A0A   37 word(s)  0 % : borrar_linea
+; 0x000A54    2 word(s)  0 % : borrar_lcd
+; 0x000A58  301 word(s)  3 % : Enviar_lcd
+; 0x000CB2  320 word(s)  3 % : Enviar_uns16
+; 0x000F32  209 word(s)  2 % : Enviar_char
+; 0x0010D4  160 word(s)  1 % : RAM_LCD
+; 0x001214  113 word(s)  1 % : medir
+; 0x001A90   26 word(s)  0 % : configuraPic
+; 0x0012F6  973 word(s) 11 % : main
 
-; RAM usage: 109 bytes (95 local), 659 bytes free
+; RAM usage: 121 bytes (107 local), 647 bytes free
 ; Maximum call level: 3 (+2 for interrupt)
-; Total of 3495 code words (42 %)
+; Total of 3481 code words (42 %)

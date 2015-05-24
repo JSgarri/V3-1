@@ -1,25 +1,25 @@
 CC8E Version 1.4, Copyright (c) B Knudsen Data, Norway 2001-2014
  --> FREE edition, 8-16 bit int, 24 bit float, 128k code words, reduced optim.
 ondulador_float.c:
- 19. May 2015  15:23
+ 21. May 2015  17:38
  Chip = 18F44K20
-Warning[1] C:\PIC\Proyecto\V3-1\ondulador_float.c 439 : Shared call tree function '_const1' may contain local variables or parameters
-Warning[2] C:\PIC\Proyecto\V3-1\ondulador_float.c 439 : Local variables and parameters in uncalled functions are not allocated (31)
+Warning[1] C:\PIC\Proyecto\V3-1\ondulador_float.c 457 : Shared call tree function '_const1' may contain local variables or parameters
+Warning[2] C:\PIC\Proyecto\V3-1\ondulador_float.c 457 : Local variables and parameters in uncalled functions are not allocated (31)
  (The application contains non-library functions that are not called. Local
  variables in these functions (option -wU) are not allocated to save space)
  RAM : ******** ******** ******** ******** ******** ******** ******** ********
   40h: ******** ******** ******** ******** ======== ======== ======== ========
-  80h: ======== ======== ======== ======== ======== ======== ======== =======7
-  C0h: ........ .....*** ******** ******** ******** ******** ******** ********
- Bank  0:147  1:256  2:256  bytes free
-RAM usage: 109 bytes (95 local), 659 bytes free
+  80h: ======== ======== ======== ======== ======== ======== ======== ========
+  C0h: ======== ===7.... ........ .******* ******** ******** ******** ********
+ Bank  0:135  1:256  2:256  bytes free
+RAM usage: 121 bytes (107 local), 647 bytes free
  File 'ondulador_float.fcs'
- Optimizing - removed 631 code words (-18 %)
+ Optimizing - removed 596 code words (-17 %)
  File 'ondulador_float.var'
  File 'ondulador_float.asm'
  File 'ondulador_float.lst'
  File 'ondulador_float.cod'
  File 'ondulador_float.occ'
  File 'ondulador_float.hex'
-Total of 3495 code words (42 %)
- * Estimated CODE SIZE of full optimization: 3112 code words (-10 %)
+Total of 3481 code words (42 %)
+ * Estimated CODE SIZE of full optimization: 3128 code words (-10 %)

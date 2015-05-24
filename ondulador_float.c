@@ -5,7 +5,7 @@
  * Descripcion:Primera prueba con el 18F44K20 para el proyecto del ondulador v2.0
  *  Configuracion: 
  *		Modelo: 18F44K20
- *		Oscilador: Crystal 64Mhz
+ *		Oscilador: PLL 16MHz*4 -> 64Mhz
  *		Puente en H con PWM mejorado
  */
 
@@ -29,8 +29,6 @@
  //************************************  M A C R O S ************************************//
  //**************************************************************************************//
 
-#define PORDEBAJO 0
-#define PORENCIMA 1
 //estados
 #define LECTURA_VAC  0
 #define CALCULOS_VAC 1
@@ -51,18 +49,18 @@
 #define BATT_LW		 6 
 #define BATT_CLEAR	 7
 //valores PID
-#define REF_AC			  31
-#define BANDA_PROPORCINAL 10 //10%
+#define REF_AC			  37
+#define BANDA_PROPORCIONAL 10 /
 
  //**************************************************************************************//
  //********************************  V A R I A B L E S  *********************************//
  //**************************************************************************************//
 #pragma rambank 0
-bit bUdw; // a 1 puja en la taula (incrementa) , a 0 decrementa
+bit bUdw; 
 uns16 ancho_pwm,r;
 float Vmax;
 uns16 SENO;
-char T,i,estado; // Index de la taula
+char T,i,estado; 
 
 
 static const char sen [26] = 			
@@ -75,12 +73,11 @@ static const char sen [26] =
  //************************** I N T E R R U P C I O N E S *******************************//
  //**************************************************************************************//
 
-#include "int18XXX.h"	 // Capçalera de interrupcions.
-
+#include "int18XXX.h"	
 
 #pragma origin 0x08	//#pragma origin 0x18	(PIC 16F88x)
 
-interrupt highPriorityTimer_0 (void)		// Interrupción por desbordamiento de Timer 0.			
+interrupt highPriorityTimer_0 (void)					
 {
 	int_save_registers 
 
@@ -109,12 +106,12 @@ interrupt highPriorityTimer_0 (void)		// Interrupción por desbordamiento de Tim
 		} 
 		if(!bUdw) T--;                       
 		if(T==0) {
-		  	while(!TMR2IF);TMR2IF =0; // ESPERO QUE ACABI  T=1
+		  	while(!TMR2IF);TMR2IF =0; 
 			T2CON = 0b.0.0001.1.01;
 			CCPR1L = 0;
 			CCP1CON.5 = 0;
 			CCP1CON.4 = 0;	 
-			while(!TMR2IF); // espeor que acabi la 1era meitat del T=0, postsclaer =2
+			while(!TMR2IF); 
 			TMR2IF =0;
 			T2CON = 0b.0.0000.1.01;
 			CCPR1L = 0;
@@ -123,9 +120,9 @@ interrupt highPriorityTimer_0 (void)		// Interrupción por desbordamiento de Tim
 			LATD.0= !LATD.0;
 			bUdw=1;  
 			T=1;
-			if(estado==ENVIO_LCD) estado = LECTURA_VAC;  // el deixo sortir
 		}			  
-							
+		if(r>=60)r=60; //limito a 6 para no quemar los mos		
+	
 		SENO = sen[T];
 		ancho_pwm = (uns16)SENO*r;
 		ancho_pwm=ancho_pwm/10;
@@ -185,8 +182,8 @@ void main (void)
 
 	OSCTUNE=0b.01.000000; //PLL enable 
 	
-	RCON = 0b.01111111; //C18 pag 80 i 167  Causes del RESET i IPEN (priority Enabled o no)
-	OSCCON    = 0b.0.111.0.0.00;
+	RCON = 0b.01111111;
+	OSCCON    = 0b.0.111.0.0.00; 
 
 	inicializar_lcd(); 
 	borrar_lcd();
@@ -196,23 +193,15 @@ void main (void)
 	borrar_lcd();
 	escribir_posicion (1, 1);
 	
-	//for(p=0;p<19;p++ )enviar_literal(mensaje1[p]);
-	//enviar_literal(LOGO_SC);
+	for(p=0;p<19;p++ )enviar_literal(mensaje1[p]);
+	enviar_literal(LOGO_SC);
+	
+	Vmax = 3.0; //
 
-	T0CON   = 0b.01000.001; //(PIC 18F4550)	// Equivale junto con INTCON2 al OPTION_REG del 16F88x).								
-	INTCON2 = 0b.0000.0100; //(PIC 18F4550)	// Equivale junto con T0CON al OPTION_REG del 16F88x).	
-	TMR0IF = 0;   //T0IF = 0; (PIC 16F88x)	// Ponemos el flanco de interrupciones a cero (aun no se ha efectuado ninguna).
-   // w1   =   0;								// Reseteamos la variable índice de la tabla.
-	LATD.0 =0;           
-
-	Vmax = 3.0; //2 el pwm maximo en 
-
-	INTCON = 0b.0100.0000;				// Interrupciones globales (bit 7) e interrupción por Timer0 (bit 5) activadas.
-
-	// COMENÇO AL PAS PER 0, AMB 2 CICLES DE PWM A Ton=0 --> SON 100uS
+	INTCON = 0b.0100.0000;				
 	T=0;
 	ancho_pwm =0; 
-	bUdw=1;	// Començo carregant 0
+	bUdw=1; 
 	for (p = 1; p <= 6; p ++)  ancho_pwm = rl (ancho_pwm);
 	CCPR1L = ancho_pwm.high8;
 	CCP1CON.5 = ancho_pwm.7;
@@ -223,7 +212,7 @@ void main (void)
 	T++; SENO = sen[T];		
 	ancho_pwm = (uns16)SENO*Vmax; // PREPARO SEGUENT VALOR
  //**************************************************************************************//
- //*******************  V A R I A B L E S   L O C A L E L E S ***************************//
+ //*******************  V A R I A B L E S   L O C A L E S********************************//
  //**************************************************************************************//
 	estado=LECTURA_VAC; //empieza por LECTURA_VAC
 	uns8 x;
@@ -231,8 +220,10 @@ void main (void)
 	uns8 iac[16],ic;
 	char vbat,o=0,vuelta=0; 
 	bit lectura=0;
-	float raiz;
+	float raiz,errorAcu;
 	uns16 Mac0,Mac1;
+	uns16 q,a;//debug
+	float ProbaVmax;
 	
 	escribir_posicion (2, 1);
  	//for(p=0; p<3; p++)enviar_literal(mensaje2[p]);
@@ -241,8 +232,7 @@ void main (void)
  	escribir_posicion (4, 10);
 	//for(p=0; p<4; p++)enviar_literal(mensaje4[p]);
  	GIE=1;
-	ADCON1=0b.0000.0000;
-	ADCON2=0b.10.001.110;
+
 
  //**************************************************************************************//
  //**************************  B U C L E   I N F I N I T O  *****************************//
@@ -253,7 +243,8 @@ void main (void)
 			case LECTURA_VAC:
 				x=0;
 				if(!lectura){
-					while(LATD.0==1){   //vmax en LEO_VAC 18V 22k serie 8k2
+					while(LATD.0==1){   
+						r= Vmax;
 						if (((T == 5)&&((x==0)||(x==7))) || ((T == 10 )&&((x==1)||(x==6))) || ((T == 15)&&((x==2)||(x==5)))||((T ==20)&&((x==3)||(x==4)))) {
 						PORTC.3=1;
 						ac=medir(LEO_VAC,8);
@@ -263,14 +254,13 @@ void main (void)
 						iac[x]=ic;
 						x++;	
 						if ((T==20&&x==4)) {
-							retardo_20u();retardo_20u();retardo_20u();retardo_20u();
-							retardo_20u();retardo_20u();retardo_20u();retardo_20u();}
+							retardo_1m();retardo_20u();retardo_20u();retardo_20u();}
 						}	
 						lectura=1;	
 					}
 				}
 				if(lectura){
-					r= Vmax*10; // ponemos aqui para hacerlo efectivo al paso por cero,se intentó en la interrupcion pero daba problemas el compilador
+					r= Vmax; // ponemos aqui para hacerlo efectivo al paso por cero,se intentó en la interrupcion pero daba problemas el compilador
 					while(LATD.0==0){
 						if  (((T == 5)&&((x==8)||(x==15))) || ((T == 10 )&&((x==9)||(x==14))) || ((T == 15)&&((x==10)||(x==13)))||((T ==20)&&((x==11)||(x==12)))) {
 						PORTC.3=1;
@@ -281,8 +271,7 @@ void main (void)
 						iac[x]=ic;
 						x++;	
 						if ((T==20&&x==12)) {
-							retardo_20u();retardo_20u();retardo_20u();retardo_20u();
-							retardo_20u();retardo_20u();retardo_20u();retardo_20u();}
+							retardo_1m();retardo_20u();retardo_20u();retardo_20u();}
 						}			
 						lectura=0;
 					}
@@ -299,13 +288,20 @@ void main (void)
 					uns16 d =(uns16)ac*ac;
 					Mac0+=d;
 				}
-				Mac1=Mac0;
-				Mac0/=p;
+				Mac1 = Mac0;
+				Mac0 = Mac0 >> 4;	//divido entre 16
 				raiz= sqrt (Mac0);
-				float banda=(BANDA_PROPORCINAL*raiz)/6.0;
-				raiz-=REF_AC;
-				Vmax=(raiz/banda)*6.0;
-				
+				q = (uns16)raiz * 10;
+
+				float banda = (BANDA_PROPORCIONAL*REF_AC)/100.0; 
+				if(raiz<=REF_AC)raiz=REF_AC - raiz;
+				else if(raiz>REF_AC)raiz=raiz - REF_AC;
+
+				ProbaVmax=(raiz/banda)*100.0;
+				ProbaVmax*=0.6;
+
+				Vmax=ProbaVmax;
+
 				estado = ENVIO_LCD;// cambiar a CALCULOS_IAC para la version final!!!!
 			
 				break;
@@ -335,63 +331,62 @@ void main (void)
 				//puesto así para tener más velocidad en el bucle principal!!
 				switch (vuelta){
 					case 0:
-						Enviar_char(2,1,vac[0]);
+						uns16 w =(uns16)banda;
+						Enviar_uns16(2,1,w);
 					break;
 					case 1:
-						Enviar_char(2,5,vac[1]);
+						Enviar_uns16(2,7,a);
 					break;
 					case 2:
-						Enviar_char(2,9,vac[2]);
-					break;
-					case 3:
 						Enviar_char(2,13,vac[3]);
 					break;
-					case 4:
+					case 3:
 						Enviar_char(2,17,vac[4]);
 					break;
-					case 5:
+					case 4:
 						Enviar_char(3,1,vac[5]);
 					break;
-					case 6:
+					case 5:
 						Enviar_char(3,5,vac[6]);
 					break;
-					case 7:
+					case 6:
 						Enviar_char(3,9,vac[7]);
 					break;
-					case 8:
+					case 7:
 						Enviar_char(3,13,vac[8]);
 					break;
-					case 9:
+					case 8:
 						Enviar_char(3,17,vac[9]);
 					break;
-					case 10:
+					case 9:
 						Enviar_char(4,1,vac[10]);
 					break;
-					case 11:
+					case 10:
 						Enviar_char(4,5,vac[11]);
 					break;
-					case 12:
+					case 11:
 						Enviar_char(4,9,vac[12]);
 					break;
-					case 13:
+					case 12:
 						Enviar_char(4,13,vac[13]);
 					break;
-					case 14:
+					case 13:
 						Enviar_char(4,17,vac[14]);
 					break;
+					case 14:
+						uns16  v= (uns16)ProbaVmax;
+						Enviar_uns16(1,1,v);
+						Enviar_char(1,12,r);
+					break;
 					case 15:
-						Enviar_char(1,1,vac[15]);
+						Enviar_uns16(1,16, q);
 					break;
 					case 16:
-						uns16 q = (uns16)raiz*10;
-						Enviar_uns16(1,15, q);
-					break;
-					case 17:
-						Enviar_uns16(1,5,Mac1);
+						Enviar_uns16(1,7,Mac1);
 					break;
 				}
 				vuelta++;
-				if(vuelta==18)vuelta=0;
+				if(vuelta==17)vuelta=0;
 				estado = LECTURA_VAC;
 			break;
 
@@ -410,11 +405,12 @@ void configuraPic (void)
 
 	OSCTUNE=0b.01.000000; //PLL enable 
 	
-	RCON = 0b.01111111; //C18 pag 80 i 167  Causes del RESET i IPEN (priority Enabled o no)
-	OSCCON    = 0b.0.111.0.0.00;//C18 pag 53  //=============== ULL b3 abans 0 
+	RCON = 0b.01111111; 
+	OSCCON    = 0b.0.111.0.0.00;
 	
-	ANSEL  = 0b.0000.0111;					// Solo el canal AN0 será entrada analógica, el resto serán entradas/salidas digitales.(PIC 816F87)
-	//ANSELH = 0b.0000.0000;				// Solo el canal AN0 será entrada analógica, el resto serán entradas/salidas digitales.(PIC 816F87)
+	ANSEL  = 0b.0000.0111;
+	ADCON1=0b.0000.0000;
+	ADCON2=0b.10.001.110;					
 	
 	TRISA  = 0b.0000.1111;					// PORTA.0 es entrada, el resto son salidas.
 	TRISB  = 0b.0000.0000;					// PORTB todo salidas.
@@ -436,4 +432,10 @@ void configuraPic (void)
 		//0b.0000.0011;-->180nS
 		//0b.0000.0100;-->240nS
 		//0b.0111.1111;-->7.9uS 
+
+	T0CON   = 0b.01000.001; //(PIC 18F4550)	// Equivale junto con INTCON2 al OPTION_REG del 16F88x).								
+	INTCON2 = 0b.0000.0100; //(PIC 18F4550)	// Equivale junto con T0CON al OPTION_REG del 16F88x).	
+	TMR0IF = 0;   //T0IF = 0; (PIC 16F88x)	// Ponemos el flanco de interrupciones a cero (aun no se ha efectuado ninguna).
+   // w1   =   0;								// Reseteamos la variable índice de la tabla.
+	LATD.0 =0;           
 }
